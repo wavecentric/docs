@@ -1,65 +1,52 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "willow",
-  "name": "Willow Starter Kit",
+  "name": "wavecentric",
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "https://static.wavecentric.ai/img/logo.svg",
+    "dark": "https://static.wavecentric.ai/img/logo.svg"
   },
   "colors": {
-    "primary": "#006AD4",
-    "light": "#007FFF",
-    "dark": "#006AD4"
+    "primary": "#a2c037",
+    "light": "#a2c037",
+    "dark": "#a2c037"
   },
-  "favicon": "favicon.svg",
+  "favicon": "https://static.wavecentric.ai/img/logo.png",
   "navbar": {
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "href": "https://ai-loop.alpeadria.com/"
     }
   },
   "navigation": {
     "tabs": [
       {
-        "tab": "Get Startedi",
+        "tab": "Get Started",
         "groups": [
           {
             "group": "Get Started",
+            "icon": "rocket",
             "pages": [
               "welcome",
-              "quickstart",
-              "development"
+              "invitation",
+              "user-management",
+              "create-update-db",
+             
+              "workflows"
             ]
           },
           {
-            "group": "Essentials",
+            "group": "Workflows",
+            "icon": "sitemap",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API Reference",
-        "groups": [
-          {
-            "group": "API Reference",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint Examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete"
+              "workflows/communication-channel",
+              "workflows/query-assistant",
+              "workflows/service-quotation",
+              "workflows/⁠contract-management",
+              "workflows/data-viewer",
+              "workflows/stato-carri",
+              "workflows/data-analysis"
             ]
           }
         ]
@@ -67,10 +54,6 @@
     ]
   },
   "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://www.linkedin.com/company/mintsearch"
-    }
+    "copyright": "© 2025 WaveCentric LTD. All rights reserved."
   }
 }

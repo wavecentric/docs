@@ -1,65 +1,58 @@
 ---
-title: Welcome to WaveCentric
-sidebarTitle: Welcome
-description: This guide covers the prerequisite system requirements, provides step-by-step instructions for downloading and setting up the platform, and offers guidance on configuring your environment for optimal performance.
+title: Welcome to AI Loop  
+sidebarTitle: Welcome  
+description: Get started with AI Loop—from secure login to managing users, connecting databases, and navigating your dashboard.
 ---
 
-<img className="block dark:hidden w-full" src="/images/hero-light.png" alt="Hero Light" />
 
-<img className="hidden dark:block w-full" src="/images/hero-dark.png" alt="Hero Dark" />
+## Logging In
 
-## Setting up
+AI Loop uses a secure, passwordless authentication method to ensure a frictionless and safe user experience.
 
-The first step to world-class documentation is setting up your editing environments.
+<Steps>
+  <Step title="Visit the Login Page">
+    Go to <a href="https://ai-loop.alpeadria.com" target="_blank">ai-loop.alpeadria.com</a> and click **Get Started**.
+  </Step>
+  <Step title="Submit Your Email">
+    Enter your work email address. A secure login link will be sent to your inbox.
+  </Step>
+  <Step title="Access via Magic Link">
+    Open the email from AI Loop and click the provided link to log in instantly—no password required.
+  </Step>
+</Steps>
 
-<CardGroup cols={2}>
+<Info icon="key">
+  **Security Notice:** AI Loop uses time-sensitive magic links and signed JWT (JSON Web Tokens) to ensure a secure, passwordless login experience.
+</Info>
+
+<Info icon="shield-check">
+  **Administrator Approval Required:** New users must be approved by an administrator before accessing the platform.
+</Info>
+
+## What’s Next?
+
+Once you’re in, here are the key actions to help you set up and optimize your workspace:
+
+<CardGroup cols={3}>
   <Card
-    title="Edit Your Docs"
-    icon="pen-to-square"
-    href="https://mintlify.com/docs/quickstart"
+    title="Invite Team Members"
+    icon="user-plus"
+    href="./invitation"
   >
-    Get your docs set up locally for easy development
+    Add collaborators to your workspace and start building AI workflows together.
   </Card>
   <Card
-    title="Preview Changes"
-    icon="image"
-    href="https://mintlify.com/docs/development"
+    title="Connect Your Database"
+    icon="database"
+    href="./create-update-db"
   >
-    Preview your changes before you push to make sure they're perfect
-  </Card>
-</CardGroup>
-
-## Make it yours
-
-Update your docs to your brand and add valuable content for the best user conversion.
-
-<CardGroup cols={2}>
-  <Card
-    title="Customize Style"
-    icon="palette"
-    href="https://mintlify.com/docs/settings/global"
-  >
-    Customize your docs to your company's colors and brands
+    Integrate an existing data source or create a new one to power your AI use cases.
   </Card>
   <Card
-    title="Reference APIs"
-    icon="code"
-    href="https://mintlify.com/docs/api-playground/openapi"
+    title="Configure Access Control"
+    icon="user-lock"
+    href="./user-management"
   >
-    Automatically generate endpoints from an OpenAPI spec
-  </Card>
-  <Card
-    title="Add Components"
-    icon="screwdriver-wrench"
-    href="https://mintlify.com/docs/components/accordion"
-  >
-    Build interactive features and designs to guide your users
-  </Card>
-  <Card
-    title="Get Inspiration"
-    icon="stars"
-    href="https://mintlify.com/customers"
-  >
-    Check out our showcase of our favorite documentation
+    Manage user roles and permissions to maintain data governance and security.
   </Card>
 </CardGroup>

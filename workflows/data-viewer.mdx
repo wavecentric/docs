@@ -1,0 +1,56 @@
+---
+title: Visualizzatore Dati 
+
+---
+
+import { Callout } from 'nextra-theme-docs'
+
+
+
+The **Data Viewer** is a versatile tool within AI Loop that allows you to extract and format database information. You can choose to view the data as a user-friendly HTML report or as a raw CSV file, with options to receive the output via email.
+
+The Data Viewer provides two primary output formats:
+
+1.  **View in HTML**
+2.  **View in CSV**
+
+---
+
+## 1. View in HTML
+
+This option is ideal for generating a readable and well-structured report. It converts the raw database information into an HTML format, which can also include a high-level summary.
+
+<Callout>
+  **Description:** Converts database data to an HTML report with an optional summary and emails it if selected.
+</Callout>
+
+### Configuration Options
+
+When viewing as HTML, you can customize the output with the following settings. Fields marked with a red asterisk (*) are mandatory.
+
+| Field Name           | Description                                                                 | Required |
+| -------------------- | --------------------------------------------------------------------------- | :------: |
+| **Receive via email?** | Enable this toggle to have the generated HTML report sent to your email address. |   Yes    |
+| **Want a summary?**  | Select 'yes' to include a concise summary at the top of your HTML report.   |   Yes    |
+
+---
+
+## 2. View in CSV
+
+Choose this option if you need to export the raw data for use in spreadsheets (like Excel or Google Sheets) or other data analysis applications.
+
+<Callout>
+  **Description:** Converts database data to a CSV file and emails it if selected.
+</Callout>
+
+### Configuration Options
+
+When viewing as CSV, you can configure the output with the following settings. Fields marked with a red asterisk (*) are mandatory.
+
+| Field Name           | Description                                                                 | Required |
+| -------------------- | --------------------------------------------------------------------------- | :------: |
+| **Receive via email?** | Enable this toggle to have the generated CSV file sent to your email address. |   Yes    |
+
+<br />
+
+After configuring your desired format and options, click the **Run** button to generate the output.

@@ -1,0 +1,86 @@
+---
+title: Creating & Managing Databases
+sidebarTitle: Datalake
+description: Learn to create, update, and manage your datasets in the Data Lake. Covers creating from scratch, importing from CSV, and performing data operations.
+---
+
+import { Info, Steps, Step, Frame, Tab, Tabs, Note } from '@your-component-library';
+
+## The Data Lake
+
+The Data Lake is your central repository for creating, managing, and editing all your datasets. To begin, select an existing database from the dropdown or create a new one.
+
+<Frame caption="The main Data Lake view where you can select or create a new database.">
+  <img src="https://static.wavecentric.ai/img/db-list.png" alt="AI Loop Data Lake Interface" />
+</Frame>
+
+---
+
+## Creating a Database
+
+You can add a database by creating one from scratch or by importing a CSV file.
+
+<Tabs>
+  <Tab title="Create from Scratch">
+    <Steps>
+      <Step title="Start Creation">
+        Click the **"Create DataBase"** button.
+      </Step>
+      <Step title="Define and Create">
+        In the modal, give your database a unique **Name**, define its initial **Columns**, and click **"Create"**.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Import from CSV">
+    <Steps>
+      <Step title="Start Import">
+        Click the **"Create from File"** button.
+      </Step>
+      <Step title="Upload Your File">
+        Select and upload your CSV file. The system will automatically create the database structure from your file's headers.
+      </Step>
+    </Steps>
+    <Note>
+      Your CSV file must include a header row, as these values will be used for the column names.
+    </Note>
+  </Tab>
+</Tabs>
+
+---
+
+## Editing a Database
+
+Once a database is selected, you can edit its content (rows) and structure (columns).
+
+#### Managing Rows
+
+| To...         | Do this...                                                               |
+| :------------ | :----------------------------------------------------------------------- |
+| **Add a Row**   | Click the **"Add New Row"** button at the bottom of the table.           |
+| **Edit a Row** | Click on the row to edit its content.                               |
+| **Delete a Row**| Hover over the row and click the **trash can icon** on the right.        |
+
+#### Managing Columns
+
+To add, rename, or delete columns:
+
+1.  Click the **"Manage Columns"** button.
+2.  In the modal that appears, you can:
+    *   Rename a column by editing its name.
+    *   Delete a column using the **trash can icon**.
+    *   Add a new column via **"Add Another Column"**.
+3.  Click **"Apply Changes"** to save.
+
+---
+
+
+
+#### Exporting to CSV
+Select your database and click the **"Download CSV"** button at the bottom of the table to download a full copy.
+
+#### Deleting a Database
+Select your database and click the **red trash can icon** next to the "Manage Columns" button. You will be asked to confirm this action.
+
+<Info>
+  **Warning:** Deleting a database is a permanent action and cannot be undone.
+</Info>
