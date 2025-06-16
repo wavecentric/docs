@@ -11,7 +11,7 @@
     "light": "#a2c037",
     "dark": "#a2c037"
   },
-  "favicon": "https://static.wavecentric.ai/img/logo.png",
+  "favicon": "https://static.wavecentric.ai/img/logo.svg",
   "navbar": {
     "primary": {
       "type": "button",
