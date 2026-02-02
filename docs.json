@@ -81,14 +81,121 @@
               "workflows/communication-channel",
               "workflows/query-assistant",
               "workflows/service-quotation",
-              "workflows/⁠contract-management",
+              "workflows/contract-management",
               "workflows/data-viewer",
               "workflows/stato-carri",
               "workflows/data-analysis"
             ]
           }
         ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Introduction",
+            "icon": "handshake",
+            "pages": [
+              "api-reference/introduction"
+            ]
+          },
+          {
+            "group": "Public APIs",
+            "icon": "globe",
+            "pages": [
+              "api-reference/public/chat",
+              "api-reference/public/route-scanner",
+              "api-reference/public/stations",
+              "api-reference/public/submit-inquiry",
+              "api-reference/public/submit-contact",
+              "api-reference/public/network-data",
+              "api-reference/public/check-user",
+              "api-reference/public/classify",
+              "api-reference/public/v3-services"
+            ]
+          },
+          {
+            "group": "Authentication",
+            "icon": "key",
+            "pages": [
+              "api-reference/authentication/login",
+              "api-reference/authentication/validate"
+            ]
+          },
+          {
+            "group": "User Profile",
+            "icon": "user",
+            "pages": [
+              "api-reference/user-profile/get-me",
+              "api-reference/user-profile/update-me"
+            ]
+          },
+          {
+            "group": "User Management",
+            "icon": "users-gear",
+            "pages": [
+              "api-reference/users/list",
+              "api-reference/users/invite",
+              "api-reference/users/get",
+              "api-reference/users/update",
+              "api-reference/users/delete"
+            ]
+          },
+          {
+            "group": "Database Operations",
+            "icon": "database",
+            "pages": [
+              "api-reference/database-operations/operations"
+            ]
+          },
+          {
+            "group": "Data Lake",
+            "icon": "water-bolt",
+            "pages": [
+              "api-reference/datalake/list-databases",
+              "api-reference/datalake/create-database",
+              "api-reference/datalake/rename-database",
+              "api-reference/datalake/delete-database",
+              "api-reference/datalake/list-documents",
+              "api-reference/datalake/create-document",
+              "api-reference/datalake/document-ops",
+              "api-reference/datalake/delete-document",
+              "api-reference/datalake/variables",
+              "api-reference/datalake/delete-variables"
+            ]
+          },
+          {
+            "group": "Flows & Automation",
+            "icon": "bolt",
+            "pages": [
+              "api-reference/flows/execute",
+              "api-reference/flows/list",
+              "api-reference/flows/details"
+            ]
+          },
+          {
+            "group": "Dashboards",
+            "icon": "chart-simple",
+            "pages": [
+              "api-reference/dashboards/widget-data"
+            ]
+          },
+          {
+            "group": "System",
+            "icon": "sensor-cloud",
+            "pages": [
+              "api-reference/system/health",
+              "api-reference/system/client-ip",
+              "api-reference/system/test"
+            ]
+          }
+        ]
       }
+    ]
+  },
+  "api": {
+    "openapi": [
+      "openapi.json"
     ]
   },
   "footer": {}
