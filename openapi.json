@@ -1,0 +1,1610 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "WaveCentric AI LooP API",
+        "description": "Comprehensive API for managing omnichannel logistics, inquiries, tasks, and data lake operations.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://ai-loop.alpeadria.com",
+            "description": "Production server"
+        }
+    ],
+    "paths": {
+        "/api/v1/auth": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Request login link",
+                "operationId": "post-auth",
+                "description": "Sends a magic link to the user's email for authentication.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@example.com"
+                                    }
+                                },
+                                "required": [
+                                    "email"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Verification email sent successfully."
+                    },
+                    "400": {
+                        "description": "Email is required."
+                    }
+                }
+            }
+        },
+        "/api/v1/validate": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Validate magic link",
+                "operationId": "post-validate",
+                "description": "Validates the magic link token and sets a JWT cookie if successful.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "user@example.com"
+                                    },
+                                    "token": {
+                                        "type": "string",
+                                        "example": "abc123token"
+                                    }
+                                },
+                                "required": [
+                                    "email",
+                                    "token"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login successful.",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Login successful!",
+                                    "redirectPath": "/ai-loop"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid token or email."
+                    }
+                }
+            }
+        },
+        "/api/v1/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Log out",
+                "operationId": "post-logout",
+                "responses": {
+                    "200": {
+                        "description": "Logged out successfully."
+                    }
+                }
+            }
+        },
+        "/api/v1/me": {
+            "get": {
+                "tags": [
+                    "User Profile"
+                ],
+                "summary": "Get current user profile",
+                "operationId": "get-me",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User profile data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "User Profile"
+                ],
+                "summary": "Update user profile",
+                "operationId": "post-me",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Profile updated successfully."
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/v1/users": {
+            "get": {
+                "tags": [
+                    "User Management"
+                ],
+                "summary": "List all users",
+                "operationId": "get-users",
+                "description": "Retrieve an alphabetical list of all registered users. Requires Administrative access.",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of users",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/User"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden: Administrative access required."
+                    }
+                }
+            }
+        },
+        "/api/v1/users/invite": {
+            "post": {
+                "tags": [
+                    "User Management"
+                ],
+                "summary": "Invite user",
+                "operationId": "post-invite",
+                "description": "Invite a new user with specific permissions. Requires Administrative access.",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "permission": {
+                                        "type": "string",
+                                        "enum": [
+                                            "admin",
+                                            "guest",
+                                            "ailoop",
+                                            "fleet"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "email"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Invitation sent successfully."
+                    }
+                }
+            }
+        },
+        "/api/v1/users/{id}": {
+            "get": {
+                "tags": [
+                    "User Management"
+                ],
+                "summary": "Get user details",
+                "operationId": "get-user-by-id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The MongoDB ObjectId of the user."
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found."
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "User Management"
+                ],
+                "summary": "Update user",
+                "operationId": "patch-user-by-id",
+                "description": "Update specific fields of a user's account. Certain restrictions apply when Company_Verified is true.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "Name": {
+                                        "type": "string"
+                                    },
+                                    "Surname": {
+                                        "type": "string"
+                                    },
+                                    "Company_Name": {
+                                        "type": "string"
+                                    },
+                                    "Company_Verified": {
+                                        "type": "boolean"
+                                    },
+                                    "Permission": {
+                                        "type": "string"
+                                    },
+                                    "Phone": {
+                                        "type": "string"
+                                    },
+                                    "Address": {
+                                        "type": "string"
+                                    },
+                                    "JobTitle": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User updated successfully."
+                    },
+                    "403": {
+                        "description": "Permission denied."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "User Management"
+                ],
+                "summary": "Delete user",
+                "operationId": "delete-user-by-id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User deleted successfully."
+                    }
+                }
+            }
+        },
+        "/api/v1/operations": {
+            "post": {
+                "tags": [
+                    "Database Operations"
+                ],
+                "summary": "Generic database operations",
+                "operationId": "post-operations",
+                "description": "Execute high-level CRUD operations on various collections.",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "db": {
+                                        "type": "string",
+                                        "description": "Collection name"
+                                    },
+                                    "operation": {
+                                        "type": "string",
+                                        "enum": [
+                                            "get",
+                                            "create",
+                                            "update",
+                                            "delete",
+                                            "getOne"
+                                        ]
+                                    },
+                                    "database": {
+                                        "type": "string",
+                                        "enum": [
+                                            "datalake",
+                                            "ailoop"
+                                        ]
+                                    },
+                                    "filter": {
+                                        "type": "object"
+                                    },
+                                    "data": {
+                                        "type": "object"
+                                    }
+                                },
+                                "required": [
+                                    "db",
+                                    "operation"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operation successful."
+                    }
+                }
+            }
+        },
+        "/api/v1/datalake/{source}/databases": {
+            "get": {
+                "tags": [
+                    "Data Lake"
+                ],
+                "summary": "List databases",
+                "operationId": "get-datalake-databases",
+                "parameters": [
+                    {
+                        "name": "source",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Data source (e.g. sinfo, magemo)"
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of databases for the source",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/DatabaseInfo"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Data Lake"
+                ],
+                "summary": "Create database",
+                "operationId": "post-datalake-databases",
+                "parameters": [
+                    {
+                        "name": "source",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Shippings_2024"
+                                    },
+                                    "variables": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "description": "Initial headers/variables for the collection"
+                                    }
+                                },
+                                "required": [
+                                    "name"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Database created successfully."
+                    }
+                }
+            }
+        },
+        "/api/v1/datalake/{source}/databases/{db}": {
+            "patch": {
+                "tags": [
+                    "Data Lake"
+                ],
+                "summary": "Rename database",
+                "operationId": "patch-datalake-database",
+                "parameters": [
+                    {
+                        "name": "source",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "db",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "newName": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "newName"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Database renamed successfully."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Data Lake"
+                ],
+                "summary": "Delete database",
+                "operationId": "delete-datalake-database",
+                "parameters": [
+                    {
+                        "name": "source",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "db",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Database dropped successfully."
+                    }
+                }
+            }
+        },
+        "/api/v1/datalake/{source}/databases/{db}/variables": {
+            "post": {
+                "tags": [
+                    "Data Lake"
+                ],
+                "summary": "Add or rename variables",
+                "operationId": "post-datalake-variables",
+                "description": "Modify the schema of a collection by adding new null-initialized fields or renaming existing ones.",
+                "parameters": [
+                    {
+                        "name": "source",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "db",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "newVariables": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "renames": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "from": {
+                                                    "type": "string"
+                                                },
+                                                "to": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Variables updated successfully."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Data Lake"
+                ],
+                "summary": "Remove variables",
+                "operationId": "delete-datalake-variables",
+                "description": "Unset ($unset) specific fields across all documents in a collection.",
+                "parameters": [
+                    {
+                        "name": "source",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "db",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "variables": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Variables removed successfully."
+                    }
+                }
+            }
+        },
+        "/api/v1/datalake/{source}/databases/{db}/documents": {
+            "get": {
+                "tags": [
+                    "Data Lake"
+                ],
+                "summary": "List documents",
+                "operationId": "get-datalake-documents",
+                "parameters": [
+                    {
+                        "name": "source",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "db",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of documents and headers",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        },
+                                        "headers": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Data Lake"
+                ],
+                "summary": "Create document",
+                "operationId": "post-datalake-documents",
+                "parameters": [
+                    {
+                        "name": "source",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "db",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Document created successfully."
+                    }
+                }
+            }
+        },
+        "/api/v1/datalake/{source}/databases/{db}/documents/{id}": {
+            "patch": {
+                "tags": [
+                    "Data Lake"
+                ],
+                "summary": "Update document field",
+                "operationId": "patch-datalake-document",
+                "description": "Atomic update of a single field in a document. Handles server-side encryption for sensitive data.",
+                "parameters": [
+                    {
+                        "name": "source",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "db",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "field": {
+                                        "type": "string",
+                                        "description": "The field name to update"
+                                    },
+                                    "value": {
+                                        "description": "The new value for the field"
+                                    }
+                                },
+                                "required": [
+                                    "field",
+                                    "value"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Field updated successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "changes": {
+                                            "type": "object",
+                                            "properties": {
+                                                "field": {
+                                                    "type": "string"
+                                                },
+                                                "from": {},
+                                                "to": {}
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Data Lake"
+                ],
+                "summary": "Delete document",
+                "operationId": "delete-datalake-document",
+                "description": "Delete a document. If it is the last document, its fields are nullified to preserve the collection schema.",
+                "parameters": [
+                    {
+                        "name": "source",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "db",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Document deleted or nulled successfully."
+                    }
+                }
+            }
+        },
+        "/api/v1/flows/{source}": {
+            "get": {
+                "tags": [
+                    "Flows & Automation"
+                ],
+                "summary": "List flows",
+                "operationId": "get-flows",
+                "description": "Retrieve all automation flows for a specific source from Activepieces.",
+                "parameters": [
+                    {
+                        "name": "source",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 50
+                        }
+                    },
+                    {
+                        "name": "cursor",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of flows",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        },
+                                        "nextCursor": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/flows/{source}/{flowId}": {
+            "get": {
+                "tags": [
+                    "Flows & Automation"
+                ],
+                "summary": "Get flow details",
+                "operationId": "get-flow-details",
+                "parameters": [
+                    {
+                        "name": "source",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "flowId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detailed flow configuration",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/flows/execute-command": {
+            "post": {
+                "tags": [
+                    "Flows & Automation"
+                ],
+                "summary": "Execute flow command",
+                "operationId": "post-execute-command",
+                "description": "Trigger an Activepieces flow to execute a specific routine or command.",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "flowId": {
+                                        "type": "string",
+                                        "example": "vsJjkCvDE9piUupc5Glek"
+                                    },
+                                    "command": {
+                                        "type": "string",
+                                        "example": "Send Quote"
+                                    }
+                                },
+                                "required": [
+                                    "flowId",
+                                    "command"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Flow triggered successfully."
+                    }
+                }
+            }
+        },
+        "/api/v1/widget-data": {
+            "post": {
+                "tags": [
+                    "Dashboards"
+                ],
+                "summary": "Get widget data",
+                "operationId": "post-widget-data",
+                "description": "Fetch real-time data (weather, time, metrics) for specific dashboard widgets.",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "widget": {
+                                        "type": "string",
+                                        "description": "Filter by specific widget name"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Widget data package",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/public/chat": {
+            "post": {
+                "tags": [
+                    "Public APIs"
+                ],
+                "summary": "AI Chat Assistant",
+                "operationId": "post-public-chat",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Help me ship machines from Venice to Munich."
+                                    }
+                                },
+                                "required": [
+                                    "message"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Assistant response text"
+                    }
+                }
+            }
+        },
+        "/api/public/check-user": {
+            "post": {
+                "tags": [
+                    "Public APIs"
+                ],
+                "summary": "Check User Exists",
+                "operationId": "post-public-check-user",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    }
+                                },
+                                "required": [
+                                    "email"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Existence status",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "exists": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/public/classify": {
+            "post": {
+                "tags": [
+                    "Public APIs"
+                ],
+                "summary": "Classify Intent",
+                "operationId": "post-public-classify",
+                "description": "Determine if a message is a logistics inquiry or a general request.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "message": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "message"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Intent classification",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "intent": {
+                                            "type": "string",
+                                            "enum": [
+                                                "INQUIRY",
+                                                "OTHER"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/public/v3-services": {
+            "get": {
+                "tags": [
+                    "Public APIs"
+                ],
+                "summary": "Get V3 Services",
+                "operationId": "get-public-v3-services",
+                "responses": {
+                    "200": {
+                        "description": "List of available services",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "total_services": {
+                                            "type": "integer"
+                                        },
+                                        "services": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/public/route-scanner": {
+            "post": {
+                "tags": [
+                    "Public APIs"
+                ],
+                "summary": "Logistics Route Scanner",
+                "operationId": "post-route-scanner",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "origin": {
+                                        "type": "object"
+                                    },
+                                    "destination": {
+                                        "type": "object"
+                                    }
+                                },
+                                "required": [
+                                    "origin",
+                                    "destination"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Available routes found."
+                    }
+                }
+            }
+        },
+        "/api/public/stations": {
+            "get": {
+                "tags": [
+                    "Public APIs"
+                ],
+                "summary": "Search Stations",
+                "operationId": "get-public-stations",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of stations matching the query."
+                    }
+                }
+            }
+        },
+        "/api/public/submit-inquiry": {
+            "post": {
+                "tags": [
+                    "Public APIs"
+                ],
+                "summary": "Submit Inquiry",
+                "operationId": "post-public-submit-inquiry",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Inquiry submitted successfully."
+                    }
+                }
+            }
+        },
+        "/api/public/submit-contact": {
+            "post": {
+                "tags": [
+                    "Public APIs"
+                ],
+                "summary": "Submit Contact Form",
+                "operationId": "post-public-submit-contact",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Contact form processed successfully."
+                    }
+                }
+            }
+        },
+        "/api/public/network-data": {
+            "get": {
+                "tags": [
+                    "Public APIs"
+                ],
+                "summary": "Get Network Data",
+                "operationId": "get-public-network-data",
+                "responses": {
+                    "200": {
+                        "description": "Network topology nodes and legs."
+                    }
+                }
+            }
+        },
+        "/api/v1/health": {
+            "get": {
+                "tags": [
+                    "System"
+                ],
+                "summary": "Health check",
+                "operationId": "get-health",
+                "responses": {
+                    "200": {
+                        "description": "Service is healthy.",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "ok"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/client-ip": {
+            "get": {
+                "tags": [
+                    "System"
+                ],
+                "summary": "Get client IP",
+                "operationId": "get-client-ip",
+                "responses": {
+                    "200": {
+                        "description": "Client IP address",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "ip": "127.0.0.1"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/test": {
+            "get": {
+                "tags": [
+                    "System"
+                ],
+                "summary": "Diagnostic test",
+                "operationId": "get-test",
+                "responses": {
+                    "200": {
+                        "description": "Test data",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "timestamp": 123456789,
+                                    "id": "abc12345"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        },
+        "schemas": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "surname": {
+                        "type": "string"
+                    },
+                    "companyName": {
+                        "type": "string"
+                    },
+                    "companyVerified": {
+                        "type": "boolean"
+                    },
+                    "permission": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "jobTitle": {
+                        "type": "string"
+                    }
+                }
+            },
+            "UserUpdate": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "surname": {
+                        "type": "string"
+                    },
+                    "jobTitle": {
+                        "type": "string"
+                    },
+                    "city": {
+                        "type": "string"
+                    },
+                    "country": {
+                        "type": "string"
+                    }
+                }
+            },
+            "DatabaseInfo": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Actual MongoDB collection name"
+                    },
+                    "userFriendlyName": {
+                        "type": "string",
+                        "description": "Human-readable name without prefix"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,40 +1,64 @@
 ---
-title: Logistics Network
-sidebarTitle: Logistics Network
-description: Visualize and manage your operational infrastructure on an interactive map.
+title: "Logistics Network"
+description: "Interactive visualization of the operational logistics environment and transport network."
 ---
 
-The **Logistics Network** functionality provides a comprehensive geographical visualization of your supply chain and operational environment, specifically optimized for regional logistics tracking.
+<img
+  className="block dark:hidden mb-6 rounded-lg shadow-md border border-gray-200"
+  src="/images/logistics-network.png"
+  alt="Logistics Network Visualization"
+/>
+<img
+  className="hidden dark:block mb-6 rounded-lg shadow-md border border-gray-700"
+  src="/images/logistics-network.png"
+  alt="Logistics Network Visualization (Dark Mode)"
+/>
 
-## Interactive Network Visualization
-Using advanced mapping technology, the Logistics Network module displays your entire infrastructure in an intuitive interface.
+The **Logistics Network** module provides a high-level, interactive geospatial view of the entire operational environment. It visualizes the active transport nodes, hubs, and the connecting rail or road legs across Europe, enabling operators to instantly assess network reach and density.
 
-### Infrastructure Nodes
-Nodes represent key physical locations in your network, such as:
-- **Stations**: Active operational hubs.
-- **Terminals**: Logistic transfer points.
-- **Rail Connections**: Strategic rail infrastructure points.
+## Key Features
 
-Each node is color-coded by type and sized according to its operational importance or capacity.
+### 1. Interactive Geospatial Map
+The core of this module is a dynamic map of Europe that supports:
+- **Pan & Zoom**: Users can roam freely across the map to focus on specific regions (e.g., Northern Italy, Central Europe).
+- **Auto-Fit**: On load, the map automatically centers on the active network cluster.
+- **Theme Adaptation**: The map's cartography (borders, land mass colors) automatically adjusts to light or dark mode for optimal readability.
 
-### Transport Legs
-The lines connecting nodes represent the actual transport pathways:
-- **Distance Tracking**: View exact distances in kilometers between nodes.
-- **Dynamic Animation**: Real-time animations show active "flows" or transport legs, providing a sense of current movement within the network.
-- **Leg Type Classification**: Identify different modes of transport or service levels by line styling.
+### 2. Node Visualization (Hubs & Terminals)
+Locations are represented as interactive nodes.
+- **Visual Hierachy**: Node size changes dynamically based on importance or "weight" (e.g., volume of traffic).
+- **Smart Labeling**: Labels automatically position themselves to avoid overlap and improve clarity.
+- **Rich Tooltips**: Hovering over a node reveals:
+  - **Station Name** & Description
+  - **Rail Availability**: Status of rail connections.
+  - **Type**: Operational classification (e.g., Terminal, Hub).
 
-## Contextual Information
-Hovering over any node or leg provides detailed metadata:
-- **Node Details**: Station type, rail availability, and site descriptions.
-- **Leg Details**: Line name, distance, and specific transport type.
+### 3. Network Legs (Connections)
+Transport routes connecting the nodes are visualized as lines.
+- **Flow Animation**: A subtle particle effect moves along the lines, indicating the direction and active status of the flow.
+- **Distance Calculation**: The system automatically calculates and displays the distance (km) for each leg.
+- **Leg Details**: Hovering over a line shows the route name, transport type, and exact distance.
 
-## Smart Zoom & Navigation
-The map automatically adjusts detail levels based on zoom, showing top-priority hubs at a high level and revealing more granular station data as you dive deeper into specific regions.
+## Data Integration
 
-<Note>
-  The network data is pulled directly from your operational databases, ensuring the visualization always mirrors your real-world infrastructure.
-</Note>
+The interactive map is powered by real-time data from the `Public Network API`. This ensures that any change in the physical network—such as a new terminal opening or a route suspension—is immediately reflected in the visualization without requiring frontend code changes.
 
-<Frame caption="The Logistics Network map visualizing nodes and transport legs.">
-  <img src="/images/logistics-network-placeholder.png" alt="Logistics Network Interface" />
-</Frame>
+```json
+/* Example Data Structure */
+{
+  "nodes": [
+    { "name": "Verona", "coordinates": [45.438, 10.991], "rail": true },
+    { "name": "Munich", "coordinates": [48.135, 11.581], "rail": true }
+  ],
+  "legs": [
+    { "source": "Verona", "target": "Munich", "distance": 430 }
+  ]
+}
+```
+
+## Usage
+
+This tool is primarily used by:
+- **Logistics Planners**: To visualize potential routing options and gaps.
+- **Sales Teams**: To demonstrate network coverage to prospective clients in real-time.
+- **Management**: For operational oversight and strategic planning.

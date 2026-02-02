@@ -1,0 +1,24 @@
+---
+title: "Introduction"
+description: "Welcome to the AI LooP API Reference"
+---
+
+## Overview
+
+The AI LooP API allows you to programmatically interact with our logistics management platform. Use the sidebar to explore endpoints for authentication, data lake access, and database operations.
+
+## Authentication
+
+Most API endpoints require a JSON Web Token (JWT). You can obtain a token by using the magic link authentication flow.
+
+<CodeGroup>
+```bash Bearer Auth
+curl --request GET \
+  --url https://ai-loop.alpeadria.com/api/v1/me \
+  --header 'Authorization: Bearer <your_jwt_token>'
+```
+</CodeGroup>
+
+## Playground
+
+You can try out any API endpoint directly from the documentation. Simply select an endpoint from the sidebar and use the **Try It** section on the right.
