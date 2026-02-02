@@ -1,51 +1,49 @@
 ---
 title: Data Lake Manager
 sidebarTitle: Data Lake
-description: Manage your business data structures and database collections directly from the dashboard.
 ---
 
-The **Data Lake Manager** is the core data governance tool in WaveCentric. It provides a centralized interface for viewing, filtering, and managing all underlying database collections that power your AI applications and logistics operations.
+The **Data Lake Manager** is the core data governance tool in AI Loop. It provides a centralized interface for viewing, filtering, and managing all underlying database collections that power your AI applications and logistics operations.
 
-## Flexible Data Management
 
-The Data Lake is your central repository for creating, managing, and editing all your datasets. You can seamlessly switch between multiple database collections using the high-performance grid.
+### Create Database
+You can initialize new data structures through two primary methods:
 
-### Creating a Database
-You can bootstrap your data in two ways:
-- **Create from Scratch**: Manually define a unique name and initial column headers for a new collection.
-- **Import from CSV**: Upload an existing CSV file. The system automatically parses your headers and initializes the database structure based on your file content.
+- **New DataBase (Manual)**: Define a custom name and add multiple initial columns manually to build a specialized collection from the ground up.
+- **Import from File**: Rapidly ingest existing datasets by uploading **CSV**, **XLSX**, or **XLS** files. The system automatically derives the database name from the filename and initializes the schema based on your file's headers.
 
-### Secure CRUD Operations
-Perform essential data management tasks directly from the UI:
-- **Record Entry**: Manually add new rows to your collections using dynamic forms that adapt to your schema.
-- **In-line Editing**: Update existing records directly in the table view with real-time field validation.
-- **Deletion**: Permanently remove records (requires confirmation).
-- **Bulk Export**: Download any collection as a CSV file for external reporting or auditing.
+<div class="grid">
+  <Frame caption="The manual database creation interface.">
+    <img src="/images/new-database.png" alt="New Database Manual" />
+  </Frame>
+  <Frame caption="Creating a database from external files (CSV/Excel).">
+    <img src="/images/create-database-from-file.png" alt="Create Database from File" />
+  </Frame>
+</div>
 
----
 
-## Technical Governance
+### Record Management & Editing
+Manage your records with a sophisticated editing suite designed for data integrity:
 
-### Schema Customization
-Maintain the integrity of your data structures as your business evolves:
-- **Column Management**: Add, rename, or remove data fields dynamically.
-- **Metadata Visibility**: View internal system fields (like unique IDs and timestamps) alongside your business data for technical context.
+- **Atomic Row Editing**: Modify individual records through a focus-modal that prevents accidental changes to adjacent data.
+- **Helper Intelligence**: The platform detects data types automatically. Typing a date or timestamp triggers a specialized **Date Helper** for easier entry.
+- **Data Suggestions**: Field-level intelligence provides contextual suggestions based on existing entries to ensure naming consistency across your dataset.
+- **Schema Evolution**: Add new columns to an existing database at any time to accommodate evolving business requirements.
 
-### Specialized User Profiles
-The Data Lake includes a dedicated view for **User Profile Management**, featuring specialized operational fields:
-- **Funnel Tracking**: Monitor which stage of the sales pipeline a user is assigned to.
-- **Company Verification**: Manage the "Verified" status of organizations within the platform.
-- **Permission Mapping**: Directly audit the permissions (Admin vs. Guest) associated with each user record.
-
-### Real-Time Search & Analytics
-Data is presented in a high-performance grid optimized for large datasets:
-- **Field-Specific Filters**: Search across every column simultaneously to find specific records.
-- **Dynamic Sorting**: Organize data by any field to identify operational trends or outliers.
-
-<Note>
-  The Data Lake is the foundation of WaveCentric's "Intelligence" layer. Changes made here are immediately synchronized with the **AI Assistant** and all automated **Workflows**, ensuring your AI always operates on the most current data.
-</Note>
-
-<Frame caption="The Data Lake Manager interface showing active collection management and filtering.">
-  <img src="/images/data-lake-placeholder.png" alt="Data Lake Interface" />
+<Frame caption="The record editing interface featuring specialized date helpers and data suggestions.">
+  <img src="/images/edit-row.png" alt="Edit Row Interface" />
 </Frame>
+
+
+### Search & Filtering
+The Data Lake is optimized for rapid analysis of large-scale logistics data:
+
+- **Cross-Column Search**: Instantly find records by searching across any business field simultaneously.
+- **Advanced Filtering**: Use field-specific probes to isolate data based on precise criteria.
+- **Temporal Analysis**: Integrated **Date-Time Pickers** within the filter headers allow you to perform precise time-based auditing and historical reporting.
+- **Bulk Export**: Download any filtered view or entire collection as a CSV for external analysis.
+
+<Frame caption="The Data Lake filtering system with integrated date-time pickers and row-level search.">
+  <img src="/images/data-filters.png" alt="Data Lake Filters" />
+</Frame>
+
