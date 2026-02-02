@@ -7,8 +7,8 @@
     },
     "servers": [
         {
-            "url": "http://localhost:3333",
-            "description": "Local Development Server"
+            "url": "https://ai-loop.alpeadria.com",
+            "description": "Production server"
         }
     ],
     "paths": {
