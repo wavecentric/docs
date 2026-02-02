@@ -1,0 +1,51 @@
+---
+title: Data Lake Manager
+sidebarTitle: Data Lake
+description: Manage your business data structures and database collections directly from the dashboard.
+---
+
+The **Data Lake Manager** is the core data governance tool in WaveCentric. It provides a centralized interface for viewing, filtering, and managing all underlying database collections that power your AI applications and logistics operations.
+
+## Flexible Data Management
+
+The Data Lake is your central repository for creating, managing, and editing all your datasets. You can seamlessly switch between multiple database collections using the high-performance grid.
+
+### Creating a Database
+You can bootstrap your data in two ways:
+- **Create from Scratch**: Manually define a unique name and initial column headers for a new collection.
+- **Import from CSV**: Upload an existing CSV file. The system automatically parses your headers and initializes the database structure based on your file content.
+
+### Secure CRUD Operations
+Perform essential data management tasks directly from the UI:
+- **Record Entry**: Manually add new rows to your collections using dynamic forms that adapt to your schema.
+- **In-line Editing**: Update existing records directly in the table view with real-time field validation.
+- **Deletion**: Permanently remove records (requires confirmation).
+- **Bulk Export**: Download any collection as a CSV file for external reporting or auditing.
+
+---
+
+## Technical Governance
+
+### Schema Customization
+Maintain the integrity of your data structures as your business evolves:
+- **Column Management**: Add, rename, or remove data fields dynamically.
+- **Metadata Visibility**: View internal system fields (like unique IDs and timestamps) alongside your business data for technical context.
+
+### Specialized User Profiles
+The Data Lake includes a dedicated view for **User Profile Management**, featuring specialized operational fields:
+- **Funnel Tracking**: Monitor which stage of the sales pipeline a user is assigned to.
+- **Company Verification**: Manage the "Verified" status of organizations within the platform.
+- **Permission Mapping**: Directly audit the permissions (Admin vs. Guest) associated with each user record.
+
+### Real-Time Search & Analytics
+Data is presented in a high-performance grid optimized for large datasets:
+- **Field-Specific Filters**: Search across every column simultaneously to find specific records.
+- **Dynamic Sorting**: Organize data by any field to identify operational trends or outliers.
+
+<Note>
+  The Data Lake is the foundation of WaveCentric's "Intelligence" layer. Changes made here are immediately synchronized with the **AI Assistant** and all automated **Workflows**, ensuring your AI always operates on the most current data.
+</Note>
+
+<Frame caption="The Data Lake Manager interface showing active collection management and filtering.">
+  <img src="/images/data-lake-placeholder.png" alt="Data Lake Interface" />
+</Frame>
