@@ -7,10 +7,6 @@
     },
     "servers": [
         {
-            "url": "http://localhost:3000",
-            "description": "Local development"
-        },
-        {
             "url": "https://ai-loop.alpeadria.com",
             "description": "Production server"
         }
