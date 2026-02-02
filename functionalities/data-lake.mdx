@@ -1,0 +1,49 @@
+---
+title: Data Lake Manager
+sidebarTitle: Data Lake
+---
+
+The **Data Lake Manager** is the core data governance tool in AI Loop. It provides a centralized interface for viewing, filtering, and managing all underlying database collections that power your AI applications and logistics operations.
+
+
+### Create Database
+You can initialize new data structures through two primary methods:
+
+- **New DataBase (Manual)**: Define a custom name and add multiple initial columns manually to build a specialized collection from the ground up.
+- **Import from File**: Rapidly ingest existing datasets by uploading **CSV**, **XLSX**, or **XLS** files. The system automatically derives the database name from the filename and initializes the schema based on your file's headers.
+
+<div class="grid">
+  <Frame caption="The manual database creation interface.">
+    <img src="/images/new-database.png" alt="New Database Manual" />
+  </Frame>
+  <Frame caption="Creating a database from external files (CSV/Excel).">
+    <img src="/images/create-database-from-file.png" alt="Create Database from File" />
+  </Frame>
+</div>
+
+
+### Record Management & Editing
+Manage your records with a sophisticated editing suite designed for data integrity:
+
+- **Atomic Row Editing**: Modify individual records through a focus-modal that prevents accidental changes to adjacent data.
+- **Helper Intelligence**: The platform detects data types automatically. Typing a date or timestamp triggers a specialized **Date Helper** for easier entry.
+- **Data Suggestions**: Field-level intelligence provides contextual suggestions based on existing entries to ensure naming consistency across your dataset.
+- **Schema Evolution**: Add new columns to an existing database at any time to accommodate evolving business requirements.
+
+<Frame caption="The record editing interface featuring specialized date helpers and data suggestions.">
+  <img src="/images/edit-row.png" alt="Edit Row Interface" />
+</Frame>
+
+
+### Search & Filtering
+The Data Lake is optimized for rapid analysis of large-scale logistics data:
+
+- **Cross-Column Search**: Instantly find records by searching across any business field simultaneously.
+- **Advanced Filtering**: Use field-specific probes to isolate data based on precise criteria.
+- **Temporal Analysis**: Integrated **Date-Time Pickers** within the filter headers allow you to perform precise time-based auditing and historical reporting.
+- **Bulk Export**: Download any filtered view or entire collection as a CSV for external analysis.
+
+<Frame caption="The Data Lake filtering system with integrated date-time pickers and row-level search.">
+  <img src="/images/data-filters.png" alt="Data Lake Filters" />
+</Frame>
+

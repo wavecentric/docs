@@ -11,7 +11,7 @@
     "light": "#a2c037",
     "dark": "#a2c037"
   },
-  "favicon": "https://static.wavecentric.ai/img/logo.svg",
+  "favicon": "/favicon.ico",
   "navbar": {
     "primary": {
       "type": "button",
@@ -22,24 +22,62 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Get Started",
+        "tab": "Functionalities",
         "groups": [
           {
-            "group": "Get Started",
+            "group": "Introduction",
             "icon": "rocket",
             "pages": [
               "welcome",
-              "invitation",
-              "user-management",
-              "create-update-db",
-             
-              "workflows"
+              "functionalities/customer-support",
+              "functionalities/membership-account-management",
+              "functionalities/invitation"
             ]
           },
           {
-            "group": "Workflows",
+            "group": "Core Functionalities",
+            "icon": "folder-tree",
+            "pages": [
+              "functionalities/sales-funnel",
+              "functionalities/tasks",
+              "functionalities/dashboard-personalization"
+            ]
+          },
+          {
+            "group": "Inquiry",
+            "icon": "clipboard-question",
+            "pages": [
+              "functionalities/inquiries-dashboard",
+              "functionalities/new-inquiry",
+              "functionalities/new-inquiry-ai-assisted"
+            ]
+          },
+          {
+            "group": "Intelligence & Analytics",
+            "icon": "brain-circuit",
+            "pages": [
+              "functionalities/analytics-reports",
+              "functionalities/logistics-network",
+              "functionalities/data-lake"
+            ]
+          },
+          {
+            "group": "CRM & Management",
+            "icon": "users",
+            "pages": [
+              "functionalities/customer-management"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Workflows",
+        "groups": [
+          {
+            "group": "Standard Workflows",
             "icon": "sitemap",
             "pages": [
+              "workflows",
               "workflows/communication-channel",
               "workflows/query-assistant",
               "workflows/service-quotation",
@@ -53,7 +91,5 @@
       }
     ]
   },
-  "footer": {
-    "copyright": "© 2025 WaveCentric LTD. All rights reserved."
-  }
+  "footer": {}
 }
