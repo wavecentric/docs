@@ -77,9 +77,10 @@
             "group": "Standard Workflows",
             "icon": "sitemap",
             "pages": [
-              "workflows/user-inquiry",
               "workflows/authentication",
-              "workflows/user-invitation"
+              "workflows/user-invitation",
+              "workflows/user-inquiry",
+              "workflows/contact-us"
             ]
           }
         ]
