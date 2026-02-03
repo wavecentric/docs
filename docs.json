@@ -77,14 +77,9 @@
             "group": "Standard Workflows",
             "icon": "sitemap",
             "pages": [
-              "workflows",
-              "workflows/communication-channel",
-              "workflows/query-assistant",
-              "workflows/service-quotation",
-              "workflows/contract-management",
-              "workflows/data-viewer",
-              "workflows/stato-carri",
-              "workflows/data-analysis"
+              "workflows/user-inquiry",
+              "workflows/authentication",
+              "workflows/user-invitation"
             ]
           }
         ]

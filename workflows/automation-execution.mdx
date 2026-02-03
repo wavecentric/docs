@@ -1,0 +1,38 @@
+---
+title: "Automation Execution"
+sidebarTitle: "Running Automations"
+description: "Triggering complex backend workflows from the frontend."
+---
+
+The Application allows the frontend to trigger Activepieces workflows securely via a proxy endpoint.
+
+## Architecture
+
+The `execute-command` endpoint acts as a secure bridge between the User Interface and the Activepieces automation engine.
+
+<ParamField path="flowId" type="string" required>
+  The Activepieces Flow ID to trigger.
+</ParamField>
+<ParamField path="command" type="string" required>
+  A descriptive action name (e.g., "Sync ERP").
+</ParamField>
+
+## Context Injection
+
+The server automatically injects the authenticated user's context into the webhook payload:
+
+```json
+{
+  "user": {
+    "email": "user@example.com",
+    "role": "admin",
+    "companyName": "Acme Logistics"
+  }
+}
+```
+
+## API Reference
+
+<Card title="Execute Command" icon="bolt" href="/api-reference/flows/execute">
+  Run a specific automation flow.
+</Card>

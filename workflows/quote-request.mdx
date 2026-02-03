@@ -1,0 +1,35 @@
+---
+title: "Public Quote Request"
+description: "Standard web form submission for new logistics leads."
+---
+
+This workflow handles inquiries submitted via the "Get a Quote" public web form.
+
+## Process Flow
+
+<Steps>
+  <Step title="Form Submission">
+    User submits contact details and cargo requirements.
+  </Step>
+  <Step title="Identity Resolution">
+    The system checks if the user exists.
+    - **New User**: Created as `lead`.
+    - **Existing User**: Profile updated (unless company is verified).
+  </Step>
+  <Step title="Automation Triggers">
+    Two background processes are started:
+    - **Send Quote Webhook**: Notifies the sales team (Activepieces).
+    - **Cost Calc Webhook**: Estimates the shipment cost.
+  </Step>
+</Steps>
+
+## Related APIs
+
+<CardGroup cols={2}>
+  <Card title="Submit Inquiry" icon="paper-plane" href="/api-reference/public/submit-inquiry">
+    Submit the main quote form.
+  </Card>
+  <Card title="Check User" icon="user-magnifying-glass" href="/api-reference/public/check-user">
+    Validate if an email is already registered.
+  </Card>
+</CardGroup>
