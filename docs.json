@@ -56,6 +56,7 @@
             "group": "Intelligence & Analytics",
             "icon": "brain-circuit",
             "pages": [
+              "functionalities/ai-assistant",
               "functionalities/analytics-reports",
               "functionalities/logistics-network",
               "functionalities/data-lake"

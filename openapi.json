@@ -42,10 +42,36 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Verification email sent successfully."
+                        "description": "Verification email sent successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "message": "Verification email sent to user@example.com. Please check your inbox."
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "400": {
-                        "description": "Email is required."
+                        "description": "Email is required.",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Email is required"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -87,9 +113,24 @@
                         "description": "Login successful.",
                         "content": {
                             "application/json": {
-                                "example": {
-                                    "message": "Login successful!",
-                                    "redirectPath": "/ai-loop"
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "redirectPath": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "message": "Login successful!",
+                                            "redirectPath": "/ai-loop"
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -109,7 +150,26 @@
                 "operationId": "post-logout",
                 "responses": {
                     "200": {
-                        "description": "Logged out successfully."
+                        "description": "Logged out successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "message": "Logged out successfully"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -133,6 +193,20 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/User"
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "email": "user@example.com",
+                                            "name": "John",
+                                            "surname": "Doe",
+                                            "companyName": "WaveCentric",
+                                            "companyVerified": true,
+                                            "permission": "admin",
+                                            "status": "Completed",
+                                            "jobTitle": "Engineer"
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -164,7 +238,14 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Profile updated successfully."
+                        "description": "Profile updated successfully.",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Profile updated successfully"
+                                }
+                            }
+                        }
                     },
                     "401": {
                         "description": "Unauthorized"
@@ -247,7 +328,26 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Invitation sent successfully."
+                        "description": "Invitation sent successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "message": "Invitation sent to user@example.com."
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -350,7 +450,26 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "User updated successfully."
+                        "description": "User updated successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "message": "User updated successfully."
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "403": {
                         "description": "Permission denied."
@@ -380,7 +499,26 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "User deleted successfully."
+                        "description": "User deleted successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "message": "User deleted successfully."
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -443,7 +581,38 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Operation successful."
+                        "description": "Operation successful.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "array"
+                                        },
+                                        "modifiedCount": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "message": "Operation successful.",
+                                            "success": true,
+                                            "data": [],
+                                            "modifiedCount": 1
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -463,7 +632,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Data source (e.g. sinfo, magemo)"
+                        "description": "Data source (e.g. ailoop, fleet)"
                     }
                 ],
                 "security": [
@@ -480,6 +649,20 @@
                                     "type": "array",
                                     "items": {
                                         "$ref": "#/components/schemas/DatabaseInfo"
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": [
+                                            {
+                                                "name": "db_ai-loop_V3_Services",
+                                                "userFriendlyName": "V3_Services"
+                                            },
+                                            {
+                                                "name": "db_ai-loop_V3_Intermodal_Gateway",
+                                                "userFriendlyName": "V3_Intermodal_Gateway"
+                                            }
+                                        ]
                                     }
                                 }
                             }
@@ -536,7 +719,22 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Database created successfully."
+                        "description": "Database created successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DatabaseInfo"
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "name": "db_ai-loop_V3_Services",
+                                            "userFriendlyName": "V3_Services"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -591,7 +789,26 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Database renamed successfully."
+                        "description": "Database renamed successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "statusMessage": "[AILOOP] Database 'V3_Services' successfully renamed to 'V3_Services_Archive'."
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -695,7 +912,26 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Variables updated successfully."
+                        "description": "Variables updated successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "statusMessage": "[AILOOP] Variables added. Matched 100, modified 100 documents."
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -749,7 +985,39 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Variables removed successfully."
+                        "description": "Variables removed successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "statusMessage": {
+                                            "type": "string"
+                                        },
+                                        "deletedCount": {
+                                            "type": "integer"
+                                        },
+                                        "deletedFields": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "statusMessage": "[AILOOP] Variables deleted. 100 documents updated.",
+                                            "deletedCount": 100,
+                                            "deletedFields": [
+                                                "legacy_tracking_id"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -805,6 +1073,26 @@
                                             }
                                         }
                                     }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "data": [
+                                                {
+                                                    "_id": "68db6f2c0ac7da8532656a2",
+                                                    "Origin": "Venice",
+                                                    "Destination": "Novara",
+                                                    "Service_ID": "V0000440"
+                                                }
+                                            ],
+                                            "headers": [
+                                                "_id",
+                                                "Origin",
+                                                "Destination",
+                                                "Service_ID"
+                                            ]
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -852,7 +1140,23 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Document created successfully."
+                        "description": "Document created successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "_id": "60d5ecb31f3f4a0015f8a0a1",
+                                            "field1": "value1",
+                                            "field2": "value2"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -941,6 +1245,18 @@
                                             }
                                         }
                                     }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "message": "Update successful",
+                                            "changes": {
+                                                "field": "title",
+                                                "from": "Old Title",
+                                                "to": "New Title"
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -1014,7 +1330,7 @@
                         "in": "query",
                         "schema": {
                             "type": "integer",
-                            "default": 50
+                            "success": 50
                         }
                     },
                     {
@@ -1041,11 +1357,42 @@
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "type": "object"
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string"
+                                                    },
+                                                    "displayName": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    }
+                                                }
                                             }
                                         },
                                         "nextCursor": {
-                                            "type": "string"
+                                            "type": "string",
+                                            "nullable": true
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "data": [
+                                                {
+                                                    "id": "HAi2EtVRQewrOjXt",
+                                                    "displayName": "Inquiry Processor",
+                                                    "status": "PUBLISHED"
+                                                },
+                                                {
+                                                    "id": "VgtiK5DK1B",
+                                                    "displayName": "Customers KPI",
+                                                    "status": "PUBLISHED"
+                                                }
+                                            ],
+                                            "nextCursor": null
                                         }
                                     }
                                 }
@@ -1138,7 +1485,30 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Flow triggered successfully."
+                        "description": "Flow triggered successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "output": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "status": "success",
+                                            "output": "Command executed"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1177,7 +1547,21 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "object"
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "Weather": {
+                                                "temp": 12,
+                                                "condition": "Cloudy"
+                                            },
+                                            "LocalTime": "2026-02-04T09:20:00Z"
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -1213,7 +1597,34 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Assistant response text"
+                        "description": "Assistant response text",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "sessionId": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "sessionId": "abc-123",
+                                            "message": "I can help you with that shipment. Where is the origin?",
+                                            "status": "active"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1254,6 +1665,13 @@
                                     "properties": {
                                         "exists": {
                                             "type": "boolean"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "found": {
+                                        "value": {
+                                            "exists": true
                                         }
                                     }
                                 }
@@ -1305,6 +1723,13 @@
                                             ]
                                         }
                                     }
+                                },
+                                "examples": {
+                                    "inquiry": {
+                                        "value": {
+                                            "intent": "INQUIRY"
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -1312,7 +1737,7 @@
                 }
             }
         },
-        "/api/public/v3-services": {
+        "/api/public/v3_services": {
             "get": {
                 "tags": [
                     "Public APIs"
@@ -1335,6 +1760,25 @@
                                             "items": {
                                                 "type": "object"
                                             }
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "total_services": 4,
+                                            "services": [
+                                                {
+                                                    "origin": "Trieste",
+                                                    "destination": "Milan",
+                                                    "service_id": "V3-001",
+                                                    "service_name": "Trieste-Milan Express",
+                                                    "origin_lat": 45.64,
+                                                    "origin_lng": 13.76,
+                                                    "destination_lat": 45.46,
+                                                    "destination_lng": 9.19
+                                                }
+                                            ]
                                         }
                                     }
                                 }
@@ -1375,7 +1819,39 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Available routes found."
+                        "description": "Available routes found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "total_routes": {
+                                            "type": "integer"
+                                        },
+                                        "possible_routes": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "total_routes": 1,
+                                            "possible_routes": [
+                                                {
+                                                    "steps": [],
+                                                    "totalDistance": 450.5,
+                                                    "summary": "Truck -> Train -> Truck - 450.5 km"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1399,7 +1875,66 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "List of stations matching the query."
+                        "description": "List of stations matching the query.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "value": {
+                                                "type": "string"
+                                            },
+                                            "label": {
+                                                "type": "string"
+                                            },
+                                            "primary": {
+                                                "type": "string"
+                                            },
+                                            "secondary": {
+                                                "type": "string"
+                                            },
+                                            "type": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            },
+                                            "coords": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "lat": {
+                                                        "type": "number"
+                                                    },
+                                                    "lng": {
+                                                        "type": "number"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": [
+                                            {
+                                                "value": "gateway_VCE",
+                                                "label": "Venice Gateway",
+                                                "primary": "Venice",
+                                                "secondary": "Gateway",
+                                                "type": "gateway",
+                                                "code": "VCE",
+                                                "coords": {
+                                                    "lat": 45.44,
+                                                    "lng": 12.31
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1423,7 +1958,34 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Inquiry submitted successfully."
+                        "description": "Inquiry submitted successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "inquiryId": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "success": true,
+                                            "inquiryId": "INQ-123",
+                                            "message": "Quote request submitted successfully. Processing in progress."
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1447,7 +2009,30 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Contact form processed successfully."
+                        "description": "Contact form processed successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "success": true,
+                                            "message": "Contact message received"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1461,7 +2046,63 @@
                 "operationId": "get-public-network-data",
                 "responses": {
                     "200": {
-                        "description": "Network topology nodes and legs."
+                        "description": "Network topology nodes and legs.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "nodes": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "legs": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "success": true,
+                                            "data": {
+                                                "nodes": [
+                                                    {
+                                                        "node_id": "1",
+                                                        "label": "Venice",
+                                                        "type": "gateway",
+                                                        "lat": 45.44,
+                                                        "lng": 12.31
+                                                    }
+                                                ],
+                                                "legs": [
+                                                    {
+                                                        "id": "20",
+                                                        "from": "Venice",
+                                                        "to": "Milan",
+                                                        "type": "train",
+                                                        "distance_km": "280"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1473,13 +2114,30 @@
                 ],
                 "summary": "Health check",
                 "operationId": "get-health",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Service is healthy.",
                         "content": {
                             "application/json": {
-                                "example": {
-                                    "message": "ok"
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "message": "ok"
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -1494,13 +2152,30 @@
                 ],
                 "summary": "Get client IP",
                 "operationId": "get-client-ip",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Client IP address",
                         "content": {
                             "application/json": {
-                                "example": {
-                                    "ip": "127.0.0.1"
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "ip": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "ip": "127.0.0.1"
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -1515,14 +2190,34 @@
                 ],
                 "summary": "Diagnostic test",
                 "operationId": "get-test",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Test data",
                         "content": {
                             "application/json": {
-                                "example": {
-                                    "timestamp": 123456789,
-                                    "id": "abc12345"
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "timestamp": {
+                                            "type": "integer"
+                                        },
+                                        "id": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "success": {
+                                        "value": {
+                                            "timestamp": 123456789,
+                                            "id": "abc12345"
+                                        }
+                                    }
                                 }
                             }
                         }
