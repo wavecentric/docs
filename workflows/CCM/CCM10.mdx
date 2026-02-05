@@ -1,0 +1,57 @@
+---
+title: "CCM 10 - Customizing Workflows"
+sidebarTitle: "CCM 10"
+description: "Customization of workflows for offers, contracts, and communications based on business needs."
+---
+
+## 1. Overview
+
+**Customizing Workflows** ensures that the platform adapts to the customer's business, rather than forcing the business to adapt to the platform. It fulfills the requirement to "customize workflows based on specific customer needs" by engaging a feedback loop where deep customer knowledge directly drives flexible commercial execution.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable ensures **Operational Fit** by combining two core strengths:
+*   **Understanding Needs**: The ability to capture and centralize specific customer requirements.
+*   **Adapting Execution**: The ability to modify standard offers and contracts to match those specific requirements, rather than adhering to rigid templates.
+
+## 3. Implemented Functionalities
+
+The platform implements "Customization" as the interplay between the following functionalities:
+
+### Customer-Centric Context
+**Requirement Addressed**: *"Based on specific customer needs"*
+
+The platform acts as a centralized "Relationship Hub". This allows the workflow to start from the customer's perspective:
+*   **Specific Requirements**: The standard workflow is blocked or altered based on the specific needs captured in the centralized Customer Directory.
+*   **Unified View**: Aggregates users, communication history, and operational tasks into a single customer profile, providing the context needed for customization.
+
+<Frame caption="The central directory providing the specific customer context needed to tailor workflows.">
+  <img src="/images/customer-management.png" alt="Customer Context Interface" />
+</Frame>
+
+### Adaptive Commercial Workflows
+**Requirement Addressed**: *"Customize workflows for... offers, contracts"*
+
+The platform enables the deviation from standard processes:
+*   **Offer Customization**: The "Edit" capability allows a standard offer workflow to remain in a "Draft" loop, gathering specific approvals or modifications (e.g., special discounts) before being finalized.
+*   **Contract Tailoring**: The ability to modify contracts and agreements allows the operational workflow to evolve in real-time without breaking the digital thread.
+
+<Frame caption="The editing interface allowing for the customization of standard commercial workflows.">
+  <img src="/images/quote3.png" alt="Workflow Customization Interface" />
+</Frame>
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### Integrated Data Architecture
+*   **Unified Graph**: The link between `CRM_Inquiries` (Customer Needs) and `Quotation`/`Contract` entities allows data to flow seamlessly, enabling the logic of one to dictate the structure of the other.
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the CCM 10 requirement through the combination of capabilities:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Workflow Adaptation** | **Evidenced by [Needs Analysis + Modification]**: The combined capability to **Analyze Needs** (via the Customer Directory) and **Modify Outputs** (via Offer/Contract Editing) constitutes a fully customizable workflow. |
+| **Logic Execution** | **Evidenced by [Automation Engine]**: The backend capability to inject specific logic blocks into standard flows proves the system's adaptability to custom business rules. |

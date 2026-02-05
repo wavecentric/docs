@@ -1,0 +1,31 @@
+---
+title: "Quotation Management"
+sidebarTitle: "Management"
+description: "Admin dashboard for monitoring, verifying, and editing automatically generated offers."
+---
+
+## Overview
+
+**Quotation Management** serves as the operational cockpit for the sales and administration teams. It provides a centralized view of all automatically generated offers, allowing for rapid verification and adjustment before transmission to the customer.
+
+## Key Features
+
+### Automated Cost Generation
+Upon the creating of an inquiry, the system triggers the **Pricing Engine** logic. This engine instantly calculates a tailor-made offer based on:
+*   **Service Type**: Predefined cost structures for specific logistics services.
+*   **Inquiry Details**: Specific parameters (origin, destination, cargo type) from the user request.
+*   **Route Data**: Optimization data provided by the Route Scanner.
+
+### Dashboard Visibility
+The dashboard presents a comprehensive list of all active quotations.
+*   **Status Tracking**: Monitors the evolution of offers (e.g., Draft, Verified, Sent).
+*   **Quick Actions**: Provides immediate access to View, Edit, and Preview functionalities.
+
+### Verification and Editing
+While the initial offer is automated, the platform ensures human oversight.
+*   **Edit Option**: Administrators can modify the auto-generated cost structure.
+*   **Discounting**: Sales teams can apply specific discounts or adjustments to personalize the final price.
+
+<Frame caption="The Quotation Management dashboard showing auto-generated costs and status tracking.">
+  <img src="/images/quote1.png" alt="Quotation Management Dashboard" />
+</Frame>

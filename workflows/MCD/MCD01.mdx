@@ -1,0 +1,66 @@
+---
+title: "MCD 01 - Centralized Management"
+sidebarTitle: "MCD 01"
+description: "Collect and centralize all logistics data in a single platform for real-time monitoring."
+---
+
+## 1. Overview
+
+**Centralized Management of Logistics Data and Services** serves as the foundational backbone of the Multimodal Chain Design. It fulfills the requirement to "collect and centralize all logistics data allowing users to monitor operations in real-time," eliminating the fragmentation caused by siloed systems.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **Data Sovereignty & Visibility** layer. It ensures:
+*   **Unified Repository**: All operational data (items, routes, partners) resides in a single, governed ecosystem.
+*   **Real-Time Control**: Instant access to the current state of any data point without synchronization latency.
+*   **Fragmentation Elimination**: Replacing scattered spreadsheets and disparate databases with a single source of truth.
+
+## 3. Implemented Functionalities
+
+The platform implements "Centralized Management" through the **Data Lake Manager**, the core governance tool for all underlying business data.
+
+### Unified Data Collection
+**Requirement Addressed**: *"Collect and centralize all logistics data"*
+
+The Data Lake provides a centralized interface for defining and populating the logistics universe:
+*   **Manual Definition**: Create specialized collections from the ground up with custom schemas.
+*   **Bulk Ingestion**: Rapidly centralize existing datasets by ingesting **CSV/Excel** files, automatically deriving schemas to ensure immediate availability.
+
+    Refer: [Data Lake Manager](/functionalities/data-lake)
+
+<div class="grid">
+  <Frame caption="The manual database creation interface for defining new logistics structures.">
+    <img src="/images/new-database.png" alt="Centralized Definition" />
+  </Frame>
+  <Frame caption="Ingesting external data sources into the central platform.">
+    <img src="/images/create-database-from-file.png" alt="Bulk Ingestion" />
+  </Frame>
+</div>
+
+### Real-Time Monitoring & Integrity
+**Requirement Addressed**: *"Monitor and manage operations in real-time"*
+
+The system ensures that data is not just stored, but actively managed:
+*   **Atomic Editing**: Modify individual records with "focus-mode" precision, ensuring data integrity during real-time updates.
+*   **Advanced Filtering**: Use field-specific probes and date-time pickers to instantly isolate specific operational segments.
+*   **Schema Evolution**: Modify the structure of live databases (add columns) to adapt to changing logistics requirements without downtime.
+
+<Frame caption="The monitoring interface allows for real-time filtering and management of live logistics data.">
+  <img src="/images/data-filters.png" alt="Real-Time Monitoring" />
+</Frame>
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### Governance Architecture
+*   **Data Lake Manager**: A unified backend service that abstracts the complexity of the database, presenting all collections as managed, searchable, and editable entities. This ensures that "fragmentation" is mechanically impossible, as all data lives within the same governed address space.
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the MCD 01 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Centralization** | **Evidenced by [Unified Creation]**: The ability to define and ingest any data structure (CSV or Manual) into a single interface proves the platform's centralization capability. |
+| **Real-Time Control** | **Evidenced by [Live Filtering]**: The `Data Filters` interface (shown above) demonstrates the ability to query and monitor operational data instantly. |

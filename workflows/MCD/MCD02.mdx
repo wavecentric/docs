@@ -1,0 +1,73 @@
+---
+title: "MCD 02 - Real-Time Analysis"
+sidebarTitle: "MCD 02"
+description: "Analyze customer requests in real-time to optimize transport routes and delivery times."
+---
+
+## 1. Overview
+
+**Real-Time Analysis of Customer Requirements Specifications** is the intelligent orchestration layer that transforms raw customer requests into optimized logistics plans. It fulfills the requirement to "analyze customer requests in real time, evaluating parameters such as volumes, weight, destination, in order to optimize transport routes and delivery times."
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **Operational Intelligence & Optimization** layer. It ensures:
+*   **Instant Evaluation**: Immediate assessment of complex logistics variables (Volume, Weight, Destination) at the point of inquiry.
+*   **Route Optimization**: Algorithmic selection of the most efficient transport paths based on live constraints.
+*   **Time Efficiency**: Drastic reduction in query-to-quote time by automating the feasibility analysis.
+
+## 3. Implemented Functionalities
+
+The platform implements "Real-Time Analysis" through the **New Inquiry Wizard** and **Route Scanner**, which structure the analysis into four distinct phases of optimization.
+
+### Step 1: Geospatial Route Analysis
+**Requirement Addressed**: *"Evaluating parameters such as... destination"*
+
+The system performs instant geospatial analysis to identify the primary transit points:
+*   **Origin & Destination**: Precise location identification for both pickup and final delivery to determine feasibility.
+*   **Visual Mapping**: Real-time geospatial visualization of the selected logistics path to verify the route corridor.
+
+    Refer: [Data Lake Manager](/functionalities/new-inquiry)
+
+### Step 2: Multi-Modal Route Optimization
+**Requirement Addressed**: *"Optimize transport routes and delivery times"*
+
+The system evaluates available paths across **Rail**, **Road**, **Sea** to generate the optimal logistics chains:
+*   **Multi-Modal Analysis**: Comparative analysis of different transport modes to identify the best balance of cost and speed.
+*   **Route Summary**: Detailed metrics on distance and transport legs for each calculated path.
+*   **Transit Time Estimation**: Real-time calculation of expected delivery times (ETA).
+
+### Step 3: Service & Constraints Definition
+**Requirement Addressed**: *"Analysis of Customer Requirements"*
+
+The analysis extends to the specific operational parameters requested:
+*   **Service Categories**: Evaluation of **Door-to-Door**, **Door-to-Terminal**, and **Terminal-to-Door** requirements.
+*   **Terminal Handling**: Identification of specific handling needs at origin or destination hubs.
+
+### Step 4: Quantitative Parameter Evaluation
+**Requirement Addressed**: *"Evaluating parameters such as volumes, weight"*
+
+The system validates the physical specifics of the cargo against transport limitations:
+*   **Loading Unit Specification**: Analysis of intermodal units including type, size, quantity, and weight.
+*   **Cargo Specifications**: Validation of specialized data such as **NHM Codes**, **Dangerous Goods (ADR/UN)**, or **Waste (CER)**.
+*   **Handling Constraints**: Verification of constraints like **Craneability** or specific temperature requirements.
+
+<Frame caption="The Route Optimization interface displaying real-time analysis of transport paths.">
+  <img src="/images/inquiry3.png" alt="Route Optimization Analysis" />
+</Frame>
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### Operational Analysis Engine
+*   **Route Scanner Service**: A dedicated microservice that ingests inquiry parameters (weight, volume, origin, destination) and computes optimal logistics chains in milliseconds.
+*   **Constraint Solver**: Validates the feasibility of each route against the physical properties of the cargo (e.g., "Cannot put 30 tons in a standard container").
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the MCD 02 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Real-Time Analysis** | **Evidenced by [Quantitative Evaluation]**: The system actively validates "Step 4" parameters (Volume, Weight) and "Step 1" parameters (Destination) as the user inputs them. |
+| **Route Optimization** | **Evidenced by [Multi-Modal Optimization]**: The "Step 2" interface (shown above) proves the system's ability to generate and compare multiple transport routes instantly. |

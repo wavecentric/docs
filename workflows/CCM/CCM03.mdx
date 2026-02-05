@@ -1,0 +1,71 @@
+---
+title: "CCM 03 - Contract Monitoring and Supervision"
+sidebarTitle: "CCM 03"
+description: "Capabilities for monitoring contracts, deadlines, and renewals aligned with business objectives."
+---
+
+## 1. Overview
+
+**Contract Monitoring and Supervision** provides the operational framework for ensuring that all business agreements and objectives are met on time. The platform addresses the critical need to "avoid deadline issues and contract inconsistencies" by digitalizing contracts as managed operational units (Tasks). This allows for continuous supervision, automated deadline tracking, and active alerting via intelligent agents.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable ensures the **operational alignment** of contracts with business execution. It covers:
+*   **Contract Management**: The lifecycle management of contractual obligations (renewals, deliverables) as structured data entities.
+*   **Deadline Supervision**: The proactive monitoring of dates to preventing lapses.
+*   **Automated Alignment**: The use of robotic agents to ensure human assignees remain aligned with impending deadlines.
+
+## 3. Implemented Functionalities
+
+The platform implements the following functionalities to fulfill the "monitor and manage" requirement.
+
+### Digital Contract Management (Tasks)
+**Requirement Addressed**: *"Monitor and manage contracts"*
+
+The platform utilizes the **Task Management** core functionality to structure contracts as tracksable entities.
+*   **Structured Lifecycle**: Contracts and renewals are managed using defined status workflows (TODO, IN PROGRESS, DONE) ensuring operational transparency.
+*   **Entity Linking**: Tasks are directly linked to specific Customers or Business Partners, ensuring contracts are always "aligned with customer needs."
+
+    Refer: [Task Management](/functionalities/tasks)
+
+### Automated Deadline Supervision
+**Requirement Addressed**: *"Ensuring deadlines... including renewals"*
+
+To avoid "deadline issues," the system integrates time-based supervision directly into the management layer.
+*   **Deadline Orchestration**: Every contract/task is assigned a precise operational deadline via the integrated calendar component.
+*   **Visual Supervision**: The Calendar View provides a temporal map of all upcoming renewals and obligations.
+
+### Intelligent Reminder System
+**Requirement Addressed**: *"Essential to avoid deadline issues"*
+
+The platform implements an **Automated Reminder** feature driven by the **Task Manager Bot**.
+*   **Proactive Alerting**: If a deadline exists, the Task Manager Bot automatically monitors the date.
+*   **Direct Notification**: The Bot sends a direct reminder to the assignee as the deadline approaches, ensuring no obligation is overlooked.
+
+<Frame caption="The Task Manager Bot sending an automated deadline reminder to the assignee.">
+  <img src="/images/taskreminder.png" alt="Task Manager Bot Reminder" />
+</Frame>
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through the following technical components:
+
+### Data Structure
+*   **`db_ai-loop_V3_Tasks`**: The underlying DataLake entity that serves as the digital twin for contracts and obligations.
+    *   **Fields**: `deadline` (ISO Date), `linked_entity` (Customer ID), `status` (Enum).
+
+### Automation Engine
+*   **Task Manager Bot**: An autonomous agent configured to scan `db_ai-loop_V3_Tasks` for upcoming `deadline` values.
+*   **Notification Service**: The delivery mechanism that routes bot-generated alerts to the specific user interface or notification center.
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the CCM 03 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Contract Management** | **Evidenced by [Task Dashboard]**: The existence of the "Board" and "List" views demonstrates the ability to manage and supervise the lifecycle of multiple contracts/tasks simultaneously. |
+| **Alignment** | **Evidenced by Entity Linking**: The "Business Partner" field in the task creation screen proves that contracts are digitally aligned with specific customer entities. |
+| **Deadline Supervision** | **Evidenced by [Calendar View]**: The active visual mapping of tasks to dates demonstrates the system's monitoring capability. |
+| **Automated Alerts** | **Evidenced by [Task Manager Bot]**: The `taskreminder.png` evidence shows the bot actively notifying a user about an impending deadline ("Reminder: Contract Renewal"), proving the system's proactive supervision. |
+

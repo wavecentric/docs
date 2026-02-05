@@ -1,0 +1,60 @@
+---
+title: "CCM 06 - Management of Offers and Contracts"
+sidebarTitle: "CCM 06"
+description: "System capabilities for modifying, updating, and tracking offers and contracts."
+---
+
+## 1. Overview
+
+**Management of Offers and Contracts** ensures that commercial agreements are living documents that can evolve with customer needs. The platform fulfills the requirement for "modification and updating with full tracking" by treating both Offers and Contracts as editable operational entities with integrated history and revision capabilities.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **lifecycle flexibility** of commercial documents. It ensures:
+*   **Rapid Adjustment**: Offers can be edited and re-sent instantly to address feedback.
+*   **Contract Revision**: Long-term agreements (Tasks) can be modified to reflect changing scope or deadlines.
+*   **Change Tracking**: All modifications are logged, maintaining the integrity of the business relationship.
+
+## 3. Implemented Functionalities
+
+The platform implements the following functionalities to fulfill the "modification and updating" requirement.
+
+### Quotation Modification
+**Requirement Addressed**: *"Modification and updating of offers"*
+
+The **Quotation Management** module allows for the direct manipulation of generated offers.
+*   **Edit Workflow**: Authorized users can reopen "Verified" offers to adjust pricing, add discounts, or modify service parameters.
+*   **Revision tracking**: The system maintains the link between the original inquiry and the modified offer, ensuring the commercial thread is never lost.
+
+    Refer: [Quotation Management](/functionalities/quotation-management)
+
+<Frame caption="The editing interface allowing for adjustment of costs and line items.">
+  <img src="/images/quote3.png" alt="Quotation Edit Interface" />
+</Frame>
+
+### Contract (Task) Updates
+**Requirement Addressed**: *"Modification of contracts"*
+
+As established in CCM 03, contracts are managed as **Tasks**. This enables dynamic updating:
+*   **Condition Revision**: Administrators can update the description, deadline, or linked assets of a contract/task at any time.
+*   **Status Evolution**: The lifecycle (TODO -> IN PROGRESS -> DONE) inherently tracks the execution status of the agreement.
+
+    Refer: [Tasks](/functionalities/tasks)
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### Mutable Data Structures
+*   **`Quotation` Entity**: Supports `status` transitions (Draft -> Verified -> Sent) and field updates.
+*   **`Task` Entity**: Fully editable JSON structure allowing for real-time updates to deadlines and descriptions.
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the CCM 06 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Offer Modification** | **Evidenced by [Quotation Dashboard]**: The "Edit" and "Verify" actions in the dashboard prove the system's capability to modify auto-generated offers before finalization. |
+| **Contract Updating** | **Evidenced by [Task Detail View]**: The ability to modify deadlines, assignees, and descriptions within the Task interface demonstrates full extensive editing capabilities. |
+| **Tracking** | **Evidenced by [Activity Logs]**: The platform logs status changes (e.g., "Status changed from Open to Done"), providing the required tracking of changes. |

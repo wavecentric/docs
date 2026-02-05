@@ -1,0 +1,57 @@
+---
+title: "CCM 18 - Integration with existing systems"
+sidebarTitle: "CCM 18"
+description: "Seamless integration with legacy and third-party systems to ensure centralized data management."
+---
+
+## 1. Overview
+
+**Integration with existing systems** serves as the interoperability bridge for the organization. It fulfills the requirement to "integrate the module with existing systems," ensuring that multiple data sources can be unified into a "centralized and fluid management" structure to avoid duplication.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **Data Consolidation** layer. It ensures:
+*   **Source of Truth**: Establishing a single, verified repository for Customer and Contract data, regardless of where the data originated.
+*   **Consistency**: Preventing data fragmentation by funneling all external records through a standardized import governance process.
+*   **Fluid Management**: Enabling the rapid onboarding of legacy data without manual re-entry.
+
+## 3. Implemented Functionalities
+
+The platform implements "System Integration" through the **Data Lake Manager**, which acts as the universal adapter for external data.
+
+### Centralized Data Governance
+**Requirement Addressed**: *"Ensure centralized and fluid management"*
+
+The **Data Lake** provides a unified interface for all business entities:
+*   **Universal Schema**: Whether data comes from an API or an Excel sheet, it is normalized into standard collections (e.g., *Customers*, *Contracts*), ensuring that downstream modules (Offers, Analytics) operate on consistent data.
+*   **Reference**: [Data Lake Manager](/functionalities/data-lake)
+
+<Frame caption="The centralized interface for defining and governing verified data structures.">
+  <img src="/images/new-database.png" alt="Centralized Data Governance" />
+</Frame>
+
+### Legacy System Ingestion
+**Requirement Addressed**: *"Avoid data duplication... integrate with existing systems"*
+
+The system supports the massive ingestion of data from legacy ERPs or CRMs:
+*   **File-Based Integration**: The platform supports the direct import of **CSV**, **XLSX**, and **XLS** files. This allows organizations to dump data from "Existing Systems" and immediately re-hydrate it within the Centrico ecosystem, preserving historical records and preventing the need for duplicate entry.
+
+<Frame caption="The ingestion interface allowing for the integration of data from existing external systems.">
+  <img src="/images/create-database-from-file.png" alt="Legacy Data Ingestion" />
+</Frame>
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### Ingestion Pipeline
+*   **`FileParserService`**: A dedicated backend service that validates external file structures against internal schemas, rejecting "bad data" before it can corrupt the central repository. This ensures that "consistency across business systems" is enforced technically, not just procedurally.
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the CCM 18 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Centralization** | **Evidenced by [Data Lake]**: The existence of a single governance tool for creating and managing databases proves the centralized nature of the system. |
+| **Integration** | **Evidenced by [Import from File]**: The "Upload File" capability is the direct mechanism for integrating with "Existing Systems" that export to standard formats. |

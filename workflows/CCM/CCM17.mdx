@@ -1,0 +1,60 @@
+---
+title: "CCM 17 - Access Control and Advanced Security"
+sidebarTitle: "CCM 17"
+description: "Implementation of strong authentication and role-based access control to protect business data."
+---
+
+## 1. Overview
+
+**Access Control and Advanced Security is critical to ensuring the protection of business and customer data. It fulfills the requirement to "implement access control mechanisms to protect confidential information" by strictly segregating permissions based on user roles.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **Data Governance & Security** layer. It ensures:
+*   **Role-Based Access Control (RBAC)**: Differentiating between high-privilege users (Admins) and restricted users (Guests).
+*   **Data Minimization**: Ensuring that users only see the data strictly necessary for their function.
+*   **Strong Authentication**: Securing the entry point to the application.
+
+## 3. Implemented Functionalities
+
+The platform implements "Access Control" through a strict **Admin vs. Guest** paradigm.
+
+### Admin Role (Full Access)
+**Requirement Addressed**: *"Admin users can able to access data"*
+
+The **Admin** role serves as the trusted custodian of the organization's data:
+*   **Unrestricted Visibility**: Admins have full access to all modules, including deep financial analytics, contract details, and the full ecosystem of business partners.
+*   **Configuration Control**: Only Admins can modify critical settings, invite new users, and manage the organization's verified profile.
+
+    Refer: [Membership & Account Management](/functionalities/membership-account-management)
+
+<Frame caption="Home Page of User with Admin Access">
+  <img src="/images/home.png" alt="Home Page of User with Admin Access" />
+</Frame>
+
+### Guest Role (Limited Access)
+**Requirement Addressed**: *"Guest role have only limited access"*
+
+The **Guest** role is designed for external stakeholders or temporary staff who require restricted visibility:
+*   **Limited Access UI**: Guests are presented with a restricted "Home" view that hides sensitive navigation elements (e.g., Financials, Contracts).
+*   **Functionality Locking**: Attempting to access core operational flows triggers a "Limited Access" security state, explicitly preventing unauthorized data retrieval.
+
+<Frame caption="The Guest view showing the 'Limited Access' state, restricting entry to sensitive business modules.">
+  <img src="/images/guest.png" alt="Guest Restricted Access" />
+</Frame>
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### Secure Middleware Using JWT
+*   **`RoleBasedGuard`**: All API endpoints are protected by middleware that validates the JSON Web Token (JWT) claims. Requests from a user with `role: 'guest'` are rejected at the server level if they attempt to fetch protected resources like `GET /api/users/me`.
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the CCM 17 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Admin Control** | **Evidenced by [Account Settings]**: The ability to view and manage sensitive "Membership Level" and "Tax ID" fields proves the depth of access granted to Admins. |
+| **Data Protection** | **Evidenced by [Guest Restriction]**: The visual "Limited Access" screen (shown in the Guest screenshot) proves that the system actively blocks access to data for unauthorized roles. |

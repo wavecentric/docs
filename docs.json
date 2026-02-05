@@ -49,7 +49,9 @@
             "pages": [
               "functionalities/inquiries-dashboard",
               "functionalities/new-inquiry",
-              "functionalities/new-inquiry-ai-assisted"
+              "functionalities/new-inquiry-ai-assisted",
+              "functionalities/contact-us",
+              "functionalities/service-inquiry"
             ]
           },
           {
@@ -68,6 +70,14 @@
             "pages": [
               "functionalities/customer-management"
             ]
+          },
+          {
+            "group": "Quotation Management",
+            "icon": "file-invoice",
+            "pages": [
+              "functionalities/quotation-management",
+              "functionalities/quotation-preview"
+            ]
           }
         ]
       },
@@ -79,9 +89,38 @@
             "icon": "sitemap",
             "pages": [
               "workflows/authentication",
-              "workflows/user-invitation",
-              "workflows/user-inquiry",
-              "workflows/contact-us"
+              "workflows/user-invitation"
+            ]
+          },
+          {
+            "group": "CENTRICO - Customer Centric + Infrastruttura",
+            "icon": "sitemap",
+            "pages": [
+              "workflows/CCM/CCM01",
+              "workflows/CCM/CCM02",
+              "workflows/CCM/CCM03",
+              "workflows/CCM/CCM04",
+              "workflows/CCM/CCM05",
+              "workflows/CCM/CCM06",
+              "workflows/CCM/CCM07",
+              "workflows/CCM/CCM08",
+              "workflows/CCM/CCM09",
+              "workflows/CCM/CCM10",
+              "workflows/CCM/CCM11",
+              "workflows/CCM/CCM12",
+              "workflows/CCM/CCM13",
+              "workflows/CCM/CCM14",
+              "workflows/CCM/CCM16",
+              "workflows/CCM/CCM17",
+              "workflows/CCM/CCM18"
+            ]
+          },
+          {
+            "group": "CENTRICO - Multimodal Chain Design configuration",
+            "icon": "folder-tree",
+            "pages": [
+              "workflows/MCD/MCD01",
+              "workflows/MCD/MCD02"
             ]
           }
         ]

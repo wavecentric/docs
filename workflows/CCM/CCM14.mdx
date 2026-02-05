@@ -1,0 +1,60 @@
+---
+title: "CCM 14 - Intuitive and Accessible Interface"
+sidebarTitle: "CCM 14"
+description: "High-adoption interface design ensuring ease of use for users with varying technical skills."
+---
+
+## 1. Overview
+
+**Intuitive and Accessible Interface for End Users** drives the adoption of the platform across the entire organization. It fulfills the requirement for an "intuitive and easy-to-use user interface," ensuring that advanced logistics capabilities are accessible to users regardless of their technical proficiency.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **User Experience (UX)** layer. It ensures:
+*   **Adoption**: Reducing the learning curve to ensure rapid onboarding of new staff.
+*   **Efficiency**: Presenting information in a layout that matches the user's specific role.
+*   **Accessibility**: Allowing complex data entry via natural language rather than rigid technical forms.
+
+## 3. Implemented Functionalities
+
+The platform implements "Intuitive and Accessible Design" through two core functional pillars:
+
+### Role-Based Personalization
+**Requirement Addressed**: *"Drive adoption by users with... skills"*
+
+The **Dashboard Personalization** framework allows the complex platform to be simplified for each user:
+*   **Modular Widgets**: Users can remove clutter and keep only the tools they understand and need (e.g., a simple "Clock" and "Tasks" view for junior staff, complex "Analytics" for managers).
+
+    Refer: [Dashboard Personalization](/functionalities/dashboard-personalization)
+
+<Frame caption="The intuitive, widget-based dashboard that adapts to the user's role and skill level.">
+  <img src="/images/dashboard-widgets.png" alt="Personalized Interface" />
+</Frame>
+
+### AI-Assisted Navigation
+**Requirement Addressed**: *"Easy-to-use... for different technology skills"*
+
+The **Navigational AI Assistant** guides users through the platform, bridging the gap between intent and execution:
+*   **Contextual Guidance**: Users can type inquiries like *"I need to see customer details"* and the AI will provide direct links to the relevant modules (e.g., "Customers Flow").
+*   **Natural Language Routing**: Eliminates the need to memorize menu structures by translating human queries into direct application navigation.
+
+<Frame caption="The AI Assistant helping users navigate to specific flows/modules based on natural language queries.">
+  <img src="/images/ai.png" alt="AI Navigation Interface" />
+</Frame>
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### Component Architecture
+*   **`WidgetRegistry`**: A frontend framework that decouples UI components from the core application, allowing for a "Drag-and-Drop" experience.
+*   **`NLP Service`**: The backend AI layer that translates "Human Language" into "Database Queries," removing the technical burden from the end-user.
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the CCM 14 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Intuitiveness** | **Evidenced by [Dashboard Layouts]**: The ability for users to customize their workspace with simple widgets proves the interface prioritizes ease of use. |
+| **Accessibility** | **Evidenced by [Natural Language Chat]**: The existence of the AI Assistant proves that users with low technical skills can still perform complex system actions successfully. |

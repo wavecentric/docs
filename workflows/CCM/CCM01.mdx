@@ -1,0 +1,74 @@
+---
+title: "CCM 01 - Customer Relationship Management"
+sidebarTitle: "CCM 01"
+description: "Platform capabilities for maintaining and optimizing customer relationships through centralized communication."
+---
+
+## 1. Overview
+
+CCM 01 Customer Relationship Management represents the core capability of the Centrico platform to centralize, manage, and optimize interactions with customers. This deliverable ensures that all incoming communication whether operational inquiries or general contact requests is captured in a unified system, allowing for timely responses and continuous relationship nurturing.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **end-to-end lifecycle of customer engagement**. It transforms disjointed communication channels into a structured digital workflow where:
+*   **Customer Relationships** are maintained via a "single pane of glass" directory.
+*   **Optimization** is achieved by automating the capture of inquiries and routing them to the correct operational teams.
+*   **Centralized Communication** is realized by aggregating data from web portals, forms, and AI assistants into a unified DataLake entity.
+
+## 3. Implemented Functionalities
+
+The following functionalities fulfill the requirements of CCM 01, mapping directly to the "maintain and optimize customer relationships" intent.
+
+### Multi-Channel Data Capture
+The platform provides distinct channels for customers to initiate contact, ensuring all touchpoints are digitalized:
+
+*   **Service Inquiry Workflow**: A specialized flow for logistics quote requests. It enables users to submit complex requirements via:
+    *   **AI Chat** (unstructured)
+    *   **Standard Forms** (structured)
+    *   **Email**: Direct ingress via `chat@mail.wavecentric.ai`
+
+      Refer: [Service Inquiry](/functionalities/service-inquiry)
+*   **Contact Us Workflow**: A general-purpose ingress for support and business queries, ensuring no customer touchpoint is lost.
+
+      Refer: [General Inquiry](/functionalities/contact-us)
+
+### Centralized Relationship Hub
+The **Customer Management** directory serves as the implementation of the "maintain relationships" requirement.
+*   **Activity Monitoring**: Uses a real-time badge system to track identifying unread messages, active tasks, and inquiry velocity per customer.
+*   **Unified View**: Aggregates users, communication history, and operational tasks into a single customer profile.
+
+      Refer : [Customer Management](/functionalities/customer-management)
+
+<Frame caption="The Customer Management directory centralizing all client interactions.">
+  <img src="/images/customer-management.png" alt="Customer Management Interface" />
+</Frame>
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through a tightly integrated technical architecture:
+
+### DataLake
+*   **Centralized Storage**: All incoming interactions are stored in `db_ai-loop_CRM_Inquiries`. This single entity acts as the source of truth for all customer relationship data, allowing for unified search and enrichment.
+*   **Business Registry**: Validated business entities are maintained in `db_ai-loop_V3_business` to link individual inquiries to long-term accounts.
+
+### APIs
+*   **`POST /api/public/submit-inquiry`**: Handles complex service requests with validation logic.
+*   **`POST /api/public/submit-contact`**: Manages general communication ingestion.
+*   **`POST /api/v1/flows/execute-command`**: The automation trigger that turns static data into active relationship tasks.
+
+### Automation & Rules Engines
+*   **Task Creation**: Automatically generates entries in `db_ai-loop_V3_Tasks`, assigning customer needs to specific internal teams.
+*   **Communication Triggers**: Executes Flows (e.g., `pYmNCmrDNyS9pxyCmasuk`) to send immediate confirmation emails, ensuring "timely communication."
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the CCM 01 requirement:
+
+*   **Platform Functionality**: The active **Customer Management** area provides the centralized portal for relationship maintenance.
+*   **User Interactions**:
+    *   **Create**: Users successfully creating inquiries via the "New Inquiry" interface.
+    *   **Visualize**: Internal teams viewing aggregated client data in the Customer Directory.
+*   **Data Structure**: The existence of `db_ai-loop_CRM_Inquiries` tables proves the centralized nature of the communication data.
+*   **Configuration**: The **Network Configuration** screens (and related settings) facilitate the "optimization" aspect by defining valid routes and services for customer inquiries.
+
+

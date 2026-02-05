@@ -1,0 +1,55 @@
+---
+title: "CCM 13 - Complaints and Resolutions"
+sidebarTitle: "CCM 13"
+description: "Tracking and management of customer complaints and resolution processes."
+---
+
+## 1. Overview
+
+**Support for the Management of Complaints and Resolutions** ensures that customer issues are handled with the same rigor as operational tasks. It fulfills the requirement to "track and manage customer complaints" by integrating issue resolution directly into the core workflow functionalities, ensuring "promptly solving any problems."
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **Issue Resolution** lifecycle. It ensures:
+*   **Capture**: No complaint is lost; emails are automatically converted into actionable items.
+*   **Resolution Tracking**: The status of a complaint is monitored from "Open" to "Done."
+*   **Visibility**: Activity indicators (badges) on the customer directory ensure issues are immediately visible to account managers.
+
+## 3. Implemented Functionalities
+
+The platform implements "Complaints and Resolutions" through the following integrated workflows:
+
+### Automated Complaint Capture
+**Requirement Addressed**: *"Track... customer complaints"*
+
+The system leverages the **Multichannel** ingress (CCM 05) to automate capture:
+*   **Mail-to-Task**: Complaints received via email are automatically processed by the `Task Creation` automation.
+*   **Actionable Entry**: Each complaint becomes a distinct entry in the **Task Management** tab, ensuring it is tracked, assigned to an agent, and given a deadline.
+
+### Resolution Monitoring
+**Requirement Addressed**: *"Monitoring the resolution process"*
+
+The **Task Management** tab serves as the resolution hub:
+*   **Status Lifecycle**: Agents move the complaint-task through defined stages (In Progress -> Resolved), providing a clear audit trail of the resolution.
+*   **Task Count Notifications**: The **Customer Management** table displays a real-time **Task Count Badge** next to each client. A high count serves as an immediate visual notification of active issues/complaints, prompting the account manager to intervene.
+
+<Frame caption="The Customer Management directory showing real-time 'Task Count' badges for immediate issue awareness.">
+  <img src="/images/customer-management.png" alt="Compliance Notification Interface" />
+</Frame>
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### Operational Integration
+*   **Unified Task Model**: Complaints are not siloed in a separate "ticketing system" but are treated as first-class operational Tasks, ensuring they receive the same attention as revenue-generating activities.
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the CCM 13 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Tracking** | **Evidenced by [Task Management Tab]**: The existence of complaint-related items in the Task list proves the system's ability to track issues. |
+| **Notification** | **Evidenced by [Customer Table Badges]**: The "Task Count" badge on the Customer Management screen acts as the notification mechanism for active issues. |
+| **Resolution** | **Evidenced by [Task Status]**: The ability to mark a task as "Done" within the Task Tab is the verification of the resolution process. |
