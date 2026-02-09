@@ -1,0 +1,63 @@
+---
+title: "MCD 11 - Dynamic Workflows"
+sidebarTitle: "MCD 11"
+description: "Dynamically manage and adapt logistics workflows to changing operational conditions."
+---
+
+## 1. Overview
+
+**Dynamic Management of Logistics Workflows** is the agility layer of the platform. It fulfills the requirement to "dynamically manage and adapt to logistics workflows, changing priorities and operations according to changing needs and conditions."
+
+This capability is necessary to **manage constantly changing logistical situations**, such as unforeseen events, delays, or emergencies, ensuring the supply chain remains resilient.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **Operational Agility & Issue Resolution** layer. It ensures:
+*   **Workflow Adaptability**: The ability to modify the sequence of operations on the fly (e.g., re-routing a task due to a blockage).
+*   **Priority Shifting**: Instantly escalating critical issues (emergencies) to the top of the queue.
+*   **Collaborative Problem Solving**: Assigning and tracking unstructured work that arises from "unforeseen events."
+
+## 3. Implemented Functionalities
+
+The platform implements "Dynamic Workflows" through the **Task Management** system, which provides a flexible, human-centric layer on top of the automated logistics processes.
+
+### Visual Workflow Orchestration
+**Requirement Addressed**: *"Adapt to logistics workflows"*
+
+The **Kanban Board** provides a visual representation of the operational pipeline, allowing managers to adapt workflows instantly:
+*   **Drag-and-Drop Re-prioritization**: Tasks can be moved between stages (e.g., from "In Progress" to "On Hold") instantly as conditions change on the ground.
+*   **Visual Bottleneck Identification**: A quick glance reveals where tasks are piling up, allowing for immediate resource reallocation.
+
+    Refer: [Task Management](/functionalities/tasks)
+
+<Frame caption="The Kanban board allows for dynamic drag-and-drop management of operational workflows.">
+  <img src="/images/kanban-board.png" alt="Dynamic Workflow Management" />
+</Frame>
+
+### Emergency & Priority Management
+**Requirement Addressed**: *"Changing priorities... unforeseen events or emergencies"*
+
+The system allows for rapid response to critical situations via granular task definition:
+*   **High-Priority Escalation**: Users can flag specific tasks as "Urgent" or "Emergency," pushing them to the top of the high-density list view.
+*   **Contextual Linking**: "Unforeseen events" don't happen in a void; tasks can be linked directly to the specific **Shipment**, **Partner**, or **Route** affected, ensuring the solution is tied to the problem.
+
+<Frame caption="Creating a high-priority task linked to specific operational entities to handle emergencies.">
+  <img src="/images/add-new-task.png" alt="Emergency and Priority Handling" />
+</Frame>
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### Real-Time State Synchronization
+*   **Live Collaboration**: Changes made to task priorities or statuses are reflected instantly for all users, ensuring the entire team adapts to the "changing condition" simultaneously.
+*   **Entity Graph**: The task system is not isolated; it sits on top of the Data Lake, meaning a task can reference any dynamic object (Container, Truck, Order) in the system.
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the MCD 11 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Dynamic Adaptation** | **Evidenced by [Kanban Interface]**: The interactive board (shown above) proves the system's capability to visually and interactively change the state and flow of operations in real-time. |
+| **Emergency Management** | **Evidenced by [Priority Inputs]**: The ability to define priorities and task types (e.g., "Issue", "Urgent") demonstrates the tooling required to handle unforeseen events. |

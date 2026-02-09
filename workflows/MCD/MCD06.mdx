@@ -1,0 +1,64 @@
+---
+title: "MCD 06 - System Integration"
+sidebarTitle: "MCD 06"
+description: "Integrate with existing systems for centralized customer and contract data management."
+---
+
+## 1. Overview
+
+**Integration with Existing Systems** ensures that the platform doesn't operate in a vacuum but serves as a converging point for the enterprise's data. It fulfills the requirement to "integrate the module with existing systems to ensure centralized and fluid management of customer and contract data."
+
+This capability is necessary to **avoid data duplication and ensure consistency across business systems**, acting as the single source of truth.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **Data Interoperability & Governance** layer. It ensures:
+*   **Centralized Repository**: Hosting data from disparate legacy systems in a single, modern environment.
+*   **Data Consistency**: Eliminating synchronization errors by maintaining a master record of customers and contracts.
+*   **Fluid Management**: Allowing seamless read/write operations on imported data without technical barriers.
+
+## 3. Implemented Functionalities
+
+The platform implements "Integration" through the **Data Lake Manager**, which is designed to ingest and standardize external data.
+
+### Unified Data Ingestion
+**Requirement Addressed**: *"Integrate with existing systems"*
+
+The Data Lake provides robust tools for migrating data from external systems into the platform:
+*   **Universal Import**: supporting **CSV**, **XLSX**, and **XLS** formats to rapidly ingest data.
+*   **Auto-Schema Detection**: The system automatically reads the structure of external files and creates the corresponding database schema, reducing integration time to seconds.
+
+    Refer: [Data Lake Manager](/functionalities/data-lake)
+
+<div class="grid">
+  <Frame caption="Ingesting external data from legacy systems via file import.">
+    <img src="/images/create-database-from-file.png" alt="System Integration" />
+  </Frame>
+  <Frame caption="The central interface for managing imported customer and contract data.">
+    <img src="/images/data-filters.png" alt="Centralized Management" />
+  </Frame>
+</div>
+
+### Centralized Data Governance
+**Requirement Addressed**: *"Centralized and fluid management"*
+
+Once integrated, the data becomes a first-class citizen in the ecosystem:
+*   **Unified Editing**: Users can manage imported contracts and customer details using the platform's modern UI, bypassing clunky legacy interfaces.
+*   **Cross-System Consistency**: By centralizing edits in the Data Lake, the organization maintains a single, consistent version of the truth.
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### Data Lake Architecture
+*   **Schema Agnostic Storage**: The Data Lake is built to handle dynamic schemas, meaning it can adapt to the structure of any "existing system" without requiring code changes.
+*   **Interoperabilty Layer**: The file import engine acts as a bridge, translating static exports into active, queryable database collections.
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the MCD 06 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **System Integration** | **Evidenced by [File Ingestion]**: The ability to upload and parse external files (CSV/Excel) proves the specific capability to integrate data from existing external systems. |
+| **Centralized Management** | **Evidenced by [Unified Interface]**: The Data Lake interface (shown above) demonstrates that once data is imported, it is managed centrally with fluid tools (search, filter, edit). |

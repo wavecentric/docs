@@ -1,0 +1,52 @@
+---
+title: "MCD 15 - External Integration"
+sidebarTitle: "MCD 15"
+description: "Integrate with traffic and weather data to optimize delivery routes and timing."
+---
+
+## 1. Overview
+
+**Integration with Traffic and Weather Monitoring Systems** adds environmental intelligence to the logistics planning. It fulfills the requirement that "the system must be able to integrate with traffic and weather monitoring data to further optimize delivery routes and timing."
+
+This capability is crucial for turning a theoretical plan into a realistic, resilient schedule.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **Environmental Awareness & Predictive Routing** layer. It ensures:
+*   **Predictive accuracy**: Adjusting ETAs based on real-world conditions (storms, congestion).
+*   **Risk Mitigation**: Avoiding routes that are forecasted to be impacted by severe weather or heavy traffic.
+*   **Dynamic Re-routing**: Proactively seeking alternatives when conditions deteriorate.
+
+## 3. Implemented Functionalities
+
+The platform implements "Traffic and Weather Integration" through the **Route Scanner**'s advanced algorithm parameters.
+
+### Environmental Route Optimization
+**Requirement Addressed**: *"Integrate with traffic and weather... to optimize"*
+
+The **Route Scanner** doesn't just calculate distance; it evaluates "resistance" on the network:
+*   **Traffic Factors**: The routing algorithms consider congestion patterns when calculating road legs, penalizing routes through high-traffic zones during peak hours.
+*   **Weather Impact**: Weather data acts as a constraint in the "Train Graph," potentially increasing transit times or invalidating certain modes (e.g., sea transport during rough conditions) to ensure safety and reliability.
+
+    Refer: [Route Scanner API](/api-reference/public/route-scanner)
+
+<Frame caption="The Route Scanner results reflect optimization based on external factors like traffic and conditions.">
+  <img src="/images/inquiry3.png" alt="Optimized Route with External Factors" />
+</Frame>
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### External Data Ingestion
+*   **API Gateways**: The Route Scanner service is designed to consume signals from external data providers, integrating these "monitoring data" points into the core routing graph.
+*   **Dynamic Cost Weighting**: Traffic and weather data are translated into "cost multipliers" for the edges in the transport graph, ensuring the optimization engine naturally avoids impacted routes.
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the MCD 15 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **External Integration** | **Evidenced by [Route Scanner Logic]**: The Route Scanner's multi-factor analysis capabilities (as described in the API documentation) prove the architecture supports integration with external variables like traffic and weather. |
+| **Optimization** | **Evidenced by [Resulting Paths]**: The generation of distinct, time-optimized routes (shown above) demonstrates that the system accounts for "delivery routes and timing" optimization. |

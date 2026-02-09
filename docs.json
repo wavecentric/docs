@@ -120,7 +120,18 @@
             "icon": "folder-tree",
             "pages": [
               "workflows/MCD/MCD01",
-              "workflows/MCD/MCD02"
+              "workflows/MCD/MCD02",
+              "workflows/MCD/MCD03",
+              "workflows/MCD/MCD04",
+              "workflows/MCD/MCD05",
+              "workflows/MCD/MCD06",
+              "workflows/MCD/MCD07",
+              "workflows/MCD/MCD08",
+              "workflows/MCD/MCD09",
+              "workflows/MCD/MCD11",
+              "workflows/MCD/MCD14",
+              "workflows/MCD/MCD15",
+              "workflows/MCD/MCD16"
             ]
           }
         ]

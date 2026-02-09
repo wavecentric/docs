@@ -1,0 +1,59 @@
+---
+title: "MCD 07 - Historical Data"
+sidebarTitle: "MCD 07"
+description: "Access and analyze historical data to understand trends and improve future planning."
+---
+
+## 1. Overview
+
+**Historical Data Management** provides the longitudinal view of the logistics operations. It fulfills the requirement to "access and analyze historical data from logistics operations to understand trends and improve future planning."
+
+This capability is useful for **making decisions based on historical data and optimizing long-term logistics**.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **Strategic Planning & Auditing** layer. It ensures:
+*   **Trend Analysis**: identifying seasonal patterns and long-term volume shifts.
+*   **Operational Auditing**: Full traceability of past transport requests for dispute resolution and quality assurance.
+*   **Continuous Improvement**: Using past performance data to refine future route planning and carrier selection.
+
+## 3. Implemented Functionalities
+
+The platform implements "Historical Data Management" through the **Data Lake Manager**, specifically preserving the entire lifecycle of valid logistical requests.
+
+### Permanent Archives
+**Requirement Addressed**: *"Access... historical data"*
+
+The system automatically archives every processed request into a dedicated historical database.
+*   **V3_Requests**: This specific collection acts as the permanent ledger for all logistics inquiries, quotes, and executed transport orders.
+*   **Immutable History**: Once a request is finalized, its data is preserved for future analysis, ensuring a stable baseline for reporting.
+
+    [Access Historical Data (V3_Requests)](https://ai-loop.alpeadria.com/ai-loop/datalake?db=V3_Requests)
+
+### Temporal Analysis Tools
+**Requirement Addressed**: *"Understand trends"*
+
+The Data Lake interface provides specific tools for navigating through time:
+*   **Date-Time Pickers**: Filter records by specific time ranges (e.g., "Last Q4" or "2023 Fiscal Year") to isolate relevant historical segments.
+*   **Trend Visualization**: Export filtered historical datasets to BI tools to visualize growth trends and performance shifts over time.
+
+<Frame caption="The Data Lake interface showing the historical V3_Requests database with time-based filtering.">
+  <img src="/images/data-filters.png" alt="Historical Data Analysis" />
+</Frame>
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### V3_Requests Collection
+*   **Structured Storage**: The `V3_Requests` database is optimized for long-term storage, indexing key fields like Date, Origin, Destination, and Cargo Type for rapid historical retrieval.
+*   **Direct Access Link**: Authorized users can access the raw historical data directly via the Data Lake deep link: `https://ai-loop.alpeadria.com/ai-loop/datalake?db=V3_Requests`
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the MCD 07 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Historical Access** | **Evidenced by [V3_Requests]**: The existence of the dedicated `V3_Requests` database (accessible via the link above) proves the system retains operational history. |
+| **Trend Analysis** | **Evidenced by [Temporal Filters]**: The ability to filter this database by date ranges (shown in the image) demonstrates the tooling necessary to analyze trends over specific periods. |

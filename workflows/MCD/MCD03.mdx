@@ -1,0 +1,55 @@
+---
+title: "MCD 03 - Simulations & scenarios"
+sidebarTitle: "MCD 03"
+description: "Analyze the impact of different options and optimize logistics decisions through 'What-If' simulations."
+---
+
+## 1. Overview
+
+**Simulations and "What-If" Scenarios** provide the critical decision-support layer of the platform. It fulfills the requirement to "allow logistics simulations to be performed on various scenarios, allowing users to analyze the impact of different options and optimize logistics decisions." This functionality is essential for making informed decisions and evaluating different options before taking concrete action.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **Strategic Planning & Decision Support** layer. It ensures:
+*   **Scenario Simulation**: The ability to model different logistics outcomes based on varying inputs (e.g., "What if we use Rail instead of Road?").
+*   **Impact Analysis**: Clear visibility into the consequences of each option, such as total distance, transit time, and environmental impact.
+*   **Decisive Control**: The system empowers the user to evaluate these generated options and requires explicit confirmation to proceed, ensuring human oversight in critical logistics flows.
+
+## 3. Implemented Functionalities
+
+The platform implements "Simulations" through the **Route Scanner** and **Inquiry Planning** modules, which present calculated options for user evaluation.
+
+### Route Simulations ("What-If")
+**Requirement Addressed**: *"Allow logistics simulations to be performed on various scenarios"*
+
+The system does not just find one route; it simulates multiple potential logistics chains:
+*   **Option Generation**: The Route Scanner calculates feasible paths across different modes (Rail, Road, Sea), effectively simulating "What-If" scenarios for each transport type.
+*   **Comparative Visibility**: Users can view these options side-by-side to compare trade-offs.
+
+### Impact-Based Decision Making
+**Requirement Addressed**: *"Analyze the impact of different options and optimize logistics decisions"*
+
+Before any route is finalized, the system presents the full impact of the choice:
+*   **Metric Transparency**: Each option displays critical metrics like **Total Distance** and**Transit Time*.
+*   **User Confirmation**: The workflow is designed to pause for decision-making. The system shows the possible options, but "makes the user to confirm" the preferred choice, ensuring that the selected route aligns with specific business goals (e.g., lowest cost vs. fastest delivery).
+
+<Frame caption="The system displaying multiple simulated route options, allowing the user to compare impacts (distance, time) before making a final decision.">
+  <img src="/images/inquiry3.png" alt="Route Simulation and Selection" />
+</Frame>
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### Simulation Engine
+*   **Multi-Objective Optimization**: The routing engine runs simulations to minimize different cost functions (distance, time, price) simultaneously, producing a set of Pareto-optimal choices.
+*   **Interactive Session State**: The system maintains a temporary "planning state" where users can toggle between options without committing to a database transaction until the final confirmation.
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the MCD 03 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Simulations** | **Evidenced by [Option Generation]**: The interface (shown above) populates multiple distinct route cards, each representing a simulated scenario for the same origin-destination pair. |
+| **Decision Support** | **Evidenced by [Selection Workflow]**: The system presents "Total Distance" and other impact metrics, forcing a user selection step before the inquiry can be converted into an order. |

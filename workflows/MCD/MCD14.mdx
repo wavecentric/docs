@@ -1,0 +1,59 @@
+---
+title: "MCD 14 - Scalability"
+sidebarTitle: "MCD 14"
+description: "Scale easily to support highly complex operations and increasing data volumes."
+---
+
+## 1. Overview
+
+**Scalability and Support for Complex Operations** ensures the platform remains performant as the business grows. It fulfills the requirement that "the module must be able to scale easily to support highly complex logistics operations and to handle an increasing volume of data without loss of performance."
+
+This is fundamental for enterprise-grade logistics, where data volumes can grow exponentially.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **Infrastructure & Performance** layer. It ensures:
+*   **Volume Handling**: The ability to ingest and query millions of records (orders, tracking events) without slowdowns.
+*   **Complexity Management**: Supporting intricate data models with custom fields and relationships without breaking the architecture.
+*   **Elastic Growth**: The system adapts to increased load seamlessly.
+
+## 3. Implemented Functionalities
+
+The platform implements "Scalability" through the **Data Lake Manager**, which is architected for big data performance.
+
+### High-Volume Data Management
+**Requirement Addressed**: *"Handle an increasing volume of data without loss of performance"*
+
+The **Data Lake** is optimized for large-scale operations:
+*   **Micro-Pagination**: The interface uses advanced cursor-based pagination to render massive datasets smoothly, ensuring that a database with 100,000 records loads as fast as one with 10.
+*   **Server-Side Filtering**: Complex queries are executed at the database level, meaning the frontend performance remains snappy regardless of dataset size.
+
+    Refer: [Data Lake Manager](/functionalities/data-lake)
+
+<Frame caption="The Data Lake interface handling complex queries and large datasets with high performance.">
+  <img src="/images/data-filters.png" alt="Scalable Data Management" />
+</Frame>
+
+### Complex Operational Models
+**Requirement Addressed**: *"Support highly complex logistics operations"*
+
+The system supports complexity through flexibility:
+*   **Schema Evolution**: Users can add new columns and data types on the fly to accommodate new operational requirements (e.g., adding "CO2 Emission" tracking to an existing Order table).
+*   **Universal Ingestion**: The ability to import diverse file formats (CSV, XLSX) means the system can absorb complex data structures from any legacy source.
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### Cloud-Native Architecture
+*   **Horizontal Scaling**: The backend services are designed to scale out, verifying that "scalability" is a core architectural feature.
+*   **Indexed Search**: All data lake fields are indexed, enabling sub-second search results even as the "volume of data" increases.
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the MCD 14 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Performance at Scale** | **Evidenced by [Data Lake Architecture]**: The implementation of server-side filtering and micro-pagination in the Data Lake proves the system is built to handle increasing data volumes without performance loss. |
+| **Complex Operations** | **Evidenced by [Custom Schemas]**: The ability to define and evolve custom database schemas demonstrates support for highly complex and changing operational models. |

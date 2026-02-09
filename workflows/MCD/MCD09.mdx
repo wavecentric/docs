@@ -1,0 +1,60 @@
+---
+title: "MCD 09 - Multi-Variable Logic"
+sidebarTitle: "MCD 09"
+description: "Manage and analyze multiple logistics variables in real-time for optimized planning."
+---
+
+## 1. Overview
+
+**Support for the Management of Multiple Variables** is the capability that allows the platform to handle the complexity of modern logistics. It fulfills the requirement to "support the management and analysis of multiple variables in real time to optimize logistics, such as the management of different destinations, means of transport, time and costs."
+
+This is **essential to ensure flexible and optimized logistics planning**, allowing users to balance competing priorities (e.g., speed vs. complexity).
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **Dynamic Logistics Configuration** layer. It ensures:
+*   **Multi-Dimensional Analysis**: Evaluating logistics options not just by one factor, but by a matrix of variables (Destination, Mode, Time).
+*   **Real-Time Flexibility**: The ability to adjust these variables on the fly and immediately see the impact on the logistics plan.
+*   **Holistic Optimization**: Ensuring that a change in one variable (e.g., changing destination) automatically triggers a re-optimization of others (e.g., transport means).
+
+## 3. Implemented Functionalities
+
+The platform implements "Multi-Variable Management" through the **Route Scanner** and **Inquiry Planning** engines, which treat every logistics request as a multi-variable equation.
+
+### Variable Management
+**Requirement Addressed**: *"Management of different destinations, means of transport"*
+
+The system allows users to configure complex scenarios with distinctive variables:
+*   **Destinations**: precise handling of Origin, Destination, and intermediate transit points (hubs).
+*   **Means of Transport**: Dynamic selection and comparison of **Rail**, **Road**, and **Sea** options.
+*   **Service Levels**: Configuration of service types (Door-to-Door, Terminal-to-Terminal) which fundamentally alter the routing logic.
+
+### Optimization of Time
+**Requirement Addressed**: *"Optimize logistics... time"*
+
+The platform constantly analyzes the trade-offs between critical variables:
+*   **Time vs. Mode**: The system presents options that highlight the relationship between speed and transport mode (e.g., "Fastest Route" via Road vs. Rail).
+*   **Real-Time Assessment**: As soon as a user changes a variable (e.g., adds a stop-over), the system recalculates the expected **Time** (ETA) and **Distance** instantly.
+
+    Refer: [Simulations & Scenarios](/workflows/MCD/MCD03)
+
+<Frame caption="The interface displaying the analysis of multiple variables (Mode, Time, Distance) to optimize the logistics decision.">
+  <img src="/images/inquiry3.png" alt="Multi-Variable Analysis" />
+</Frame>
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### Multi-Objective Solver
+The optimization engine uses a weighted scoring system to handle multiple variables simultaneously, allowing it to recommend the "best" route based on a balance of factors rather than just a single metric.
+*   **Dynamic Graph Re-Routing**: When a variable relates to a physical constraint (e.g., specific destination accessible only by road), the graph traverser automatically filters out invalid transport means.
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the MCD 09 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Variable Management** | **Evidenced by [Parameter Inputs]**: The system accepts and processes distinct inputs for **Destinations** (Origin/Dest), **Means** (Rail/Road), and **Times** (ETA requirements). |
+| **Real-Time Optimization** | **Evidenced by [Dynamic Results]**: The interface (shown above) displays the prioritized results of this multi-variable analysis, offering optimized choices for **Time** and **Distance**. |

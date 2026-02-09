@@ -1,0 +1,59 @@
+---
+title: "MCD 05 - Route Optimization"
+sidebarTitle: "MCD 05"
+description: "Automatically calculate and optimize transport routes for efficient delivery."
+---
+
+## 1. Overview
+
+**Optimization of Transport Routes** is the core algorithmic component that ensures the most efficient movement of goods. It fulfills the requirement to "automatically calculate and optimize transport routes based on various factors, such as distance, traffic, and vehicle availability, to ensure efficient delivery."
+
+This capability is high priority, as **Route optimization to improve delivery times and reduce transportation costs** is fundamental to the platform's value proposition.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **Algorithmic Logistics Planning** layer. It ensures:
+*   **Cost Efficiency**: Reduction of operational costs by selecting the most economical route combinations.
+*   **Time Management**: improvement of delivery times through intelligent pathfinding.
+*   **Resource Utilization**: Optimization of asset usage by balancing vehicle availability with demand.
+
+## 3. Implemented Functionalities
+
+The platform implements "Route Optimization" through the **Route Scanner** and advanced simulation tools.
+
+### Automated Route Calculation
+**Requirement Addressed**: *"Automatically calculate and optimize transport routes"*
+
+The system's **Route Scanner** is a powerful API and interface that computes the best possible logistics chains:
+*   **Multi-Factor Analysis**: Algorithms weigh distance, traffic patterns, and vehicle availability to determine the optimal path.
+*   **Intermodal preference**: The scanner prioritizes intermodal solutions (combining Rail, Road, Sea) to maximize efficiency and sustainability.
+
+    Refer: [Route Scanner API](/api-reference/public/route-scanner)
+
+<Frame caption="The Route Scanner interface displaying optimized multi-modal route options.">
+  <img src="/images/inquiry3.png" alt="Optimized Route Options" />
+</Frame>
+
+### Train Graph Simulator
+**Requirement Addressed**: *"Dependencies of the first/last mile ship or truck"*
+
+A fundamental tool for this delivery is the **Train Graph Simulator**, which models the complex interactions of the rail network:
+*   **Operational Scenarios**: Describes various operational scenarios of the train system.
+*   **Dependency Management**: Manages the critical dependencies between the main rail leg and the first/last mile connections (ship or truck), ensuring seamless intermodal transfers.
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### Optimization Engine
+*   **Route Scanner API**: A public-facing endpoint that exposes the core routing logic, allowing external systems to request optimized routes based on origin and destination.
+*   **Graph-Based Modeling**: The use of a "train graph" allows the system to mathematically represent the logistics network, treating stations as nodes and tracks/ships/trucks as edges with specific costs and capacities.
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the MCD 05 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Automated Optimization** | **Evidenced by [Route Scanner]**: The existence of the `Route Scanner` API and interface proves the system's ability to automatically calculate optimal paths. |
+| **Complex Dependencies** | **Evidenced by [Graph Simulator]**: The implementation of the train graph simulator demonstrates the handling of complex first/last mile dependencies logic. |
