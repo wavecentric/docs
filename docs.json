@@ -82,6 +82,53 @@
         ]
       },
       {
+        "tab": "Flows",
+        "pages": [
+          {
+            "group": "Communication",
+            "icon": "envelope",
+            "pages": [
+              "flows/communication",
+              "flows/email-inbound"
+            ]
+          },
+          {
+            "group": "Dashboard",
+            "icon": "grid-2",
+            "pages": [
+              "flows/widget"
+            ]
+          },
+          {
+            "group": "Fleet",
+            "icon": "truck",
+            "pages": [
+              "flows/fleet-search",
+              "flows/fleet-status",
+              "flows/flotta-carri"
+            ]
+          },
+          {
+            "group": "Business",
+            "icon": "building",
+            "pages": [
+              "flows/creditsafe",
+              "flows/customers"
+            ]
+          },
+          {
+            "group": "Admin",
+            "icon": "shield",
+            "pages": [
+              "flows/ai-assistant",
+              "flows/website-status-check",
+              "flows/overdue-scheduler",
+              "flows/datalake-notifications"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Workflows",
         "groups": [
           {
