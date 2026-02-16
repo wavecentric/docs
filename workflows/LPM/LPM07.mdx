@@ -1,0 +1,74 @@
+---
+title: "LPM 07 - Management and Automation of Requests for Quotation"
+sidebarTitle: "LPM 07"
+description: "Automate the RFQ process based on specific needs, allowing for a quick and accurate response from suppliers."
+---
+
+## 1. Overview
+
+**Management and Automation of Requests for Quotation (RFQ)** streamlines the procurement lifecycle by automating the response generation process. This deliverable addresses the need to "automate the RFQ process based on specific needs, allowing for a quick and accurate response from suppliers and improving overall efficiency." By reducing manual intervention in the quotation process, the system significantly decreases the time it takes to issue quotes and offers.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **Automated Procurement Execution** layer. It ensures:
+*   **Process Automation**: Triggering RFQ processing capabilities electronically to eliminate manual delays.
+*   **Precision Response**: Generating responses that strictly adhere to the specific "Service Request Details" defined by the customer.
+*   **Efficiency Gains**: Minimizing the turnaround time between a request and a calculated offer.
+
+## 3. Implemented Functionalities
+
+The platform implements "Management and Automation of RFQ" through the **Quotation Execution Engine**, which processes defined requests into calculated quotes.
+
+### Automated RFQ Processing
+**Requirement Addressed**: *"Automate the RFQ process"*
+
+The system utilizes an automated execution flow to process requests:
+*   **One-Click Execution**: The "Run" capability triggers the automated analysis of the Quote ID.
+*   **Instant Calculation**: The system automatically computes costs and feasibility based on the input parameters relative to supplier contracts.
+*   **Status Automation**: Automatically transitions requests from "Received" to "Cost Calculated" without manual data entry.
+
+    Refer: [Quotation Management](/functionalities/quotation-management)
+
+### Needs-Based Customization
+**Requirement Addressed**: *"Based on specific needs"*
+
+The automation engine is driven by precise customer specifications captured in the RFQ:
+*   **Specific Service Parameters**: Automates logistics based on exact needs like "terminal-to-terminal", "Round Trip: No", and "One-off" frequency.
+*   **Cargo-Specific Logic**: Adapts the automated response to cargo details such as "Bulk: true", "Intermodal Units: false", and specific codes (NHM).
+*   **Route-Specific Execution**: Processes unique route combinations (e.g., Beihai Tieshangang to CONCOR CFS Milavittan) individually.
+
+<Frame caption="The Quotation Management interface where specific needs are defined and the automated RFQ process is triggered.">
+  <img src="/images/quote4.png" alt="Automated RFQ Management" />
+</Frame>
+
+### Efficiency & speed
+**Requirement Addressed**: *"Quick and accurate response... improving overall efficiency"*
+
+The platform optimizes for speed:
+*   **Immediate Costing**: Instantly generates line-item costs (Rail Service, ISOtank, Trucking) upon execution.
+*   **Surplus Calculation**: Automatically applies margin logic (e.g., 12% Surplus) to ensure commercial viability is assessed instantly.
+*   **Reduced Cycle Time**: Eliminates the wait time associated with manual supplier inquiries by digitizing the offering logic.
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### Execution Engine
+*   **Flow Command**: The `quotation-management` flow includes a specific `Run` command that initiates the automation sequence.
+*   **Pricing Algorithms**: Backend logic that takes specific "Service Request Details" as input variables and outputs precise cost structures.
+*   **Data Binding**: Links specific RFQ parameters (Units, Specifications) directly to the pricing engine.
+
+### User Interface
+*   **Run Control**: A dedicated execution button for triggering the RFQ automation.
+*   **Detail Visualization**: Clear display of the input parameters (User Info, Request Details) alongside the automated output (Cost Summary).
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the LPM 07 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Automation** | **Evidenced by [Run Functionality]**: The "Run" button next to the Quote ID input demonstrates the system's capability to trigger automated processing of the RFQ. |
+| **Specific Needs** | **Evidenced by [Service Request Details]**: The interface captures and processes highly specific needs (e.g., "Bulk: true", "Type: terminal-to-terminal"), ensuring the automated response is tailored to exact requirements. |
+| **Quick Response** | **Evidenced by [Instant Cost Calculation]**: The immediate generation of the "Cost Summary" (Rail Cost, Sub Cost, Total Cost) proves the system's ability to provide a quick and accurate response. |
+| **Efficiency** | **Evidenced by [Unified View]**: Managing the request inputs and the automated cost outputs in a single view (as shown in the image) demonstrates improved overall efficiency in the RFQ process. |

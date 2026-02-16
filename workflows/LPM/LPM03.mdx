@@ -1,0 +1,95 @@
+---
+title: "LPM 03 - Continuous Monitoring of Operational-Economic Efficiency KPIs"
+sidebarTitle: "LPM 03"
+description: "Continuous real-time monitoring of operational and economic KPIs to ensure optimal performance."
+---
+
+## 1. Overview
+
+**Continuous Monitoring of Operational-Economic Efficiency KPIs** provides real-time visibility into critical performance indicators that drive procurement excellence. This deliverable addresses the need to "allow continuous real-time monitoring of operational and economic KPIs (such as delivery times, transport costs, overall efficiency)" enabling data-driven decisions and proactive performance management. This capability is critical to improving visibility and control of business performance.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **Performance Analytics & KPI Monitoring** layer. It ensures:
+*   **Real-Time Visibility**: Instant access to key operational and economic metrics without manual reporting delays.
+*   **Trend Analysis**: Historical tracking and visualization of procurement activities over time.
+*   **Performance Control**: Ability to identify bottlenecks, cost inefficiencies, and optimization opportunities at a glance.
+
+## 3. Implemented Functionalities
+
+The platform implements "Continuous Monitoring of Operational-Economic KPIs" through the **[Quotation Management Dashboard](https://ai-loop.alpeadria.com/ai-loop/flows?group=CENTRICO&flow=quotation-management&command=dashboard)** with integrated analytics and metrics tracking.
+
+### Real-Time Operational KPIs
+**Requirement Addressed**: *"Continuous real-time monitoring of operational KPIs"*
+
+The dashboard provides comprehensive operational metrics:
+*   **Total Requests**: Real-time count of all quotation requests (e.g., "1") enabling volume tracking.
+*   **Today's Requests**: Daily activity monitoring showing current day's quotation volume (e.g., "1").
+*   **Request Status Tracking**: Instant visibility into quotation lifecycle stages with counts for each phase.
+*   **Activity Trends**: Weekly request activity visualization showing temporal patterns and workload distribution.
+
+    Refer: [Quotation Management](/functionalities/quotation-management)
+
+### Economic Performance Monitoring
+**Requirement Addressed**: *"Monitoring economic KPIs such as transport costs"*
+
+The system provides detailed economic performance tracking:
+*   **Cost Calculated**: Number of quotations with completed cost calculations (e.g., "1"), tracking pricing completion rate.
+*   **Quotations Sent**: Count of finalized and delivered quotations (e.g., "0"), measuring conversion and response efficiency.
+*   **Cost Efficiency Metrics**: Track the ratio of calculated costs to sent quotations for process optimization.
+*   **Economic Activity Correlation**: Link operational volumes to economic outcomes for profitability analysis.
+
+<Frame caption="The KPI dashboard providing real-time monitoring of operational and economic metrics with trend visualization.">
+  <img src="/images/quote5.png" alt="KPI Monitoring Dashboard" />
+</Frame>
+
+### Efficiency Analytics
+**Requirement Addressed**: *"Overall efficiency to ensure optimal performance"*
+
+The platform enables efficiency analysis through visual analytics:
+*   **Weekly Request Activity Chart**: Time-series visualization showing request patterns from 2026-02-10 to 2026-02-16, enabling:
+    *   Peak period identification
+    *   Workload distribution analysis
+    *   Resource allocation optimization
+*   **Summary Metrics**: Four key performance indicators providing instant operational health overview.
+*   **Trend-Based Insights**: Historical activity patterns supporting predictive capacity planning.
+*   **Process Efficiency Measurement**: Track the progression from request creation through cost calculation to quotation delivery.
+
+### Dashboard Access & Navigation
+**Requirement Addressed**: *"Continuous real-time monitoring"*
+
+The dashboard ensures continuous monitoring accessibility:
+*   **Direct Access**: Available via [Quotation Management Dashboard](https://ai-loop.alpeadria.com/ai-loop/flows?group=CENTRICO&flow=quotation-management&command=dashboard).
+*   **Navigation Options**: Dual access points through "View Request" and "dashboard" buttons for flexible workflow.
+*   **Persistent Visibility**: Always-available metrics ensuring continuous performance oversight.
+*   **Real-Time Updates**: Metrics refresh automatically as quotations progress through workflow stages.
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### Analytics Architecture
+*   **KPI Dashboard**: Centralized analytics interface aggregating operational and economic metrics in real-time.
+*   **Metrics Engine**: Backend calculations for request counts, status tracking, and activity aggregation.
+*   **Visualization Components**: Chart components rendering weekly activity trends with temporal axes.
+
+### Data Aggregation
+*   **Count Metrics**: Automated tallying of total requests, daily requests, calculated costs, and sent quotations.
+*   **Temporal Analysis**: Time-series data collection enabling weekly activity visualization.
+*   **Status Workflow Integration**: Real-time connection to quotation lifecycle states for instant metric updates.
+
+### Dashboard Features
+*   **Summary Cards**: Four prominent metric cards displaying key KPIs (Total Requests, Today's Requests, Cost Calculated, Quotations Sent).
+*   **Weekly Chart**: Interactive activity visualization showing request volumes across date ranges.
+*   **Responsive Updates**: Automatic metric recalculation as new quotations are created or progress through stages.
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the LPM 03 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Operational KPI Monitoring** | **Evidenced by [Summary Metrics]**: The dashboard displays real-time operational KPIs including Total Requests (1), Today's Requests (1), providing instant visibility into procurement activity volumes and daily operational tempo. |
+| **Economic KPI Monitoring** | **Evidenced by [Economic Metrics]**: The Cost Calculated (1) and Quotations Sent (0) metrics demonstrate comprehensive economic KPI tracking, measuring pricing workflow completion and quotation delivery rates critical for cost management. |
+| **Efficiency Tracking** | **Evidenced by [Weekly Request Activity Chart]**: The time-series visualization showing request patterns from Feb 10-16, 2026 proves the system's ability to track overall efficiency through trend analysis and activity distribution monitoring. |
+| **Real-Time Visibility** | **Evidenced by [Dashboard Interface]**: The accessible dashboard at the quotation management flow with continuously updated metrics (Total: 1, Today: 1, Calculated: 1, Sent: 0) demonstrates real-time monitoring capabilities critical for performance control and visibility. |

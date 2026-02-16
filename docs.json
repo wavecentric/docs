@@ -133,6 +133,24 @@
               "workflows/MCD/MCD15",
               "workflows/MCD/MCD16"
             ]
+          },
+          {
+            "group": "CENTRICO - Logistic Procurement",
+            "icon": "truck-fast",
+            "pages": [
+              "workflows/LPM/LPM01",
+              "workflows/LPM/LPM02",
+              "workflows/LPM/LPM03",
+              "workflows/LPM/LPM04",
+              "workflows/LPM/LPM05",
+              "workflows/LPM/LPM06",
+              "workflows/LPM/LPM07",
+              "workflows/LPM/LPM08",
+              "workflows/LPM/LPM09",
+              "workflows/LPM/LPM10",
+              "workflows/LPM/LPM11",
+              "workflows/LPM/LPM12"
+            ]
           }
         ]
       },

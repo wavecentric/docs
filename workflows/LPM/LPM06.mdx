@@ -1,0 +1,89 @@
+---
+title: "LPM 06 - Integration with Existing Systems"
+sidebarTitle: "LPM 06"
+description: "Integrate the module with existing systems to ensure centralized and fluid management of customer and contract data."
+---
+
+## 1. Overview
+
+**Integration with Existing Systems** serves as the interoperability foundation for procurement operations. This deliverable addresses the critical requirement to "integrate the module with existing systems to ensure centralized and fluid management of customer and contract data." By unifying multiple data sources into a single governance structure, the platform eliminates data duplication and ensures consistency across business systems—a necessity for reliable procurement decision-making.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **Data Consolidation & System Integration** layer. It ensures:
+*   **Single Source of Truth**: Establishing a unified, verified repository for supplier, customer, and contract data regardless of origin.
+*   **Data Consistency**: Preventing fragmentation by standardizing external records through centralized import governance.
+*   **Fluid Data Management**: Enabling rapid onboarding of legacy procurement data without manual re-entry or duplication.
+
+## 3. Implemented Functionalities
+
+The platform implements "Integration with Existing Systems" through the **Data Lake Manager**, which acts as the universal adapter for external procurement data.
+
+### Centralized Data Governance
+**Requirement Addressed**: *"Ensure centralized and fluid management of customer and contract data"*
+
+The **Data Lake** provides a unified interface for all procurement-related business entities:
+*   **Universal Schema Definition**: Create standardized collections for procurement data (Suppliers, Customers, Contracts, Quotations) ensuring that all systems operate on consistent data structures.
+*   **Manual Database Creation**: Define custom schemas for specialized procurement data requirements with full control over field types and relationships.
+*   **Centralized Access**: Single platform for managing all procurement-related data regardless of source system.
+
+    Refer: [Data Lake Manager](/functionalities/data-lake)
+
+<Frame caption="The centralized interface for defining and governing procurement data structures.">
+  <img src="/images/new-database.png" alt="Centralized Procurement Data Governance" />
+</Frame>
+
+### Legacy System Integration
+**Requirement Addressed**: *"Integrate the module with existing systems"*
+
+The system supports seamless integration with existing ERP, CRM, and procurement systems:
+*   **File-Based Integration**: Direct import of **CSV**, **XLSX**, and **XLS** files enables organizations to migrate data from existing systems instantly.
+*   **Bulk Data Migration**: Import historical supplier data, contract records, and customer information in bulk, preserving operational history.
+*   **Schema Auto-Detection**: Automatic schema inference from uploaded files accelerates integration by eliminating manual configuration.
+*   **Immediate Availability**: Imported data becomes immediately available for quotation management, analytics, and reporting.
+
+<Frame caption="The ingestion interface enabling integration of procurement data from existing external systems.">
+  <img src="/images/create-database-from-file.png" alt="Legacy System Integration" />
+</Frame>
+
+### Data Duplication Prevention
+**Requirement Addressed**: *"Avoid data duplication and ensure consistency"*
+
+The platform enforces consistency through technical controls:
+*   **Standardized Import Process**: All external data funnels through the Data Lake governance layer, ensuring uniform structure.
+*   **Schema Validation**: Incoming data is validated against defined schemas, rejecting inconsistent data before it corrupts the repository.
+*   **Normalized Storage**: Whether data originates from an API, file import, or manual entry, it is stored in standardized collections (e.g., Suppliers, Contracts).
+*   **Reference Integrity**: Downstream modules (Quotation Management, Analytics) operate on the same centralized data, eliminating version conflicts.
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### Integration Architecture
+*   **Data Lake Manager**: Universal data governance platform serving as the central hub for all procurement data.
+*   **File Parser Service**: Backend service that validates external file structures against internal schemas, ensuring data quality.
+*   **Multi-Format Support**: Compatibility with industry-standard formats (CSV, XLSX, XLS) for broad system integration.
+
+### Data Pipeline
+*   **Ingestion Workflow**: Standardized process for importing external data:
+    1. File upload through the web interface
+    2. Automatic schema detection and validation
+    3. Data normalization and transformation
+    4. Storage in centralized collections
+*   **Validation Rules**: Technical enforcement of data consistency preventing "bad data" from corrupting the repository.
+
+### Governance Controls
+*   **Manual Definition**: Create custom databases with precise field specifications for specialized procurement requirements.
+*   **Automated Ingestion**: Rapid bulk import for large legacy datasets preserving historical procurement records.
+*   **Unified Access**: Single interface for all procurement data regardless of origin, ensuring operational consistency.
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the LPM 06 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Centralized Management** | **Evidenced by [Data Lake Interface]**: The unified governance tool for creating and managing databases proves centralized management of customer and contract data across all procurement operations. |
+| **System Integration** | **Evidenced by [Import from File]**: The "Upload File" capability with support for CSV, XLSX, and XLS formats is the direct mechanism for integrating with existing ERP, CRM, and procurement systems. |
+| **Data Duplication Prevention** | **Evidenced by [Schema Governance]**: The standardized database creation and import processes ensure all data—regardless of source—flows into consistent structures, technically preventing duplication and ensuring consistency across business systems. |
+| **Fluid Management** | **Evidenced by [Bulk Import Capability]**: The ability to import large datasets instantly (via file upload with automatic schema detection) enables fluid data management, eliminating manual re-entry delays and ensuring rapid system integration. |
