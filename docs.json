@@ -109,11 +109,25 @@
             ]
           },
           {
-            "group": "Business",
-            "icon": "building",
+            "group": "Centrico",
+            "icon": "database",
             "pages": [
               "flows/creditsafe",
-              "flows/customers"
+              "flows/customers",
+              "flows/data-viewer",
+              "flows/service-quote",
+              "flows/client-analysis",
+              "flows/contract-management",
+              "flows/kpi",
+              {
+                "group": "Quotation Management",
+                "pages": [
+                  "flows/new-inquiry",
+                  "flows/cost-calculation",
+                  "flows/inquiry-list",
+                  "flows/preview-send"
+                ]
+              }
             ]
           },
           {
