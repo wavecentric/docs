@@ -1,0 +1,91 @@
+---
+title: "LPM 13 - Contract and Agreement Management"
+sidebarTitle: "LPM 13"
+description: "Manage creation, storage, and review of supplier contracts ensuring compliance with business objectives."
+---
+
+## 1. Overview
+
+**Support for the Management of Contracts and Agreements with Suppliers** is the contractual governance layer that manages the lifecycle of supplier agreements. It fulfills the requirement to "manage the creation, storage, and review of contracts with suppliers, ensuring that they comply with established conditions and business objectives."
+
+This is **important to ensure contract compliance and facilitate the management of business relationships** with suppliers and service providers.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **Contract Lifecycle Management** layer. It ensures:
+*   **Contract Creation**: Automated generation of professional service contracts with supplier details.
+*   **Document Storage**: Centralized storage of contract PDFs with status tracking.
+*   **Review & Delivery**: Review mechanisms and delivery workflows for contract distribution.
+
+## 3. Implemented Functionalities
+
+The platform implements "Contract and Agreement Management" through the **Contract Management Flow**, which handles the complete lifecycle from creation to delivery.
+
+### Contract Creation
+**Requirement Addressed**: *"Manage the creation of contracts with suppliers"*
+
+Automated contract generation with supplier and service details:
+*   **Client Selection**: Choose from available supplier database (Anagrafica).
+*   **Service Selection**: Select from predefined services (Rail Transport, Road Freight, Warehouse Storage).
+*   **Automated ID Generation**: Unique contract identifiers (CON-timestamp-random).
+*   **Professional PDF Formatting**: Company branding with AlpeAdria logo and footer integration.
+
+    Refer: [Contract Management](/flows/contract-management)
+
+<Frame caption="The contract creation interface for selecting clients and services.">
+  <img src="/images/flows/contract1.png" alt="Contract Creation Interface" />
+</Frame>
+
+### Contract Storage and Review
+**Requirement Addressed**: *"Storage and review of contracts"*
+
+Centralized contract management with review capabilities:
+*   **Database Storage**: Contracts stored in `db_ai-loop_contract` collection with metadata.
+*   **Status Tracking**: Lifecycle management (DRAFT → SENT).
+*   **PDF Preview**: Embedded PDF viewer for contract review before sending.
+*   **Client Details**: Integration of supplier contact information and addresses.
+
+### Contract Delivery
+**Requirement Addressed**: *"Ensuring compliance with established conditions"*
+
+Controlled contract distribution workflow:
+*   **Email Integration**: Routes through Communication flow for delivery tracking.
+*   **PDF Attachment**: Attaches generated contract as email attachment.
+*   **Status Updates**: Automatically updates contract status upon successful delivery.
+*   **Delivery Confirmation**: Tracks email delivery and client receipt.
+
+<Frame caption="The contract PDF preview showing professional formatting ready for delivery.">
+  <img src="/images/flows/contract2.png" alt="Contract PDF Preview" />
+</Frame>
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### Contract Generation Engine
+*   **PDFKit Integration**: Professional PDF generation with custom formatting and branding.
+*   **Template System**: Standardized contract templates ensuring compliance with business terms.
+*   **Data Integration**: Fetches supplier details from centralized client database (Anagrafica Completa).
+
+### Storage Architecture
+Contract data persisted with full metadata:
+*   **Contracts Collection**: `datalake_main.db_ai-loop_contract`
+*   **Client Data**: `datalake_main.db_ai-loop_anagrafica_completa`
+
+### Workflow Commands
+- **Create Contract**: Generate new contract draft with client and service selection
+- **View Contract**: Preview generated PDF with embedded viewer
+- **Send Contract**: Deliver contract via email to supplier
+
+**Access Point:**
+[Open Contract Management →](https://ai-loop.alpeadria.com/ai-loop/flows?flow=gestione-contratti)
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the LPM 13 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Contract Creation** | **Evidenced by [Creation Interface]**: The system generates professional contracts with automated ID assignment, client details, and service specifications, proving creation capability. |
+| **Storage & Review** | **Evidenced by [PDF Preview]**: Contracts are stored in MongoDB with status tracking (DRAFT/SENT) and can be reviewed via embedded PDF viewer before distribution. |
+| **Compliance Management** | **Evidenced by [Controlled Delivery]**: The workflow enforces review (View Contract) before distribution (Send Contract), ensuring contracts comply with established conditions before reaching suppliers. |

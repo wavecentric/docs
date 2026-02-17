@@ -119,6 +119,7 @@
               "flows/client-analysis",
               "flows/contract-management",
               "flows/kpi",
+              "flows/sales-funnel",
               {
                 "group": "Quotation Management",
                 "pages": [
@@ -189,7 +190,9 @@
               "workflows/MCD/MCD07",
               "workflows/MCD/MCD08",
               "workflows/MCD/MCD09",
+              "workflows/MCD/MCD10",
               "workflows/MCD/MCD11",
+              "workflows/MCD/MCD13",
               "workflows/MCD/MCD14",
               "workflows/MCD/MCD15",
               "workflows/MCD/MCD16"
@@ -210,7 +213,8 @@
               "workflows/LPM/LPM09",
               "workflows/LPM/LPM10",
               "workflows/LPM/LPM11",
-              "workflows/LPM/LPM12"
+              "workflows/LPM/LPM12",
+              "workflows/LPM/LPM13"
             ]
           }
         ]
