@@ -1,67 +1,158 @@
 ---
-title: "Stato Carri (Status)"
+title: "Stato Carri"
 sidebarTitle: "Stato Carri"
-description: "Operational dashboard for fleet condition"
+description: "Visualize and summarize railway wagon data with interactive charts and AI-powered executive summaries."
 ---
 
-## 1. Overview
-**Stato Carri** (Wagon Status) is the operational control tower for the fleet. While *Flotta Carri* defines the asset, *Stato Carri* tracks its dynamic reality. It provides real-time visibility into availability, location, and mechanical condition and captures the lifecycle of one asset.
+The **Stato Carri** system provides powerful tools for analyzing and summarizing railway wagon data. Users can generate interactive bar charts grouped by any wagon attribute or create comprehensive AI-powered executive summaries of the entire fleet.
 
-## 2. Maintenance Lifecycle
+## Workflow Visualization
 
 ```mermaid
-stateDiagram-v2
-    [*] --> Available: Onboarding
-    Available --> Assigned: Planning Logic
-    Assigned --> InTransit: Train Departure
-    InTransit --> AtTerminal: Train Arrival
-    AtTerminal --> Available: Release
+graph TD
+    User([User Opens Fleet Status]) --> Choice{Select Action}
     
-    Available --> Damaged: Defect Report
-    Damaged --> Maintenance: Workshop Entry
-    Maintenance --> Available: Repair Complete
+    Choice -->|View By| SelectField[Select Grouping Field]
+    Choice -->|Summary| FetchAll[Fetch All Wagon Data]
+    
+    SelectField --> Fields[Choose Field:<br/>PESO, PORTATA, ASSI,<br/>MODELLO, TIPO, etc.]
+    Fields --> Aggregate[Aggregate by Selected Field]
+    Aggregate --> Count[Count Records per Group]
+    Count --> GenerateChart[Generate ECharts Bar Chart]
+    GenerateChart --> ChartHTML[Interactive Chart Display]
+    
+    FetchAll --> AllDocs[Retrieve All Wagon Documents]
+    AllDocs --> AIPrompt[Send to AI Model]
+    AIPrompt --> AISummary[Generate Executive Summary]
+    AISummary --> ConvertMD[Convert Markdown to HTML]
+    ConvertMD --> SummaryHTML[Formatted Summary Display]
 ```
 
-## 3. Status States
+## Key Features
 
-### Operational States
-*   **AVAILABLE**: The wagon is technically sound and ready for assignment.
-*   **ASSIGNED**: The wagon is linked to a planned train journey.
-*   **IN-TRANSIT**: The wagon is currently moving on an active train.
-*   **AT-TERMINAL**: The wagon is dwelling at a specific network node.
+### 1. View By - Interactive Data Visualization
 
-### Non-Operational States
-*   **MAINTENANCE**: The wagon is in a workshop (Officina) and unavailable for planning.
-*   **DAMAGED (Guasto)**: The wagon has a reported defect but is not yet in a workshop.
-*   **STORED (Accantonato)**: The wagon is parked long-term.
+Generate dynamic bar charts to visualize wagon distribution across any attribute:
 
-## 4. Key Functionalities
+**Available Grouping Fields**:
+- **PESO**: Weight distribution
+- **PORTATA**: Capacity grouping
+- **ASSI**: Axle configuration
+- **LUNGHEZZA**: Length categories
+- **MODELLO**: Model types
+- **TIPO**: Wagon types
+- **FORNITORE**: Supplier distribution
+- **Wagon_Keeper**: Keeper assignments
+- **POSIZIONE**: Current positions
 
-### The "Traffic Light" Dashboard
-The interface uses a rigorous color-coding system for instant situational awareness:
-*   **GREEN**: Available & Clean.
-*   **YELLOW**: Available but nearing maintenance deadline (< 30 days).
-*   **RED**: Unavailable (Maintenance/Damaged).
+**Chart Features**:
+- Interactive ECharts-powered visualization
+- Automatic count aggregation per group
+- Professional styling with customizable colors
+- Responsive design with tooltips
+- Clear axis labels and title
 
-### Maintenance Workflow
-1.  **Defect Reporting**: Operational staff flag a wagon as "Damaged" upon inspection.
-2.  **Status Update**: System automatically flips status to `DAMAGED` and removes it from available stock.
-3.  **Workshop Routing**: Fleet Manager generates a "Repair Order" sending the wagon to a specific Workshop Node.
+<Frame caption="Interactive bar chart showing wagon distribution grouped by selected field.">
+  <img src="/images/magemo/fleet/view.png" alt="View By Chart" />
+</Frame>
 
-### Location Tracking
-The system updates the wagon's location automatically based on Execution events:
-*   **Train Arrival**: Updates location to the Arrival Terminal.
-*   **Train Departure**: Updates location to "On Train [Train Number]".
+[Open View By Chart →](https://ai-loop.alpeadria.com/ai-loop/flows?flow=stato-carri&command=view-by&View_by=)
 
-## 5. View By — Fleet Distribution Analysis
+### 2. Summary - AI-Powered Fleet Analysis
 
-Stato Carri has two main views, selectable via tabs at the top of the page:
+Generate comprehensive executive summaries using AI analysis:
 
-| Tab | Purpose |
-| :--- | :--- |
-| **View by** | Generates a bar chart grouping wagons by a selected attribute. |
-| **Summary** | A numeric summary table of the same data. |
+**Summary Includes**:
+- Total number of wagons (owned vs. managed breakdown)
+- Complete list of wagon IDs (NUMEROVAGONE)
+- Key operational details for each wagon
+- Critical patterns and upcoming deadlines
+- Management-relevant insights
 
-## 6. Navigation
-*   **Menu Path**: `Fleet_V1 > Stato Carri`
+**AI Processing**:
+- Analyzes all wagon documents from `db_ai-loop_FLEET_carri`
+- Extracts critical fields: ECM, ASSI, PESO, TIPO, MODELLO, PORTATA, contract details, and more
+- Generates concise, professional summaries for quick decision-making
+- Identifies time-sensitive information relative to current date
 
+<Frame caption="AI-generated executive summary of fleet status with key insights.">
+  <img src="/images/magemo/fleet/summary.png" alt="Fleet Summary" />
+</Frame>
+
+## Workflow Details
+
+<Steps>
+  <Step>
+    ### 1. User Selects Action
+    User accesses the Fleet Status feature and chooses between:
+    - **View By**: Generate visual charts
+    - **Summary**: Get AI-powered analysis
+  </Step>
+
+  <Step>
+    ### 2a. View By - Chart Generation
+    
+    **User Action**: Select a field to group by (e.g., "TIPO" for wagon types)
+    
+    **System Process**:
+    1. Queries `db_ai-loop_FLEET_carri` collection
+    2. Performs MongoDB aggregation: groups by selected field and counts records
+    3. Sorts results by field value
+    4. Generates ECharts configuration with:
+       - X-axis: Field values (wagon types, models, etc.)
+       - Y-axis: Count of wagons
+       - Title: "Distribuzione dei carri per [Field]"
+    5. Returns interactive HTML chart
+    
+    **Output**: Interactive bar chart showing distribution of wagons across the selected attribute
+  </Step>
+
+  <Step>
+    ### 2b. Summary - AI Analysis
+    
+    **System Process**:
+    1. Fetches all documents from `db_ai-loop_FLEET_carri` with projection:
+       - Wagon identifiers: NUMEROVAGONE, ECM
+       - Physical attributes: ASSI, PESO, TIPO, MODELLO, PORTATA, LUNGHEZZA
+       - Operational data: POSIZIONE, monitoring, Wagon_Keeper
+       - Contract info: FORNITORE, Rif_Contratto, INIZIO_NOLEGGIO, Termine_Disdetta
+       - Maintenance: Scadenza, KM_rimanenti, Eventuali_limitazioni_Km
+       - Special equipment: Special_Equipment_POWER_BOX, Special_Equipment_ALTRO
+    
+    2. Sends data to AI with specialized logistics prompt
+    3. AI analyzes and generates summary covering:
+       - Total wagon count (owned vs. managed)
+       - Wagon IDs and key details
+       - Critical patterns and deadlines
+    
+    4. Converts markdown response to HTML
+    5. Returns formatted executive summary
+    
+    **Output**: Professional HTML summary ready for management review
+  </Step>
+
+  <Step>
+    ### 3. Display Results
+    
+    - **Charts**: Rendered in browser with full interactivity (hover tooltips, zoom, etc.)
+    - **Summary**: Displayed as formatted HTML with proper headings and structure
+    - Both outputs are optimized for quick scanning and decision-making
+  </Step>
+</Steps>
+
+## Use Cases
+
+### Operations Management
+- **Quick Distribution Check**: Use "View By TIPO" to see wagon type distribution
+- **Supplier Analysis**: Group by "FORNITORE" to analyze supplier allocation
+- **Location Overview**: View by "POSIZIONE" to understand fleet positioning
+
+### Executive Reporting
+- **Fleet Status Report**: Generate AI summary for weekly management meetings
+- **Contract Review**: Summary highlights upcoming contract deadlines and renewal dates
+- **Maintenance Planning**: AI identifies wagons approaching service limits
+
+### Strategic Planning
+- **Capacity Analysis**: View by "PORTATA" to understand capacity distribution
+- **Model Assessment**: Group by "MODELLO" to analyze fleet composition
+- **Keeper Allocation**: View by "Wagon_Keeper" to review keeper assignments

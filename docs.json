@@ -172,15 +172,6 @@
             ]
           },
           {
-            "group": "Fleet",
-            "icon": "truck",
-            "pages": [
-              "flows/fleet-search",
-              "flows/fleet-status",
-              "flows/flotta-carri"
-            ]
-          },
-          {
             "group": "Centrico",
             "icon": "database",
             "pages": [

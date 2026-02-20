@@ -1,63 +1,96 @@
 ---
-title: "Flotta Carri (Fleet)"
+title: "Flotta Carri"
 sidebarTitle: "Flotta Carri"
-description: "Master registry for wagon assets"
+description: "Real-time GPS tracking and visualization of railway wagons on an interactive map."
 ---
 
-## 1. Overview
-**Flotta Carri** (Fleet Registry) serves as the definitive master record for every piece of rolling stock in the network. It acts as the "Birth Certificate" for each wagon, storing immutable technical data and evolving ownership details.
+**Flotta Carri** provides real-time GPS tracking of railway wagons using location data from Nexxiot API. View all tracked wagons on an interactive map with movement status, location details, and wagon information.
 
-## 2. Fleet Data Relationships
+## Workflow Visualization
 
 ```mermaid
 graph TD
-    WT[Wagon Types] -->|Blueprint| W[Wagon Registry]
-    W -->|Assigned To| M[Mute: Sets]
-    W -->|Ownership| S[Subjects]
-    W -->|Technical Specs| V[National Vehicle Register]
-    M -->|Linked To| SVC[Design: Services]
+    User([User Opens Flotta Carri]) --> Auth[Authenticate with Nexxiot API]
+    Auth --> Fetch[Fetch GPS Asset Data]
+    Fetch --> Extract[Extract Wagon Locations]
+    Extract --> Filter[Filter Valid Coordinates]
+    Filter --> Map[Render Interactive Map]
+    
+    Map --> Moving[Moving Wagons]
+    Map --> Standing[Standing Wagons]
+    
+    Moving --> Cluster[Marker Clustering]
+    Standing --> Cluster
+    
+    Cluster --> Interactive[Interactive Display]
+    Interactive --> StatusBar[Status Bar with Counts]
+    Interactive --> Tooltips[Wagon Details on Hover]
+    Interactive --> Filters[Filter by Movement Status]
 ```
 
-## 3. Core Data Entities
+## Key Features
 
-### General Identity
-*   **Wagon Number (UIC)**: The unique 12-digit identifier (e.g., `33 87 457 6 200-1`).
-*   **Wagon Type**: Link to the *Wagon Types* master data (e.g., `Sggnss 80'`).
-*   **Series**: The generic series classification.
-*   **Registration Country**: The country code of the wagon's registration.
+### Real-Time GPS Tracking
+- Fetches live wagon locations from Nexxiot third-party API
+- Displays GPS coordinates on interactive Leaflet map
+- Auto-centers map on fleet location
 
-### Technical Specifications
-*   **Tare Weight**: The empty weight of the wagon (crucial for train mass calculations).
-*   **Load Limit**: Maximum payload capacity.
-*   **Axle Count**: Number of axles (determining track access charges).
-*   **Brake Type**: The braking regime (e.g., P/G, K-blocks) affecting speed limits.
-*   **Internal Length**: Usable loading length for containers/trailers.
+### Movement Status Visualization
+- **Moving Wagons**: Blue truck icons (🚚) with pulsing animation
+- **Standing Wagons**: Gray truck icons (🚚) 
+- **Status Bar**: Shows real-time counts
+  - "in movimento" - moving wagons count
+  - "in piedi" - standing wagons count
+  - "tutto" - total wagon count
 
-### Maintenance & Lifecycle
-*   **Immatriculation Date**: When the wagon first entered service.
-*   **Last Revision**: Date of the last major overhaul.
-*   **Next Revision Due**: Calculated deadline for mandatory inspection.
-*   **Wheelset Data**: Specific tracking of wheelset diameters and wear.
+### Interactive Map Controls
+- **Click Status Bar**: Filter wagons by movement state
+- **Hover on Markers**: View wagon details instantly
+- **Marker Clustering**: Groups nearby wagons for cleaner visualization
+- **Zoom & Pan**: Navigate across the entire fleet
 
-### Ownership & Leasing
-*   **Keeper (VKM)**: The Entity in Charge of Maintenance (ECM) (e.g., `VTG`, `ERMEWA`).
-*   **Owner**: The financial owner of the asset.
-*   **Lease Contract**: Reference to the lease agreement, including start and end dates.
+### Wagon Information
+Each wagon marker displays:
+- **EVN**: Unique wagon identifier
+- **Type**: Wagon type classification
+- **Status**: Moving or Standing
+- **Location**: Current address/display name
+- **Time**: Last GPS measurement timestamp
 
-## 4. Operations & Validation
+[Open Flotta Carri →](https://ai-loop.alpeadria.com/ai-loop/flows?flow=flotta_carri)
 
-### Safety Validation
-The system prevents operational errors by cross-referencing this registry during train composition:
-1.  **Overload Prevention**: Blocking loading if `Tare + Cargo > Max Weight`.
-2.  **Compatibility Check**: Ensuring the wagon type supports the specific UTI types (via the Compatibility Matrix).
-3.  **Speed Restriction**: Alerting planners if a wagon's brake type limits the entire train's speed (e.g., 100km/h vs 120km/h).
+## How It Works
 
-### Workflow: Onboarding a New Wagon
-1.  **Manual Entry**: Operator enters the 12-digit UIC.
-2.  **External Lookup**: System attempts to fetch technical specs from the National Vehicle Register (API integration where available).
-3.  **Validation**: UIC Checksum digit is verified.
-4.  **Activation**: Wagon status is set to "Active" and becomes available for Planning.
+<Steps>
+  <Step>
+    ### 1. API Authentication
+    System authenticates with Nexxiot API to access GPS tracking data.
+  </Step>
 
-## 5. Navigation
-*   **Menu Path**: `Fleet_V1 > Flotta Carri`
-*   **Access**: Restricted to Fleet Managers and Technical Directors.
+  <Step>
+    ### 2. Fetch Wagon Data
+    Retrieves all assets with:
+    - GPS coordinates (latitude, longitude)
+    - Movement state (moving/standing)
+    - Wagon metadata (type, EVN)
+    - Location details and timestamps
+  </Step>
+
+  <Step>
+    ### 3. Map Visualization
+    Renders interactive map with:
+    - Moving wagons: Blue icons with pulse animation
+    - Standing wagons: Gray static icons
+    - Clustered markers for dense areas
+    - Status bar with live counts
+  </Step>
+
+  <Step>
+    ### 4. User Interaction
+    Users can:
+    - Filter by clicking status counts
+    - Hover for wagon details
+    - Zoom to specific regions
+    - Track individual wagons
+  </Step>
+</Steps>
