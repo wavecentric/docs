@@ -35,7 +35,20 @@ Every node is linked to its stakeholders:
 *   **Owner (Proprietario)**: The entity that owns the physical infrastructure.
 *   **Operator (Gestore)**: The entity responsible for daily operations (Terminal Operator).
 
-## 3. Data Connectivity
+## 3. Propagation & Operational Logic
+
+A **Node** is not just a static record; it drives the functional limits of the entire network.
+
+### I. The Routing Engine Gateway
+When creating a **Design > Trace**, the system filters valid endpoints based on nodes that have defined `Collegamenti` (Links). If a connection doesn't exist in the Nodes registry, it cannot be used in a commercial Service.
+
+### II. Automated Milestone Triggering
+Nodes marked as `is_terminal=1` act as detection zones for the **Monitoring** module. When a GPS coordinate matches the node's `latitudine/longitudine` (plus a defined geofence radius), the system automatically updates the trip status to **Arrivato**.
+
+### III. PCS Integration
+The `transcodifiche_id_terminal_pcs` field is the technical key for EDI messaging. When a manifest is sent to a Port Community System, the system uses this ID to ensure the port's software correctly identifies the destined terminal.
+
+## 4. Data Connectivity & Flow
 
 ```mermaid
 graph TD
@@ -44,45 +57,43 @@ graph TD
         SOG[Subjects Registry] --> N
         ZON[Zones Registry] --> N
     end
-    subgraph "Outbound"
-        N --> DESIGN[Design: Services/Traces]
-        N --> CONNECTIONS[Design: Connections Graph]
-        N --> PLANNING[Planning: Bookings]
-        N --> EXECUTION[Execution: Gate Events]
-        N --> MONITORING[Monitoring: Inventory Views]
+    subgraph "Outbound Propagation"
+        N --> DESIGN[Design: Define Traces between Nodes]
+        N --> BKG[Booking: Select Load/Unload Points]
+        N --> EXE[Execution: Trigger Gate Events]
+        N --> MON[Monitoring: Geographic Geofencing]
+        N --> ADM[Admin: Calculate Terminal Storage Costs]
     end
 ```
 
-## 4. Field Mapping Reference
+## 5. Field Mapping Reference
 
 ### Registry View (Gestione Nodi)
-| Field | Technical Name | Description |
-| :--- | :--- | :--- |
-| **Descrizione** | `descrizione` | Full terminal/station name. |
-| **Tipo Nodo** | `id_tipo_nodo` | Classification (Station, Port, Terminal, etc). |
-| **Luogo** | `id_luogo` | Associated LOCODE/Località. |
-| **UIC** | `codice_uic` | Railway identifier. |
-| **Prov/Paese** | `provincia` / `paese` | Geographic location details. |
+| Field | Technical Name | Description | Source |
+| :--- | :--- | :--- | :--- |
+| **Descrizione** | `descrizione` | Full terminal/station name. | Manual |
+| **Tipo Nodo** | `id_tipo_nodo` | Classification (Station, Port, Terminal, etc). | Config Enum |
+| **Luogo** | `id_luogo` | Associated LOCODE/Località. | LOCODE Master |
+| **UIC** | `codice_uic` | Railway identifier. | Manual |
+| **Stakeholders** | `id_gestore` | The terminal operator. | **Soggetti** |
 
 ### Configuration Tabs (Form)
 
 #### Anagrafica (Core Data)
-- **Names**: `descrizione` (Required).
-- **Classification**: `id_tipo_nodo` (Required).
+- **Primary**: `descrizione` (Required), `id_tipo_nodo` (Required).
 - **Geography**: `luogo` (LOCODE Link), `id_zona` (Zone Group), `indirizzo`, `cap`.
-- **Stakeholders**: `id_proprietario`, `id_gestore` (Linked to Subjects).
-- **Geo-Precision**: `latitudine`, `longitudine`.
+- **Geo-Precision**: `latitudine`, `longitudine` (Driving GPS logic).
 
-#### Servizi di Nodo (Operational)
-- **Activity**: `sn_id_tipo_attivita` (e.g., Handling).
-- **Provider**: `sn_id_fornitore` (Linked to Subjects).
-- **Quotes**: `sn_rif_contratto`, `sn_rif_quotazione`.
+#### Servizi di Nodo (Cost Calculation Engine)
+- **Activity**: `sn_id_tipo_attivita` (e.g., Handling, Shunting).
+- **Provider**: `sn_id_fornitore` (Linked to **Soggetti**).
+- **Quotes**: `sn_rif_contratto` (Link to financial agreements).
 
-#### Collegamenti (Network Graph)
+#### Collegamenti (The Network Adjacency Matrix)
 - **Link Type**: `co_tipo` (Road/Rail/Sea).
 - **Target Node**: `co_luogo_collegato`.
-- **Metrics**: `co_distanza` (km).
+- **Metrics**: `co_distanza` (km) used for transit time estimations.
 
-#### Transcodifiche (System Sync)
+#### Transcodifiche (EDI Sync)
 - **EDI/CIM**: `transcodifiche_edi`, `transcodifiche_cim`.
-- **External Hubs**: `transcodifiche_id_terminal_pcs` (Port Community System ID).
+- **External Hubs**: `transcodifiche_id_terminal_pcs` (Used for Port-to-System handshakes).

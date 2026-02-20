@@ -6,7 +6,7 @@ description: "Real-time GPS tracking and visualization of railway wagons on an i
 
 **Flotta Carri** provides real-time GPS tracking of railway wagons using location data from Nexxiot API. View all tracked wagons on an interactive map with movement status, location details, and wagon information.
 
-<img src="/images/magemo/wagon.png" alt="Flotta Carri - Wagon Fleet Dashboard" />
+<img src="/images/magemo/fleet/flotta-carri.png" alt="Flotta Carri - Real-time Wagon Fleet Map Dashboard" />
 
 ## Workflow Visualization
 
@@ -38,12 +38,13 @@ graph TD
 - Auto-centers map on fleet location
 
 ### Movement Status Visualization
-- **Moving Wagons**: Blue truck icons (🚚) with pulsing animation
-- **Standing Wagons**: Gray truck icons (🚚) 
-- **Status Bar**: Shows real-time counts
-  - "in movimento" - moving wagons count
-  - "in piedi" - standing wagons count
-  - "tutto" - total wagon count
+The dashboard provides immediate visual feedback on the operational state of the fleet:
+- <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-blue-500"></div> **in movimento**: Wagons currently in transit (Nexxiot detection).</div>
+- <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-gray-500"></div> **in piedi**: Wagons currently stationary at a node.</div>
+- <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-green-500"></div> **tutto**: The total tracked inventory.</div>
+
+- **Moving Wagons**: Blue truck icons (🚚) with a pulsing animation for live identification.
+- **Standing Wagons**: Gray static icons (🚚) representing idle or parked assets.
 
 ### Interactive Map Controls
 - **Click Status Bar**: Filter wagons by movement state

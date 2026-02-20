@@ -38,22 +38,38 @@ The following interface is used for the creation and maintenance of railway trac
   <img src="/images/nuova_traccia.png" alt="Nuova Traccia Form" />
 </Frame>
 
-## 3. Maneuver Logic (Section M53)
-The system tracks precise shunting and maneuver timestamps required for train preparation. This is captured in the **M53 Partenza** and **M53 Arrivo** sections.
+## 3. Operational Logic & Maneuver (Section M53)
+Railway Traces are more than just schedules; they are the technical constraints that define the capacity of the rail network.
 
-*   **Inizio/Fine Manovra I & II**: Four distinct time slots per station to capture complex preparation phases (e.g., terminal-to-shunting-yard).
-*   **Ora Partenza/Arrivo**: The scheduled "Ready-to-Depart" and "Actual Arrival" timestamps.
+### I. The Capacity Guardrail
+The fields `peso_max` and `lunghezza_max` are physically enforced in the **Planning > Rail** module. 
+- **Length Check**: As wagons are added to the consist, the system sums their technical lengths (`anagrafica_carri.lunghezza_fuori_tutto`). If the total exceeds the trace limit, the train is flagged as "Out of Gauge".
+- **Weight Check**: The cumulative gross weight of wagons and loaded UTIs is checked against the trace's `peso_max`.
 
-## 4. Connectivity & Impact
+### II. M53 Handover Logic
+The system tracks precise shunting and maneuver timestamps required for train preparation. This is captured in the **M53 Partenza** and **M53 Arrivo** sections:
+*   **Preparation Phases**: Four distinct time slots per station to capture complex preparation (e.g., terminal-to-shunting-yard).
+*   **Operational Ready (OR)**: The timestamp when the train is technically ready for the Infrastructure Manager (IM).
+
+## 4. Connectivity & Propagation
 
 ```mermaid
 graph TD
-    N[Nodes Master] --> T[Trace Definition]
-    T --> S[Service Config]
-    T --> RP[Rail Planning]
-    RP --> EX[Execution Manifests]
+    subgraph "Structural Layer"
+        N[Nodes Master] --> T[Trace Definition]
+        SOG[Subjects: Carriers] --> T
+    end
+    subgraph "Operational Layer"
+        T --> CON[Connections: Path Selection]
+        CON --> RP[Rail Planning: Composition]
+        RP --> EXE[Execution: CIM Generation]
+    end
 ```
 
-*   **Inbound**: Traces perform lookups against **Nodes** (of type 'Rail') and **Subjects** (of type 'Carrier').
-*   **Outbound (Planning)**: Traces are the core entities used in the **Rail Planning** interface. Planners cannot assign cargo that exceeds the `peso_max` or `lunghezza_max` defined here.
-*   **Outbound (Execution)**: The `numero` (Train Number) is used as the primary key for **PCS** (Port Community System) synchronization.
+### Inbound Dependencies
+*   **Nodes Master**: Traces perform lookups against **Nodes** filtered by type 'Railway Station/Terminal'.
+*   **Subjects Registry**: Only subjects tagged with the role **Vettore Ferroviario** can be assigned to a trace.
+
+### Downstream Impact
+- **CIM Generation**: The `numero` (Train Number) is a mandatory field in the Rail Consignment Note generated in **Execution**.
+- **PCS Handshake**: Technical integration with Port Systems uses the trace's train number as the unique "Arrival/Departure Identifier" for EDI synchronization.

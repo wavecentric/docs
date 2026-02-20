@@ -36,21 +36,38 @@ The interface below illustrates the technical configuration of a **Railway Relat
   <img src="/images/relazione_ferroviaria.png" alt="Relazione Ferroviaria" />
 </Frame>
 
-## 3. Rolling Stock & Transit
-Connections allow for the default configuration of the train model.
-*   **Composizione Muta**: Linking a default set of wagons (`js-mute`) to the connection.
-*   **Nodi Transito**: A sequental list of intermediate stations, including **Border Crossing** (Confine) flags and UIC Route codes.
+## 3. Operational Handover Logic
+A **Connection** is the technical blueprint that ensures commercial promises (Services) are technically feasible.
 
-## 4. Connectivity Matrix
+### I. The Handover Timeline (MAD/HLR)
+The system enforces a rigorous timeline for intermodal responsibility:
+- **MAD (Messa a Disposizione)**: The timestamp when the cargo is physically ready at the terminal for the railway company.
+- **HLR (Handed Over)**: The timestamp when legal and physical custody is transferred to the Carrier.
+- **Logic**: These times are used in the **Execution** module to generate the "Ready-to-Load" alerts for terminal operators.
+
+### II. Rolling Stock Integration
+Connections link specific **Rolling Stock Models** (Mute Carri) to a route. When a trip is generated from this connection, the system automatically pre-populates the **Rail Planning** "Tetris" view with these specific technical wagons, reducing manual effort for planners.
+
+## 4. Connectivity Matrix & Propagation
 
 ```mermaid
 graph TD
-    S[Services Master] --> C[Connection Design]
-    T[Traces Master] --> C
-    C --> TG[Trip Generator]
-    TG --> B[Operational Booking]
+    subgraph "Design Inputs"
+        S[Services: Brand/Product] --> C[Connection Design]
+        T[Traces: Infrastructure Slots] --> C
+        M[Mute: Wagon Templates] --> C
+    end
+    subgraph "Downstream Workflow"
+        C --> TG[Trip Generator: Batch creation]
+        TG --> BKG[Booking: Slot Selection]
+        TG --> PLN[Planning: Pre-fill Wagons]
+    end
 ```
 
-*   **Inbound**: Pulls O/D nodes from the **General Module** and path numbers from **Railway Traces**.
-*   **Outbound**: Directly feeds the **Trip Generator** (Generatore Viaggi). When a user creates a booking, the system uses these connection templates to calculate feasible routes and transit times.
-*   **Operational Control**: The handover times (MAD/HLR) defined here are used as the baseline for "Planned vs. Actual" performance monitoring in the **Execution** and **Admin** modules.
+### Inbound Dependencies
+*   **Services Module**: Links the route to a commercial offering (e.g., "Bavaria Express").
+*   **Traces Module**: Links the logical connection to physical train numbers and Infrastructure Manager (IM) paths.
+
+### Outbound Impact
+- **Trip Generator**: This is the primary input for the batch generation tool. Without a valid Connection, no operational `Viaggio` (Trip) can be instantiated.
+- **SLA Monitoring**: The MAD/HLR baseline defined here is compared against live timestamps in the **Admin & Reports** module to calculate carrier performance KPIs (Service Level Agreements).

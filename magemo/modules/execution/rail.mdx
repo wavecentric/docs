@@ -7,30 +7,34 @@ description: "Train trip lifecycle and physical execution"
 ## 1. Overview
 The **Rail Operations** sub-module is the operational heart of the Execution module. It manages the physical transition of a train from a "Planned" state to active movement, capturing real-time timestamps and synchronizing with external port systems.
 
-## 2. Technical Field Mapping (Operazioni Rail)
-
-This registry displays all active train voyages in the network.
+## 2. Technical Field Mapping (Intelligence & Sources)
+The rail execution board is a dynamic view of the trip's lifecycle. It pulls data from planning templates and enriches them with live operational telemetry.
 
 ### Filter & Search
-| Label | HTML Name | Description |
-| :--- | :--- | :--- |
-| **Viaggio Treno** | `codice_pratica` | Search by the unique system voyage ID. |
-| **Stato Treno** | `id_stato_treno` | Status filter (e.g., Inviato, Arrivato). |
-| **Tr. Iniziale** | `traccia_iniziale`| Search by the technical path number. |
+| Label | Technical ID | Source | Flow Logic |
+| :--- | :--- | :--- | :--- |
+| **Servizio** | `id_servizio` | **DESIGN** | Filters by commercial service line. |
+| **Connessione** | `id_connessione` | **DESIGN** | Filters by specific route template. |
+| **Vettore Ferr.**| `id_vettore` | **GENERALE** | Filtered by Role: *Vettore Ferroviario*. |
+| **Stato Treno** | `status` | **Config** | Dynamic lifecycle states (Planned, Arrived, etc). |
 
 ### Operational Grid
-| Column | Source | Description |
+| Column | Source Field | Logic |
 | :--- | :--- | :--- |
-| **VIAGGIO** | `pratica.codice` | Internal voyage identifier. |
-| **STATUS** | `stato.descrizione`| Current execution state. |
-| **ETD / ETA** | `etd` / `eta` | Scheduled arrival and departure times. |
-| **PIENI / VUOTI** | `aggregates` | Real-time count of containers on the train. |
+| **VIAGGIO** | `trip_code` | Unique ID generated in **DESIGN > Generatore**. |
+| **ETD / ETA** | `estimated_time`| Pulled from **DESIGN > Tracce**. |
+| **PIENI / VUOTI**| `unit_count` | Summary of loaded UTIs from **PLANNING**. |
+| **DELAY** | `variance` | Calculated: `Planned Time` vs `Live Timestamp`. |
 
-## 3. Operational Events & Manifests
-Execution operators use this module to finalize the physical train:
-*   **Loading List Detail**: Jumps into the unit-level view to confirm physical container placement.
-*   **CIM Generation**: Automated creation of the **Rail Consignment Note** based on the verified wagon consist.
-*   **PCS Synchronization**: Technical integration with Port Community Systems to push the manifests to the port terminals.
+## 3. Operational Events & Manifests: The Automation Engine
+Execution operators use this module to finalize the "Paperless" logistics chain:
+
+- **Activation**: When a trip is activated, the system "Freezes" the loading list. Any further changes must be made via **Operational Overrides**.
+- **CIM / Rail Waybill**: The system automatically aggregates the **Subject** (Sender/Receiver), **Wagon** (Technical info), and **Booking** (Cargo info) to generate a legally compliant CIM document.
+- **Milestone Handover**: When an operator clicks "Arrivato" (Arrived), the system:
+    1. Updates the tracking timeline in **MONITORING**.
+    2. Triggers the EDI `COARRI` message to the **PCS**.
+    3. Makes the record available for invoicing in **ADMIN**.
 
 ## 4. Connectivity Flow
 
@@ -39,9 +43,9 @@ graph TD
     PL[Planning: Load Plan] --> EX[Execution: Live Event]
     EX --> PCS[PCS Integration]
     EX --> MON[Monitoring: Track & Trace]
-    EX --> BIL[Admin: Invoicing]
+    EX --> ADM[Admin: Financial Audit]
 ```
 
-*   **Inbound**: Pulls the "Frozen" loading lists from **PLANNING**.
-*   **Outbound (Monitoring)**: Every status change (e.g., *Departed*) instantly updates the **Track & Trace** milestone timeline for customers.
-*   **Outbound (Finance)**: Weight and wagon data are pushed to **ADMIN & REPORTS** for billing the railway carriers and customers.
+*   **Inbound**: Pulls the "Frozen" loading lists and technical wagon consist from **PLANNING**.
+*   **Outbound (Monitoring)**: Every status change instantly updates the **Track & Trace** milestone dashboard.
+*   **Outbound (Finance)**: Upon trip closure, validated tonnage data is pushed to **ADMIN & REPORTS** for carrier settlement and customer billing.

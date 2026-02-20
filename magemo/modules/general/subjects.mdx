@@ -32,59 +32,64 @@ The connection matrix determines which specific service lines are available for 
 ### 4. Infrastructure Mapping (Magazzini)
 Links subjects to specific **Nodes** (Terminals/Stations), establishing ownership or stakeholder relationships. This enables features like **Storage Threshold Alerts** (Soglia stock).
 
-## 3. Interaction Logic
+## 3. Operational Logic & Data Security
+The Subjects module is the "Identity Provider" for Magemo. It enforces business rules through several technical mechanisms:
 
-- **Role-Based Filtering**: Checking a category (e.g., "Vettore") instantly makes that subject available in dropdowns throughout the platform (e.g., in the DESIGN module for Trace definition).
-- **ERP Integration**: The system displays the `erp_codice_cliente` and `erp_codice_fornitore`, which are typically read-only fields synchronized from an external financial system to ensure data consistency.
-- **Service Hub**: The "Connessioni" tab allows for granular enablement of service-connessione pairs for each subject, ensuring commercial agreements are enforced at the system level.
+### I. Role-Based Visibility
+The system uses the `categorie` tags to drive UI availability. 
+- If a subject is not tagged as **Vettore**, they will not appear in the **Execution > Rail** carrier selection dropdown.
+- If a subject is not tagged as **Cliente**, they cannot be selected as the primary `id_soggetto` in a **Booking**.
 
-## 4. Data Connectivity
+### II. Financial Safeguards
+By linking subjects to external ERP IDs (`erp_codice_cliente`), the system ensures that every booking is credited to a valid account. If a subject lacks an ERP code, the **Admin** module may flag their bookings as "Pro-forma" or block invoicing.
+
+### III. Notification Resolution
+The **Contatti** sub-registry is the engine for PDF dispatch. When a CIM or Manifest is generated, the system looks at the **Vettore** linked to the trip, finds its contacts with `Tipologia = Operations`, and automatically attaches them to the email queue.
+
+## 4. Data Connectivity & Flow
 
 ```mermaid
 graph LR
-    subgraph "Inbound"
-        GEO[Country Registry] --> S[Subjects]
-        NODI[Nodes Registry] --> S
-        ERP[External ERP] --> S
+    subgraph "Inbound Sources"
+        GEO[Country Master] --> S[Subjects]
+        NODI[Nodes Master] --> S
+        ERP[Financial ERP] --> S
     end
-    subgraph "Outbound"
-        S --> DESIGN[Design: Services/Traces]
-        S --> PLANNING[Planning: Bookings]
-        S --> MONITORING[Monitoring: Terminal Ops]
-        S --> EXECUTION[Execution: CIM/Manifests]
-        S --> NOTIFY[Notification Engine]
+    subgraph "Downstream Propagation"
+        S --> DESIGN[Design: Define Service Owners]
+        S --> BKG[Booking: Assign Customers/Haulers]
+        S --> EXE[Execution: Assign Carriers/Drivers]
+        S --> MON[Monitoring: Equipment Suppliers]
+        S --> NOTIFY[Notification: Email Triggers]
     end
 ```
 
 ## 5. Field Mapping Reference
 
 ### Registry List (Gestione Soggetti)
-| Field | Technical Name | Description |
-| :--- | :--- | :--- |
-| **Ragione Sociale** | `ragsoc` | Full legal name of the entity. |
-| **Nome Breve** | `nomebreve` | Short moniker used in dashboards and lists. |
-| **Categorie** | `categorie` | Tagged list of operational roles (Agente, MTO, etc). |
-| **Ruoli** | `ruoli` | Commercial status (Prospect, Customer, Supplier). |
-| **PIVA/CF** | `piva` / `cf` | VAT and Fiscal identification. |
-| **Cod. Cliente** | `erp_codice_cliente` | Unique ID from the financial system (Client). |
-| **Cod. Fornitore** | `erp_codice_fornitore` | Unique ID from the financial system (Supplier). |
+| Field | Technical Name | Source | Description |
+| :--- | :--- | :--- | :--- |
+| **Ragione Sociale** | `ragsoc` | Manual | Full legal name of the entity. |
+| **Nome Breve** | `nomebreve` | Manual | Short moniker used in dashboards. |
+| **Categorie** | `categorie` | Enum | Operational roles (Agente, MTO, etc). |
+| **Ruoli** | `ruoli` | Enum | Commercial status (Prospect, Customer). |
+| **Cod. Cliente** | `erp_codice_cliente` | **ERP** | Key for financial synchronization. |
 
 ### Form Detailed Sections (Nuovo Soggetto)
 
-#### Anagrafica (Core Data)
+#### Anagrafica (Core Identity)
 - **Names**: `ragsoc` (Required), `nomebreve` (Required).
 - **Address**: Full administrative and fiscal address including country codes (`paeseamministrativo`, `paesefiscale`).
-- **Fiscal**: PIVA (VAT), CF (Fiscal Code), EORI Code.
+- **Fiscal**: PIVA (VAT), CF (Fiscal Code), EORI Code (Critical for customs).
 
-#### Contatti (1:N)
-| Field | Technical Name | Description |
+#### Contatti (The Notification Registry)
+| Field | Technical Name | Flow |
 | :--- | :--- | :--- |
-| **Tipologia** | `contatto_tipo` | Booking, Administration, or Operations. |
-| **Ufficio** | `contatto_ufficio` | Import or Export focus. |
-| **Riferimento** | `contatto_contesto` | Referente (Main) vs Interessato (CC). |
-| **Email** | `contatto_email` | Direct contact for automated triggers. |
+| **Tipologia** | `contatto_tipo` | Determines if they receive Bookings vs Invoices. |
+| **Ufficio** | `contatto_ufficio` | Filters by Import/Export focus. |
+| **Email** | `contatto_email` | The target for automated PDF delivery. |
 
-#### Magazzini & Connessioni
-- **Magazzini**: Links to the Nodes Registry via `magazzino_luogo`. Tracks ownership (`magazzino_is_proprietario`).
-- **Connessioni**: Binary toggle (`1`/`0`) via `connessione[ID]` for every service-line available.
-- **Transcodifiche**: External system IDs like `codice_edi` and `codice_uirr`.
+#### Magazzini & Connessioni (Network Boundaries)
+- **Magazzini**: Links to **Nodi** via `magazzino_luogo`. Tracks ownership relationships.
+- **Connessioni**: Binary gateway (`1`/`0`) that enables or disables specific commercial service lines for this customer.
+- **Transcodifiche**: External system IDs like `codice_edi` and `codice_uirr` used for inter-system handshakes.

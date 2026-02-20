@@ -29,13 +29,29 @@ The departures/arrivals list serves as the primary dashboard for rail coordinato
 | 5 | **CARRI** | `count(carri)` | Total number of wagons in the consist. |
 | 6 | **STATUS** | `status_icon` | System verification checkmark (Green = OK). |
 
-## 3. The "Tetris" View: Loading Logic
+## 3. The "Tetris" View: Loading Logic & Constraints
 The core of the module is the **Composition Tool**, where planners perform the following manual and automated tasks:
-*   **Wagon Consist Builder**: Dragging technical wagons from the registry into the train sequence.
-*   **Unit Placement**: Assigning UTIs from the "Bookings to Load" queue onto specific wagon positions.
-*   **Automated Validation**: The system cross-references the **Compatibility Matrix** (Weight, Profile, UTI Type) in real-time. If a combination is unsafe, the system blocks the assignment.
 
-## 4. Connectivity Architecture
+### Technical Constraints (The Guardrail)
+The system enforces several hard constraints during the composition phase:
+- **Maximum Train Length**: Pulls from the **DESIGN > Tracce** template. The UI turns red if the combined wagon lengths exceed this limit.
+- **Tonnage Limit**: Checks against the traction power of the assigned **Vettore Ferroviario**.
+- **The Matrix Check**: Every container placement is validated against the **Compatibility Matrix**.
+    - *Y-Axis*: Wagon Type (Intermodal, Pocket, Flat).
+    - *X-Axis*: UTI Type (Tank, HC, Bulk).
+    - *Result*: Pass/Fail based on profile and structural capacity.
+
+### Automated Validation
+The system cross-references data in real-time. If a combination is unsafe (e.g., a heavy tank on a light-axle wagon), the system blocks the assignment with a technical error message.
+
+## 4. Connectivity & Propagation
+The Rail Planning module acts as the "Decision Hub" of the lifecycle.
+
+| Target Module | Data Propagated | Purpose |
+| :--- | :--- | :--- |
+| **EXECUTION** | `carico_treno` | Populates the Loading List and CIM forms. |
+| **MONITORING** | `id_viaggio` | Prepares the Track & Trace board for incoming milestones. |
+| **PCS** | `COPARN` | Triggers the EDI notification to the port terminals for expected units. |
 
 ```mermaid
 graph TD

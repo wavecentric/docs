@@ -7,44 +7,47 @@ description: "Tabular analysis of network performance and throughput"
 ## 1. Overview
 The reporting engine provides deep insights into the database using predefined templates for common logistics KPIs. It transforms raw operational events into structured data for client billing, carrier auditing, and management oversight.
 
-## 2. Technical Field Mapping (Report Soste)
-The **Soste** (Storage) report is the primary tool for administrative terminal validation.
+## 2. Technical Field Mapping (Intelligence & Sources)
+The reporting engine is a cross-modular aggregator. Every field is a dynamic pointer to the master or operational databases.
 
-| Field | Source | Description |
-| :--- | :--- | :--- |
-| **Codice UTI** | Inventory | The physical unit identification. |
-| **Sosta (GG/HH)** | Calculation | Duration between Gate-In and Gate-Out. |
-| **Inizio / Fine Sosta**| Monitoring | The validated timestamps of entry and exit. |
-| **Validato Il** | Manual | Administrative audit timestamp. |
+| Field Label | Technical ID | Primary Source | Flow Logic |
+| :--- | :--- | :--- | :--- |
+| **Cliente** | `id_cliente` | **GENERALE > Soggetti** | Filtered by Role: *Cliente*. |
+| **Connessione** | `id_connessione` | **DESIGN > Connessioni**| Links report to a specific route. |
+| **Tipo UTI** | `id_tipo_uti` | **GENERALE > UTI** | Aggregates volume by equipment class. |
+| **Tonnellaggio** | `peso_netto` | **BOOKING** | Sum of net weights of loaded units. |
+| **Status** | `stato_inv` | **System State** | Current commercial state (Planned, Invoiced). |
 
 ## 3. Core Report Catalog
 
-### Report Generale Treni
-Monitoring of train journeys and capacity utilization.
-*   **Fields**: Viaggio ID, ETD/ATD variance, Load Factor %, Total Weight.
-*   **Purpose**: Rail network optimization and carrier SLA verification.
+### Report Tonnage & Volumes
+Aggregates the physical throughput of the network.
+*   **KPIs**: Total TEU, Net Tonnes vs Gross Tonnes.
+*   **Source**: Pulled from the `bookings` table, filtered by confirmed `id_viaggio`.
 
-### Report Autotrasportatori
-Tracking of road transport missions.
-*   **Fields**: Hauler Name, Mission Status, Actual Pick-up/Delivery times.
-*   **Purpose**: Performance auditing of external trucking partners.
+### Report Autotrasportatori (Trucking)
+Performance auditing of external trucking partners.
+*   **Fields**: Hauler Name (`id_vettore`), Mission Status, ATD/ATA variance.
+*   **Purpose**: Tracking first/last mile efficiency.
 
-### Report Clienti
-Detailed tracking of individual customer bookings.
-*   **Fields**: Booking Ref, Merchandise Type, HS Code, Total TEU.
+### Report Soste (Storage & Demurrage)
+Calculates terminal occupancy for billing accessory services.
+*   **Logic**: `Gate-In Time` - `Gate-Out Time`.
+*   **Critical Node**: Must be linked to a **Node** in the registry marked with `is_terminal=1`.
 
-## 4. Reporting Architecture
+## 4. Reporting Architecture & Propagation
 
 ```mermaid
 graph LR
-    EXE[Execution Events] --> DB[(Operational DB)]
-    DB --> R[Reporting Engine]
+    PLAN[Planning Config] --> R[Reporting Engine]
+    EXE[Execution Events] --> R
+    BKG[Booking Demand] --> R
     R --> XLS[Excel Export]
     R --> PDF[Invoicing Annex]
     R --> DASH[Management Dashboard]
 ```
 
-### Capabilities
-*   **Batch Save**: Operators can perform inline validation of records (e.g., checking storage days) and commit changes in bulk using the **Salva dati report** function.
-*   **Recalculation**: The **Ricalcola** button allows for a manual refresh of the calculation engine if timestamps are corrected after the event.
-*   **Data Consistency**: All filters are dynamically linked to the **GENERALE** module master registries, ensuring that reports stay aligned with current subjects and nodes.
+### Advanced Functionalities
+*   **Batch Integrity**: Operators use the **Salva dati report** function to "freeze" a report for a specific period, preventing future operational changes from altering historical financial figures.
+*   **Dynamic Recalculation**: If a terminal mistake is corrected in the **Execution** module (e.g., wrong Gate-In date), the **Ricalcola** button in Admin re-runs the storage cost engine instantly.
+*   **Role-Based Visibility**: Visibility into "Fatturazione" (Billing) fields is restricted to users with administrative privileges defined in the global configuration.

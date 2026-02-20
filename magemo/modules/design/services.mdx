@@ -10,9 +10,12 @@ The **Services** (Servizi) registry is the central management interface for defi
 <img src="/images/magemo/new-srvice.png" alt="Transport Services Management" />
 
 ## 2. Technical Field Mapping
+The Services registry pulls data from either global enums or core system configurations to ensure consistency across the design phase.
 
 ### List View (Gestione Servizi)
-The registry provides a searchable grid of all defined services, highlighting their operational status and validity periods.
+The registry provides a searchable grid of all defined services.
+- **Search Logic**: Free-text search on `denominazione` and `codice_servizio`.
+- **Primary Key**: Each row is a primary key (`id_servizio`) used as a foreign key throughout the **DESIGN** and **PLANNING** modules.
 
 | Field | Source | Description |
 | :--- | :--- | :--- |
@@ -22,17 +25,23 @@ The registry provides a searchable grid of all defined services, highlighting th
 | **Validità** | `data_da` / `data_a` | The active date range for the service. |
 
 ### Configuration Form (Add/Edit)
-The configuration is divided into functional sections to handle both operational and administrative metadata.
+These fields define the operational and commercial boundaries of the offering.
 
-| Section | Field | HTML Name | Purpose |
-| :--- | :--- | :--- | :--- |
-| **Generale** | **Tipo trasporto** | `id_tipo_trasporto` | Defines mode (Rail, Road, Maritime). |
-| **Generale** | **Tipo servizio** | `id_tipo_servizio` | Multi-select for service categories. |
-| **Parametri PCS**| **Terminal Partenza**| `terminal_pcs_partenza`| External reference for port systems. |
-| **Caratteristiche**| **Operativo** | `operativo` | Toggles visibility in Execution. |
-| **Amministrazione**| **Fatturazione** | `fatturazione` | Controls automated billing logic. |
+| Field Label | Technical Name | Source Data (ID) | Origin | Flow/Logic |
+| :--- | :--- | :--- | :--- | :--- |
+| **Tipo servizio** | `id_tipo_servizio` | `tipi_servizio` | Enum | Defines the operational model (Commercial vs Technical). |
+| **Tipo trasporto** | `id_tipo_trasporto` | `tipi_trasporto` | Enum | Determines which assets (Wagons/UTI) are valid. |
+| **Operativo** | `operativo` | Checkbox | Manual | Toggles visibility in Execution modules. |
+| **Fatturazione** | `fatturazione` | Checkbox | Manual | Controls automated billing logic in Admin. |
 
-## 3. Data Connectivity
+## 3. Propagation & Data Connectivity
+Once a Service is defined, it becomes a **Source of Truth** for the entire logistics lifecycle.
+
+| Target Module | Dynamic Field | Usage |
+| :--- | :--- | :--- |
+| **DESIGN > Connessioni** | `Servizio di rif.` | Links a physical route to this commercial service. |
+| **BOOKING > Nuovo** | `Servizio` | The primary selector for starting a new transport mandate. |
+| **ADMIN > Reports** | `Filtro Servizio`| Used to aggregate tonnage and revenue by service name. |
 
 ```mermaid
 graph LR
@@ -40,15 +49,12 @@ graph LR
     NOD[Nodes Master] --> S
     S --> B[Booking Creation]
     S --> P[Operational Planning]
+    S --> ADM[Admin Analytics]
 ```
 
 ### Inbound Dependencies
-*   **Subjects Registry**: Services are linked to specific MTOs and Vettori.
+*   **Subjects Registry**: Services are linked to specific MTOs and Carriers.
 *   **Nodes Registry**: Departure and arrival terminals must be pre-defined as valid network nodes.
-
-### Outbound Impact
-*   **Booking Lookup**: When a user creates a new transport request, they first select a **Service**, which then filters valid O/D pairs and transport rules.
-*   **Financial Tracking**: The "Fatturazione" (Billing) toggle handles how costs and revenues are aggregated in the **Admin & Reports** module.
 
 ## 4. Operational Lifecycle
 Services are maintained in an `Attivo` or `Inattivo` state. A service can only be utilized for new bookings if it falls within its defined validity date range and is marked as active in the system.
