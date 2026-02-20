@@ -82,6 +82,78 @@
         ]
       },
       {
+        "tab": "Magemo",
+        "groups": [
+          {
+            "group": "Foundation & Data",
+            "pages": [
+              "magemo/architecture",
+              "magemo/connectivity"
+            ]
+          },
+          {
+            "group": "GENERALE - Master Data",
+            "pages": [
+              "magemo/modules/general/subjects",
+              "magemo/modules/general/nodes",
+              "magemo/modules/general/equipment",
+              "magemo/modules/general/locations",
+              "magemo/modules/general/configuration"
+            ]
+          },
+          {
+            "group": "DESIGN - Network",
+            "pages": [
+              "magemo/modules/design/services",
+              "magemo/modules/design/traces",
+              "magemo/modules/design/connections"
+            ]
+          },
+          {
+            "group": "PLANNING - Composition",
+            "pages": [
+              "magemo/modules/planning/dashboard",
+              "magemo/modules/planning/booking",
+              "magemo/modules/planning/rail"
+            ]
+          },
+          {
+            "group": "EXECUTION - Dispatch",
+            "pages": [
+              "magemo/modules/execution/rail",
+              "magemo/modules/execution/trucking",
+              "magemo/modules/execution/maritime",
+              "magemo/modules/execution/pcs"
+            ]
+          },
+          {
+            "group": "MONITORING - Tracking",
+            "pages": [
+              "magemo/modules/monitoring/track-trace",
+              "magemo/modules/monitoring/inventory",
+              "magemo/modules/monitoring/equipment",
+              "magemo/modules/monitoring/gate-operations"
+            ]
+          },
+          {
+            "group": "ADMIN & REPORTS",
+            "pages": [
+              "magemo/modules/admin/reports",
+              "magemo/modules/admin/statistics"
+            ]
+          },
+          {
+            "group": "Fleet Management Suite",
+            "pages": [
+              "magemo/fleet/configurator",
+              "magemo/fleet/registry",
+              "magemo/fleet/status",
+              "magemo/fleet/search"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Workflows",
         "groups": [
           {

@@ -1,0 +1,81 @@
+---
+title: "Data Connectivity"
+sidebarTitle: "Data Connectivity"
+description: "Data lifecycle and entity relationships"
+---
+
+## 1. The Operational Lifecycle
+The application tracks the lifecycle of an intermodal transport mandate from its inception as a commercial agreement to its closure as a historical record.
+
+```mermaid
+sequenceDiagram
+    participant B as Booking (Commercial)
+    participant P as Planning (Technical)
+    participant E as Execution (Operational)
+    participant M as Monitoring (Tracking)
+    participant R as Admin/Reports (Analysis)
+
+    B->>P: Confirmed Booking (Cargo, Weight, Route)
+    P->>P: Assign Asset (Wagon/Vessel) via Compatibility Matrix
+    P->>E: Loading Plan / Composition
+    E->>E: Dispatch (CIM, Manifest, Bill of Lading)
+    E->>M: Real-time Status (In Transit)
+    M-->>E: Delays / Event Updates
+    E->>R: Closed Workflow
+    R->>R: Statistics & Financial Tonnage
+```
+
+## 2. Core Entity Relationship
+How the "General" module drives the rest of the system.
+
+```mermaid
+erDiagram
+    SOGGETTI ||--o{ CONTATTI : owns
+    SOGGETTI ||--o{ NAVI : owns
+    TIPI-NAVE ||--o{ NAVI : classifies
+    TIPI-CARRO ||--o{ CARRI : classifies
+    TIPI-CARRO ||--o{ COMPATIBILITA-MATRIX : defines-Y
+    TIPI-UTI ||--o{ COMPATIBILITA-MATRIX : defines-X
+    NODI ||--o{ ZONE : groups
+    NODI ||--o{ BOOKING : targets
+    CARRI ||--o{ MUTE : bundles
+    MERCI ||--o{ BOOKING : describes
+```
+
+## 3. External Ecosystem & Integrations
+The system does not operate in a vacuum. It acts as a central hub for multiple external stakeholders and technical systems.
+
+```mermaid
+graph LR
+    subgraph "External Systems"
+        PCS[Port Community Systems]
+        IM[Infrastructure Manager]
+        ERP[Financial ERP]
+    end
+    
+    subgraph "Core Platform"
+        EXEC[Execution Module]
+        PLAN[Planning Module]
+        ADM[Admin Module]
+    end
+    
+    subgraph "Mobile"
+        APP[Driver App]
+    end
+
+    EXEC <-->|EDI/COPARN| PCS
+    EXEC <-->|Web-CIM| IM
+    ADM -->|Invoicing Data| ERP
+    EXEC <-->|Push/Milestones| APP
+```
+
+## 4. Key Connectivity Rules
+1. **The Safety Validator**: The **Wagon/UTI Compatibility Matrix** is the fundamental rulebook. No cargo (UTI) can be loaded onto an asset (Wagon) without an explicit "Pass" from this matrix.
+2. **The Notification Hub**: The **Modelli Mail** system resolves contacts dynamically from the **Contatti** registry based on the **Soggetto** linked to the current booking.
+3. **Master Data Dependency**: Every operational transaction (a "Viaggio" or "Booking") is strictly a pointer to the **Master Data** module. Modifications in "General" (e.g., updating a Wagon's weight limit) propagate immediately to the **Planning Engine**.
+
+## 5. Critical Data Points
+- **IMO Number**: The universal key for Maritime tracking.
+- **Matricola**: The unique key for Rail assets.
+- **ISO Size Type**: The standardization key for Cargo dimensions.
+- **LoCode**: The international key for geographic Nodes.

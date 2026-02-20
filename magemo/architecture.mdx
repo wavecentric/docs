@@ -1,0 +1,36 @@
+---
+title: "Design & Architecture"
+sidebarTitle: "Design & Architecture"
+description: "Technical stack and architectural foundation of Magemo"
+---
+
+## 1. Vision & Purpose
+The platform is a mission-critical Intermodal Transport Management System (TMS) designed for the seamless orchestration of rail and maritime logistics. The application prioritizes operational density, technical accuracy, and real-time data visibility over flashy visuals.
+
+## 2. Architectural Overview
+
+```mermaid
+graph TD
+    User((Operational User)) --> UI[Vue.js Frontend]
+    UI --> Router{Vue Router}
+    
+    subgraph "Core Modules"
+        Router --> GENERALE[Generale Master Data]
+        Router --> PLANNING[Rail & Maritime Planning]
+        Router --> EXECUTION[Operational Dispatch]
+        Router --> MONITORING[Real-time Tracking]
+        Router --> ADMIN[Reports & Security]
+    end
+
+    subgraph "Nervous System"
+        GENERALE --> API[REST API Layer]
+        PLANNING --> API
+        EXECUTION --> API
+        API --> DB[(Operational Database)]
+        API --> NOTIFY[Notification Engine]
+    end
+
+    NOTIFY --> Email((Automated Mail))
+```
+
+
