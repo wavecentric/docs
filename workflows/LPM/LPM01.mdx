@@ -1,0 +1,88 @@
+---
+title: "LPM 01 - Optimization of Logistics Operations and Supplier Relations"
+sidebarTitle: "LPM 01"
+description: "Centralize and coordinate logistics operations, improving coordination with suppliers to optimize procurement processes."
+---
+
+## 1. Overview
+
+**Optimization of Logistics Operations and Supplier Relations** addresses the critical need to centralize and coordinate logistics operations while improving supplier collaboration. The platform provides a comprehensive solution to "optimize procurement processes and reduce inefficiencies or delays" by digitalizing the entire quotation lifecycle and supplier interaction workflow. This is essential for improving efficiency and reducing operating costs.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **Procurement Coordination & Supplier Management** layer. It ensures:
+*   **Centralized Procurement**: All supplier quotations and requests are managed through a unified system.
+*   **Real-Time Supplier Coordination**: Instant visibility into quotation status, pricing, and service details without communication delays.
+*   **Process Optimization**: Eliminating manual processes, reducing response times, and improving decision-making through structured data.
+
+## 3. Implemented Functionalities
+
+The platform implements "Optimization of Logistics Operations and Supplier Relations" through the **Quotation Management** system under the CENTRICO workflow.
+
+### Unified Quotation Management
+**Requirement Addressed**: *"Centralize and coordinate logistics operations"*
+
+The Quotation Management system provides a centralized interface for managing all supplier quotations and procurement requests:
+*   **Request Tracking**: Create and track quotation requests with unique identifiers (e.g., `IN_16022026_949.46`).
+*   **Supplier-Specific Requests**: Each quotation is linked to specific suppliers with detailed company information.
+*   **Service Visibility**: Complete visibility of requested services, routes, and specifications in a single view.
+
+    Refer: [Quotation Management](/functionalities/quotation-management)
+
+<Frame caption="The Quotation Management interface showing centralized request tracking and supplier coordination.">
+  <img src="/images/quote4.png" alt="Quotation Management System" />
+</Frame>
+
+### Supplier Coordination & Communication
+**Requirement Addressed**: *"Improving coordination with suppliers"*
+
+The system facilitates efficient supplier coordination through structured data capture:
+*   **User Information**: Captures requester details (Name, Email, Phone, Company) for seamless communication.
+*   **Service Request Details**: Detailed specifications including origin/destination terminals, transport type (e.g., terminal-to-terminal, round trip), and service frequency.
+*   **Specification Management**: Structured capture of operational requirements such as:
+    *   Intermodal Units (ITU)
+    *   Conventional Transport options
+    *   Bulk handling capabilities
+    *   Special categories and requirements
+
+### Procurement Process Optimization
+**Requirement Addressed**: *"Optimize procurement processes and reduce inefficiencies or delays"*
+
+The platform streamlines procurement through automated workflows:
+*   **Dashboard View**: Real-time overview of all quotation requests with filtering and search capabilities.
+*   **Cost Transparency**: Itemized cost breakdowns including:
+    *   Rail service costs
+    *   ISO container costs
+    *   Truck costs
+    *   Sub-costs and surplus calculations
+    *   Total cost summaries
+*   **Status Tracking**: Visual status indicators (e.g., "Cost Calculation" stage) to track request progress and eliminate delays.
+*   **Quick Actions**: "View Request" and "dashboard" options for rapid access to quotation details.
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### Data Architecture
+*   **Quotation Flow System**: A dedicated flow (`quotation-management`) under the CENTRICO group that standardizes the procurement process.
+*   **Structured Data Model**: Standardized fields for service requests, user information, cost calculations, and specifications.
+
+### User Interface Components
+*   **Request Entry**: Form-based quotation request creation with validation.
+*   **Quote ID Search**: Direct access to specific quotations via unique identifiers.
+*   **Dashboard**: Comprehensive view of all requests with time-stamped submissions and status tracking.
+
+### Integration Capabilities
+*   **Supplier Portal**: Accessible via `https://ai-loop.alpeadria.com/ai-loop/flows?group=CENTRICO&flow=quotation-management`
+*   **Real-Time Updates**: Automatic status updates as quotations progress through stages.
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the LPM 01 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Centralization** | **Evidenced by [Quotation Management Interface]**: The unified dashboard showing multiple quotation requests (e.g., `IN_16022026_949.46`) with complete tracking capabilities proves centralized operation management. |
+| **Supplier Coordination** | **Evidenced by [User Info & Service Details]**: The structured capture of supplier information, company details, and service specifications demonstrates improved coordination mechanisms. |
+| **Process Optimization** | **Evidenced by [Cost Summary & Status Tracking]**: The detailed cost breakdown (Item 1: Rail Service, Item 2: Multi-modal services) with real-time status ("Cost Calculation") and surplus tracking (12%) proves optimized procurement processes. |
+| **Efficiency Improvement** | **Evidenced by [Quick Access Features]**: The "View Request" button, Quote ID search (`IN_16022026_949.46`), and dashboard navigation eliminate manual processes and reduce delays. |

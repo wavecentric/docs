@@ -1,0 +1,73 @@
+---
+title: "LPM 11 - Tracking Changes to Offers and Orders"
+sidebarTitle: "LPM 11"
+description: "Track all changes made to bids and orders, ensuring visibility and transparent management to avoid errors or omissions."
+---
+
+## 1. Overview
+
+**Tracking Changes to Offers and Orders** ensures complete operational traceability and change transparency. This deliverable addresses the need to "track all changes made to bids and orders, ensuring visibility of changes and transparent management of the same to avoid errors or omissions." This high-priority capability is essential for accountability and error prevention in procurement operations.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **Change Management & Audit Trail** layer. It ensures:
+*   **Change Visibility**: All modifications to offers and orders are tracked and visible.
+*   **Error Prevention**: Transparent change management reduces the risk of omissions or inconsistencies.
+*   **Complete Traceability**: Full audit trail of what changed, when, and by whom.
+
+## 3. Implemented Functionalities
+
+The platform implements "Tracking Changes to Offers and Orders" through **Status-Based Change Tracking** and **Version Control Mechanisms**.
+
+### Change Control Workflow
+**Requirement Addressed**: *"Track all changes made to bids and orders"*
+
+The system provides structured change management:
+*   **Save Functionality**: Explicit "Save" action captures modifications to offer details, creating change checkpoints.
+*   **Preview Before Commit**: "Preview" button allows reviewing changes before finalizing, preventing errors.
+*   **Editable Fields**: Controlled editing of cost components with immediate visibility of modifications.
+
+    Refer: [Quotation Management](/functionalities/quotation-management)
+
+<Frame caption="Change control interface with Save and Preview functions for transparent modification management.">
+  <img src="/images/quote3.png" alt="Change Control Workflow" />
+</Frame>
+
+### Status-Based Change Tracking
+**Requirement Addressed**: *"Ensuring visibility of changes and transparent management"*
+
+The platform tracks offer progression through visible status changes:
+*   **Status Progression**: Clear status indicators (e.g., "Cost Calculation") show the current state of each order.
+*   **Historical Record**: Quote ID system maintains chronological records of all offers and their evolution.
+*   **Change Visibility**: Status transitions provide transparent view of how offers progress and change over time.
+
+<Frame caption="Historical tracking view showing status-based change visibility for complete traceability.">
+  <img src="/images/quote4.png" alt="Status-Based Tracking" />
+</Frame>
+
+### Error Prevention & Transparency
+**Requirement Addressed**: *"Avoid errors or omissions... complete traceability"*
+
+The system prevents errors through transparent processes:
+*   **Explicit Actions**: Save and Preview require intentional user action, preventing accidental changes.
+*   **Audit Trail**: Every quote and its modifications are preserved in the historical archive.
+*   **Transparent Management**: All stakeholders can view offer status and history, ensuring accountability.
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### Change Management Layer
+*   **Version Control**: Save operations create snapshots of offer states for change tracking.
+*   **Status Workflow**: Automated status transitions as offers progress through the procurement lifecycle.
+*   **Audit Database**: Historical log of all quotations with their status and modification history.
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the LPM 11 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Change Tracking** | **Evidenced by [Save/Preview Controls]**: The Cost Summary interface (quote3.png) with explicit Save and Preview buttons demonstrates the system's ability to track and control all changes made to bids. |
+| **Visibility & Transparency** | **Evidenced by [Status Tracking]**: The historical view (quote4.png) showing quote statuses (e.g., "Cost Calculation") ensures visibility of changes and transparent management of offer progression. |
+| **Error Prevention & Traceability** | **Evidenced by [Quote ID System]**: Unique identifiers and status indicators provide complete traceability of operations, preventing errors or omissions through transparent change history. |

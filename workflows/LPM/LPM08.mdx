@@ -1,0 +1,76 @@
+---
+title: "LPM 08 - Document Management and Historical Preservation"
+sidebarTitle: "LPM 08"
+description: "Manage documents relating to offers and requests, keeping historical versions in a secure and orderly way."
+---
+
+## 1. Overview
+
+**Document Management and Historical Preservation** ensures the integrity and traceability of all procurement records. This deliverable addresses the need to "manage documents relating to offers and requests, keeping historical versions in a secure and orderly way for future consultation or verification." By centralizing document generation and storage, the system provides a robust audit trail and ensures commercial accountability.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **Digital Records & Audit Trail** layer. It ensures:
+*   **Centralized Repository**: Secure storage of all generated offers and incoming requests.
+*   **Version Control**: Tracking of historical iterations of quotes and contracts.
+*   **Instant Retrieval**: Rapid access to past documents for verification or duplication.
+
+## 3. Implemented Functionalities
+
+The platform implements "Document Management and Historical Preservation" through the **Quotation History Archive** and **Document Generation Engine**.
+
+### Offer Document Management
+**Requirement Addressed**: *"Manage documents relating to offers"*
+
+The system automatically generates and manages professional offer documents:
+*   **Automated Generation**: Creates standardized PDF offers from calculated data, ensuring format consistency.
+*   **Digital Storage**: Stores the generated document directly associated with the Quote ID.
+*   **Download & Share**: Enables immediate retrieval of the official offer document for distribution or filing.
+
+    Refer: [Quotation Preview](/workflows/LPM/LPM02)
+
+<Frame caption="The system generates and manages formal offer documents, ensuring a professional and traceable output.">
+  <img src="/images/quote2.png" alt="Offer Document Management" />
+</Frame>
+
+### Historical Versioning & Traceability
+**Requirement Addressed**: *"Keeping historical versions... for future consultation"*
+
+The platform maintains a complete chronological record of all procurement activities:
+*   **Unique Identification**: Every request and offer is assigned a unique Quote ID (e.g., `IN_16022026_949.46`), serving as the primary key for historical retrieval.
+*   **Status History**: Tracks the lifecycle of a document from "Received" to "Cost Calculated" to "Sent", preserving the context of each version.
+*   **Centralized Archive**: A searchable list view provides access to all past and present requests, acting as the historical database for the department.
+
+<Frame caption="The historical archive view allowing for the management and verification of past requests and their statuses.">
+  <img src="/images/quote4.png" alt="Historical Document Archive" />
+</Frame>
+
+### Secure Verification
+**Requirement Addressed**: *"Secure and orderly way for... verification"*
+
+The system ensures document integrity for verification purposes:
+*   **Immutable Records**: Once an offer is finalized and sent, the record acts as a snapshot of the commercial terms at that point in time.
+*   **Audit Trail**: The "Run" and "View" actions provide traceability of who accessed or processed a specific document.
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### Document Engine
+*   **PDF Generator**: Service responsible for rendering the detailed offer document from the structured data.
+*   **Storage**: Secure Data storage for the generated document files, linked to the database records.
+
+### Archival System
+*   **History Log**: Database collection acting as the ledger for all quotation records.
+*   **Search Index**: Allows users to filter and find historical documents based on ID, Customer, or Status.
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the LPM 08 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Document Management** | **Evidenced by [Generated Offer]**: The professional offer preview (quote2.png) proves the system's ability to manage and present complex documents relating to offers in an orderly format. |
+| **Historical Preservation** | **Evidenced by [Quote ID System]**: The list view (quote4.png) showing unique IDs (e.g., `IN_16022026_949.46`) demonstrates the orderly keeping of historical versions for future consultation. |
+| **Traceability** | **Evidenced by [Status Tracking]**: The visible statuses ("Cost Calculation", "Received") in the history view provide the necessary context for verifying the state and progress of any historical document. |
+| **Secure Consultation** | **Evidenced by [Centralized List]**: The ability to view all requests in a single, managed interface ensures that documents are kept in a secure way for efficient management. |

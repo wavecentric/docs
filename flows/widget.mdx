@@ -1,0 +1,76 @@
+---
+title: Dashboard Widget
+sidebarTitle: Dashboard Widget
+description: Personalized dashboard widget that aggregates weather, tasks, notifications, and company data in a single API call.
+---
+
+**Dashboard Widget** provides a comprehensive data snapshot for users when they load the application. It combines multiple data sources into a single response, delivering everything needed for a personalized homepage experience.
+
+## What It Does
+
+When triggered with a user's IP address and email, the widget retrieves and combines:
+
+- **Local Weather**: Current temperature, humidity, wind speed, sunrise/sunset times based on IP geolocation
+- **Open Tasks**: Active tasks assigned to the user or their company
+- **Notifications**: Unread system notifications from the activity feed
+- **Client List**: All business names from the customer database
+- **User Profile**: Account details and settings
+- **Company Info**: Details about the user's company
+- **AI Configuration**: Available AI assistant tools and settings
+
+## Data Retrieved
+
+### Weather & Location
+- Geolocation from IP address (city, region, country, timezone)
+- Current weather conditions via Open-Meteo API
+- Local time calculation based on user's timezone
+
+### Tasks Summary
+- Searches for open tasks assigned to user's email
+- Falls back to company-linked tasks if no personal tasks found
+- Returns all tasks with status colors from configuration
+
+### Notifications
+- Fetches unread notifications (`read: "no"`) from `db_ai-loop_System_Notifications`
+- Includes both `view_once` and `accept_once` notification types
+- Sorted by timestamp (most recent first)
+
+### Company & Business Data
+- User's company information from `db_ai-loop_V3_business`
+- Complete client list for quick reference
+- Instance-level configuration from `db_ai-loop_company`
+
+### AI Tools
+- Available AI assistant configurations from `db_ai-loop_CRM_Configs`
+- Tools and capabilities accessible to the user
+
+## Widget Capabilities
+
+The Dashboard Widget powers the following modular components:
+
+| Widget          | Functionality                                                                 |
+| :-------------- | :---------------------------------------------------------------------------- |
+| **AI Queries**  | Access quick AI-powered insights and recent results directly from your home screen. |
+| **Open Tasks**  | A live snapshot of your pending assignments with direct links to manage them. |
+| **Updates**     | A notification hub showing recent system alerts, message pings, and status changes with "View-Once" hover-to-dismiss logic. |
+| **Clients**     | Quick-access links to your most frequent business partners and lead profiles. |
+| **Weather**     | Real-time weather data for your current operational location based on IP geolocation. |
+| **Current Time**| A precision clock with date and timezone context calculated from your location. |
+| **My Company**  | Quick view of your organization's core details and verified status. |
+| **Instance Info**| Technical context about your specific operational environment. |
+| **About Me**    | A profile summary showing your role, contact info, and job title. |
+
+### Advanced Features
+- **Intelligent Notifications**: "Updates" widget auto-marks transient alerts as read on hover
+- **Rich Interaction**: Embedded links and deep-linking to relevant records in Data Lake or flows
+- **Live State Updates**: Real-time counters without manual page refreshes
+
+## Technical Details
+
+- **Trigger**: Authenticated webhook with Bearer token
+- **Authentication**: Header-based with `Authorization: Bearer {token}`
+- **Input**: User IP address, email, and company name
+- **Databases**: `datalake_main`, `ai-loop`
+- **Collections**: Tasks, Notifications, Business, Company, Users, CRM Configs
+- **APIs**: ipapi.co/ipwho.is (geolocation), Open-Meteo (weather)
+

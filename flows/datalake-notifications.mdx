@@ -1,0 +1,123 @@
+---
+title: System Notifications
+sidebarTitle: System Notifications
+description: Real-time activity feed that tracks all database operations and important events across the platform.
+---
+
+**System Notifications** provides a centralized activity feed displaying all important operations and events across the application. Users receive personalized updates about database changes, communications, and system activities in a familiar social media-style interface.
+
+## What It Does
+
+The notification system automatically creates activity entries for all operations that modify the database or trigger important events. This includes:
+
+- Database table and field management (create, update, delete)
+- Email communications (sent, received, replied)
+- Customer interactions (new quotes, service requests)
+- User invitations and team changes
+- Task assignments and updates
+- CreditSafe report generations
+- System-wide administrative actions
+
+Each notification is stored in `db_ai-loop_System_Notifications` and displayed on the user's home page feed.
+
+## Notification Types
+
+### View Once
+Informational updates about routine activities:
+- "New table created in datalake"
+- "Column added to customer database"
+- "Row updated in tasks collection"
+
+**Interaction**: Automatically marked as read when the user hovers over the notification.
+
+### Accept Once
+Important events requiring user acknowledgment:
+- "Customer email received - requires response"
+- "New service request submitted"
+- "Task deadline approaching"
+
+**Interaction**: Requires explicit action via "Okay, Got it!" button to mark as read.
+
+## Feed Interface
+
+![Activity feed showing recent system notifications](/images/flows/system_notifcation.png)
+
+The notification feed displays on the home page with a LinkedIn/Facebook-style layout:
+
+### Feed Structure
+Each notification shows:
+- **Title**: Bold, attention-grabbing summary with emojis
+- **Message**: Detailed description with relevant data and links
+- **Timestamp**: Relative time ("5 minutes ago", "2 hours ago")
+- **Action Button**: "Okay, Got it!" for `accept_once` notifications
+
+### Display Logic
+- Shows all notifications where `read: "no"` for the current user's email
+- Sorted by timestamp (most recent first)
+- Updates in real-time as new notifications arrive
+
+## Dual Notification System
+
+For database operations, the system creates **two notifications**:
+
+1. **User Confirmation**: Sent to the person who performed the action
+   - Confirms successful completion
+   - Includes summary of changes made
+   - Links to view updated data
+
+2. **Admin Alerts**: Sent to all admin team members with `receive_notifications: yes`
+   - Details the operation and user who performed it
+   - Provides context and change details
+   - Enables oversight and audit trail
+
+## How It Works
+
+### Notification Creation
+When a database operation or important event occurs:
+
+1. **Event Trigger**: System detects the operation (webhook, API call, or internal action)
+2. **User Lookup**: Identifies relevant recipients based on email and team settings
+3. **Message Generation**: Creates personalized title and HTML-formatted message
+4. **Database Insert**: Stores notification in `db_ai-loop_System_Notifications`
+5. **Feed Display**: Notification appears immediately in user's feed
+
+### Notification Dismissal
+
+**View Once (Hover to Dismiss)**:
+- User hovers mouse over the notification
+- System makes API request to update `read: "yes"`
+- Notification removed from feed instantly
+
+**Accept Once (Click to Dismiss)**:
+- User clicks "Okay, Got it!" button
+- API request updates `read: "yes"`
+- Confirmation animation before removal
+
+## Notification Examples
+
+### Database Operations
+```
+Title: 💡 New Field Added!
+Message: You've successfully added the column 'credit_score' to the customers table.
+Link: View Table →
+Type: view_once
+```
+
+### Communication Events
+```
+Title: 📧 Customer Email Received
+Message: New email from john@example.com regarding Quote #12345
+Action: Okay, Got it!
+Type: accept_once
+```
+
+### System Activities
+```
+Title: 🎯 Success! customers Table Created
+Message: You have successfully created a new table customers with columns: name, email, city
+Link: Click here →
+Type: view_once
+```
+
+
+

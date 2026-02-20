@@ -1,0 +1,82 @@
+---
+title: "LPM 02 - Generating Custom Quotes"
+sidebarTitle: "LPM 02"
+description: "Create customized quotes in real-time based on specific customer requests, supply requirements and contract conditions."
+---
+
+## 1. Overview
+
+**Generating Custom Quotes** enables the system to produce immediate, personalized quotations tailored to each customer's unique requirements. This deliverable eliminates delays between inquiry and quote by providing automated quote generation with real-time customization capabilities. The platform ensures that every quote reflects specific customer requests, supply requirements, and contract conditions, improving competitiveness and meeting precise customer demands.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **Custom Quote Generation & Personalization** layer. It ensures:
+*   **Real-Time Customization**: Every quote is uniquely constructed based on specific customer parameters (routes, services, cargo specifications, contract terms).
+*   **Professional Presentation**: Automated generation of polished, customer-ready quotation documents reflecting brand standards.
+*   **Competitive Response**: Instant quote creation capability that enables rapid response to market opportunities.
+
+## 3. Implemented Functionalities
+
+The platform implements "Generating Custom Quotes" through the **Quotation Preview** system, accessible from the Quotation Management workflow.
+
+### Automated Quote Generation
+**Requirement Addressed**: *"Create customized quotes in real-time based on specific customer requests"*
+
+The system provides automated quote generation with customization capabilities:
+*   **Template-Based Generation**: Professional quotation documents are automatically generated from structured data.
+*   **Customer Personalization**: Each quote is addressed to the specific customer with their details.
+*   **Real-Time Preview**: Instant visualization of the complete quotation before finalization.
+
+    Refer: [Quotation Preview](/functionalities/quotation-preview)
+
+### Dynamic Pricing & Contract Conditions
+**Requirement Addressed**: *"Based on supply requirements and contract conditions"*
+
+The platform accommodates complex pricing structures and contractual terms:
+*   **Multi-Leg Routing**: Supports multiple service segments (e.g., Hafen Trieste → 48 Münster, Germany; Milano Segrate → DUSS-Terminal Karlsruhe).
+*   **Service Specifications**: Detailed unit descriptions including container types, weights, and dimensions (20' ISOtank x1, Empty No weight, Dry 45' container).
+*   **Flexible Pricing**: Itemized cost breakdown with configurable pricing (€500.00€, €0.00€) and surplus calculations (12%).
+*   **Total Cost Calculation**: Automatic computation of total costs (€560.00€) based on all service components.
+
+<Frame caption="The Quotation Preview interface showing customized quote generation with professional formatting.">
+  <img src="/images/quote2.png" alt="Custom Quote Preview" />
+</Frame>
+
+### Professional Quote Delivery
+**Requirement Addressed**: *"Necessary to improve competitiveness"*
+
+The system ensures quotes meet professional standards for competitive advantage:
+*   **Branded Templates**: Company branding (alpeadria - Global intermodal logistics) with professional layout.
+*   **Document Export**: PDF generation for easy distribution and archiving.
+*   **Status Management**: Clear status indicators (DRAFT) to track quote lifecycle.
+*   **One-Click Delivery**: "Send Quote" button for immediate transmission to customers.
+*   **Quote Access**: Direct quote retrieval via unique identifiers (e.g., `QUOTE-1759828864415-1315`).
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### Quote Generation Engine
+*   **Quotation Preview System**: Renders professional quotation documents from structured inquiry data.
+*   **Template Engine**: Dynamic template rendering that populates customer-specific information, routing details, and pricing.
+
+### Data Integration
+*   **Customer Data Binding**: Automatic population of customer information from inquiry records.
+*   **Service Catalog Integration**: Links service specifications to pricing models and availability.
+*   **Pricing Logic**: Calculates total costs including base prices, service fees, and surplus margins.
+
+### User Interface
+*   **Quote ID Input**: Direct access to specific quotations for review and editing.
+*   **PDF Viewer**: Embedded document preview with zoom, download, and print capabilities.
+*   **Action Controls**: Status indicators, Run button for quote generation, and Send Quote button for delivery.
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the LPM 02 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Real-Time Customization** | **Evidenced by [Quote Preview Interface]**: The quote `QUOTE-1759828864415-1315` shows customized routing (Hafen Trieste to 48 Münster, Milano Segrate to DUSS-Terminal Karlsruhe) with specific container specifications, proving real-time quote customization based on customer requests. |
+| **Supply Requirements** | **Evidenced by [Service Specifications]**: The detailed unit descriptions (20' ISOtank x1 Empty, Dry 45' container BOX x1 Full, 23t) demonstrate the system's ability to incorporate specific supply and cargo requirements into quotes. |
+| **Contract Conditions** | **Evidenced by [Pricing Structure]**: The itemized pricing with configurable costs (€500.00€, €0.00€), 12% surplus calculation, and total cost (€560.00€) proves the system accommodates contract-specific pricing conditions. |
+| **Competitiveness** | **Evidenced by [Professional Output]**: The branded quotation document with professional layout, customer personalization, PDF export capability, and "Send Quote" functionality demonstrates competitive quote delivery capabilities. |

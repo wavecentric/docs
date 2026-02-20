@@ -1,0 +1,88 @@
+---
+title: "LPM 04 - Controlling Changes and Updates to Offerings"
+sidebarTitle: "LPM 04"
+description: "Manage and track changes and updates to bids already issued, maintaining consistency and avoiding discrepancies."
+---
+
+## 1. Overview
+
+**Controlling Changes and Updates to Offerings** ensures bid integrity throughout the quotation lifecycle. This deliverable addresses the critical need to "manage and track changes and updates to bids already issued, maintaining consistency with initial requests and contractual conditions, avoiding discrepancies." The platform provides controlled editing capabilities with full traceability, crucial to ensure data consistency and improve the traceability of offers.
+
+## 2. Scope and Business Meaning
+
+Functionally, this deliverable covers the **Offer Change Management & Consistency Control** layer. It ensures:
+*   **Controlled Modifications**: Ability to update pricing, services, and specifications while maintaining audit trails.
+*   **Consistency Enforcement**: Changes remain aligned with original customer requests and contractual terms.
+*   **Discrepancy Prevention**: Validation mechanisms ensure updates don't introduce conflicts or inconsistencies.
+
+## 3. Implemented Functionalities
+
+The platform implements "Controlling Changes and Updates to Offerings" through the **Cost Summary Management** interface with version control and validation capabilities.
+
+### Structured Cost Editing
+**Requirement Addressed**: *"Manage and track changes and updates to bids already issued"*
+
+The system provides granular control over quotation components:
+*   **Item-Level Modification**: Edit individual service items independently:
+    *   Item 1: Rail Service (Trieste-Munich) with configurable costs
+    *   Item 2: Door Service (Munich-Troisdorf) with separate pricing
+*   **Cost Component Updates**: Modify specific cost elements:
+    *   `20_ISOtank_empty`: 150€ (editable)
+    *   `45_full`: 350€ (editable)
+    *   Sub-costs automatically recalculated (€500.00€, €0.00€)
+*   **Margin Adjustments**: Update surplus percentages (12%) with real-time total cost recalculation (€560.00).
+
+<Frame caption="The Cost Summary interface enabling controlled updates to quotation pricing while maintaining consistency.">
+  <img src="/images/quote3.png" alt="Offer Change Management" />
+</Frame>
+
+### Consistency Validation
+**Requirement Addressed**: *"Maintaining consistency with initial requests and contractual conditions"*
+
+The platform enforces consistency through structured editing:
+*   **Service Integrity**: Changes preserve the original service structure:
+    *   Rail Service: Trieste-Munich route remains linked to specific cost components
+    *   Door Service: Munich-Troisdorf segment maintains its pricing independence
+*   **Contractual Alignment**: Updates respect the original service agreement:
+    *   Container specifications (20' ISOtank, 45' container) remain consistent
+    *   Service types (empty vs. full) are preserved in cost modifications
+*   **Sub-Cost Aggregation**: Automatic calculation ensures pricing consistency across items.
+
+### Change Tracking & Versioning
+**Requirement Addressed**: *"Avoiding discrepancies" and "improve the traceability of offers"*
+
+The system maintains offer traceability through workflow controls:
+*   **Save Functionality**: Explicit save action required to commit changes, creating an audit point.
+*   **Preview Before Commit**: "Preview" button allows verification of changes before finalization, preventing discrepancies.
+*   **Total Cost Validation**: Real-time calculation (€560.00) provides immediate feedback on update impacts.
+*   **Status Management**: Quote status transitions reflect modification state, maintaining clear history.
+
+## 4. Technical Enablement
+
+The platform enables this deliverable through:
+
+### Editing Architecture
+*   **Cost Summary Interface**: Dedicated view for modifying quotation pricing and service components.
+*   **Field-Level Controls**: Individual input fields for each cost component enabling precise updates.
+*   **Calculation Engine**: Automatic recalculation of sub-costs, surplus, and totals upon any change.
+
+### Data Consistency
+*   **Service Binding**: Cost components remain linked to their respective service items preventing orphaned updates.
+*   **Validation Rules**: Input constraints ensure updates maintain data integrity (numeric values, positive amounts).
+*   **Atomic Updates**: Changes are applied as transactions ensuring consistency across related fields.
+
+### Traceability Mechanisms
+*   **Explicit Save Model**: Changes are not persisted until Save button is clicked, creating clear modification boundaries.
+*   **Preview Capability**: Quotation preview regeneration allows verification before committing updates.
+*   **Version Awareness**: System maintains awareness of modified vs. original quote states.
+
+## 5. Evidence of Delivery
+
+The following evidence demonstrates strict compliance with the LPM 04 requirement:
+
+| Capability | Verification Evidence |
+| :--- | :--- |
+| **Change Management** | **Evidenced by [Editable Cost Fields]**: The Cost Summary shows modifiable pricing fields (`20_ISOtank_empty`: 150€, `45_full`: 350€) with Save and Preview buttons, proving the system's ability to manage changes to issued bids. |
+| **Consistency Maintenance** | **Evidenced by [Structured Item Organization]**: The preservation of Item 1 (Rail Service: Trieste-Munich) and Item 2 (Door Service: Munich-Troisdorf) structure with linked cost components demonstrates consistency with initial service requests during updates. |
+| **Discrepancy Prevention** | **Evidenced by [Automated Calculations]**: Real-time sub-cost aggregation (€500.00€, €0.00€), surplus calculation (12%), and total cost update (€560.00) prevent manual calculation errors and discrepancies. |
+| **Traceability** | **Evidenced by [Save and Preview Controls]**: The explicit Save button for committing changes and Preview button for verification provide clear audit points, improving traceability of offer modifications. |

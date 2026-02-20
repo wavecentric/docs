@@ -154,6 +154,68 @@
         ]
       },
       {
+        "tab": "Flows",
+        "groups": [
+          {
+            "group": "Communication",
+            "icon": "envelope",
+            "pages": [
+              "flows/communication",
+              "flows/email-inbound"
+            ]
+          },
+          {
+            "group": "Dashboard",
+            "icon": "grid-2",
+            "pages": [
+              "flows/widget"
+            ]
+          },
+          {
+            "group": "Fleet",
+            "icon": "truck",
+            "pages": [
+              "flows/fleet-search",
+              "flows/fleet-status",
+              "flows/flotta-carri"
+            ]
+          },
+          {
+            "group": "Centrico",
+            "icon": "database",
+            "pages": [
+              "flows/creditsafe",
+              "flows/customers",
+              "flows/data-viewer",
+              "flows/service-quote",
+              "flows/client-analysis",
+              "flows/contract-management",
+              "flows/kpi",
+              "flows/sales-funnel",
+              {
+                "group": "Quotation Management",
+                "pages": [
+                  "flows/new-inquiry",
+                  "flows/cost-calculation",
+                  "flows/inquiry-list",
+                  "flows/preview-send"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Admin",
+            "icon": "shield",
+            "pages": [
+              "flows/ai-assistant",
+              "flows/website-status-check",
+              "flows/overdue-scheduler",
+              "flows/datalake-notifications"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Workflows",
         "groups": [
           {
@@ -200,10 +262,31 @@
               "workflows/MCD/MCD07",
               "workflows/MCD/MCD08",
               "workflows/MCD/MCD09",
+              "workflows/MCD/MCD10",
               "workflows/MCD/MCD11",
+              "workflows/MCD/MCD13",
               "workflows/MCD/MCD14",
               "workflows/MCD/MCD15",
               "workflows/MCD/MCD16"
+            ]
+          },
+          {
+            "group": "CENTRICO - Logistic Procurement",
+            "icon": "truck-fast",
+            "pages": [
+              "workflows/LPM/LPM01",
+              "workflows/LPM/LPM02",
+              "workflows/LPM/LPM03",
+              "workflows/LPM/LPM04",
+              "workflows/LPM/LPM05",
+              "workflows/LPM/LPM06",
+              "workflows/LPM/LPM07",
+              "workflows/LPM/LPM08",
+              "workflows/LPM/LPM09",
+              "workflows/LPM/LPM10",
+              "workflows/LPM/LPM11",
+              "workflows/LPM/LPM12",
+              "workflows/LPM/LPM13"
             ]
           }
         ]

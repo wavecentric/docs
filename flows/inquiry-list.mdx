@@ -1,0 +1,100 @@
+---
+title: Inquiry List
+sidebarTitle: Inquiry List
+description: Admin dashboard for monitoring, verifying, and editing automatically generated quotations.
+---
+
+**Inquiry List** serves as the operational cockpit for sales and administration teams, providing a centralized view of all automatically generated offers with verification and editing capabilities.
+
+## Workflow Visualization
+
+```mermaid
+graph TD
+    Admin([Admin Opens<br/>Dashboard]) --> ViewList[View Quotation<br/>List]
+    
+    ViewList --> Filter{Filter by<br/>Status}
+    Filter --> Draft[Draft]
+    Filter --> Verified[Verified]
+    Filter --> Sent[Sent]
+    Filter --> Calculated[Cost Calculated]
+    
+    ViewList --> SelectQuote[Select Quotation]
+    SelectQuote --> ViewDetails[View Details]
+    
+    ViewDetails --> Actions{Available<br/>Actions}
+    
+    Actions --> Edit[Edit Quotation]
+    Actions --> Preview[Preview]
+    Actions --> Verify[Mark as Verified]
+    
+    Edit --> ModifyCosts[Modify Cost<br/>Structure]
+    ModifyCosts --> ApplyDiscount[Apply Discounts/<br/>Adjustments]
+    ApplyDiscount --> Save[Save Changes]
+    
+    Preview --> GeneratePDF[Generate PDF<br/>Preview]
+    
+    Verify --> UpdateStatus[Update Status<br/>to Verified]
+    UpdateStatus --> ReadyToSend[Ready to Send]
+```
+
+## What It Does
+
+- **Dashboard Overview**: Centralized view of all active quotations
+- **Status Tracking**: Monitors quotation lifecycle (Draft → Verified → Sent)
+- **Quick Actions**: Immediate access to View, Edit, and Preview functionalities
+- **Cost Verification**: Review automatically generated pricing
+- **Manual Adjustments**: Edit and customize cost structures before sending
+
+## Key Features
+
+### Automated Cost Generation
+Upon inquiry creation, the Pricing Engine instantly calculates offers based on:
+- **Service Type**: Predefined cost structures for specific logistics services
+- **Inquiry Details**: Origin, destination, cargo type from customer request
+- **Route Data**: Optimization data from Route Scanner
+
+### Dashboard Visibility
+- Comprehensive list of all active quotations
+- Status tracking (Draft, Cost Calculated, Verified, Sent)
+- Quick action buttons for each quotation
+
+### Verification and Editing
+- **Edit Option**: Modify auto-generated cost structures
+- **Discounting**: Apply specific discounts or adjustments
+- **Human Oversight**: Ensure pricing accuracy before customer transmission
+
+![Quotation Management Dashboard](/images/quote1.png)
+
+## How to Use
+
+<Steps>
+  <Step>
+    ### Access Dashboard
+
+    Navigate to Inquiry List to see all active quotations with their current status.
+  </Step>
+
+  <Step>
+    ### Review Quotation
+
+    Select a quotation to view detailed cost breakdown, route information, and customer details.
+  </Step>
+
+  <Step>
+    ### Edit if Needed
+
+    Modify pricing, apply discounts, or adjust cost structures as required by sales strategy.
+  </Step>
+
+  <Step>
+    ### Verify and Send
+
+    Mark quotation as verified when ready, then proceed to send to customer.
+  </Step>
+</Steps>
+
+## Technical Details
+
+**Database:**
+- Inquiries: `datalake_main.db_ai-loop_CRM_Inquiries`
+- Quotations: Auto-generated from cost calculation flow
