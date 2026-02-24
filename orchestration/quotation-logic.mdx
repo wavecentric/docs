@@ -1,0 +1,32 @@
+---
+title: "Quotation & Pricing Orchestration"
+sidebarTitle: "Quotation Logic"
+description: "The commercial engine for transforming inquiries into viable transport quotes."
+---
+
+## 1. Multi-Step Quotation Management
+The **Quotation Management** module (`/quotation-management`) orchestrates the commercial response to complex multimodal requests.
+- **Request Ingestion**: Links an `Inquiry` to a `req_ID`, creating a working container for cost calculation.
+- **Scenario Comparison**: Planners can model multiple transport options (e.g., Road vs. Rail) within the same quote to present the most cost-effective solution.
+
+<Frame caption="The Quotation Management interface for calculating costs and managing service requests.">
+  <img src="/images/quote1.png" alt="Quotation Management" />
+</Frame>
+
+
+## 2. Interactive Quotation Preview
+The **Preview** module (`/quotation-preview`) ensures that the final output is commercially polished and technically accurate.
+- **Live Markdown Rendering**: Generates a professional PDF/HTML view of the quote, including terms, conditions, and route visuals.
+- **Operational Link**: Once a quote is accepted, it triggers the automatic creation of a **Booking** in the Magemo layer.
+
+<Frame caption="Real-time Quotation Preview with professional document generation.">
+  <img src="/images/quote2.png" alt="Quotation Preview" />
+</Frame>
+
+
+```mermaid
+graph TD
+    INQ[Inquiry Extraction] --> QM[Quotation Management]
+    QM -->|Cost Calculation| PRE[Quotation Preview]
+    PRE -->|Acceptance| BKG[Magemo Booking]
+```

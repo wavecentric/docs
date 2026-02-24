@@ -1,0 +1,39 @@
+---
+title: "Application Framework & Architecture"
+sidebarTitle: "App Framework"
+description: "Technical overview of the Nuxt 3 frontend powering CENTRICO and MAGEMO."
+---
+
+The unified orchestration platform is built on a modern **Nuxt 3** and **Vue 3** stack, designed for high performance and operational density.
+
+## Core Tech Stack
+-   **Frontend**: Nuxt 3 (Vue 3, TypeScript).
+-   **Styling**: Tailwind CSS for rapid, consistent UI development.
+-   **Icons**: Lucide-Vue-Next for a clean, technical visual language.
+-   **State Management**: Pinia and specialized Composables (e.g., `useMagemo`, `useLeads`).
+-   **API Layer**: Direct integration with the **Exo Data Lake** via localized standard operations.
+
+## Directory Structure Overview
+The framework implements a **Context-Preserving UI** pattern. Instead of using standard route transitions that lose state, the application relies on:
+- **Sheet (Sidebar) Interaction:** Large forms (like `BookingForm.vue`) open in a sliding sheet, allowing the operator to reference the underlying list without losing scroll position.
+- **Inline View Flipping:** Modules like `exec-rail.vue` flip between `list` and `form` modes using a reactive `viewMode` variable, ensuring long-running shunting operations stay in focus.
+
+### Reactive State & Composables
+The core of the logic is moved to **Unified Composables** that enforce structural integrity:
+- **`useMagemo`**: Handles the mapping between high-density technical registries and Vue reactive objects. It provides a `saveWithValidation` wrapper that checks for "Master Data Integrity" (e.g., verifying a Wagon actually exists in the `GENERALE` registry before allowing it to be assigned to a load plan).
+- **`useLeads`**: Manages the commercial lifecycle, including a "Stage Transition Guard" that ensures mandatory commercial data is present before moving a lead to the "Contracted" status.
+
+### The "Master Data Enforcement" Guard
+A critical architectural pattern in the platform is the **Reference Guard**. Throughout the code, lookups for Nodes, Subjects, and Equipment are not simple string fields; they are cross-referenced in real-time. If a `nodeId` in a booking doesn't match a record in `db_ai-loop_MAGEMO_NODES`, the UI explicitly flags a "Master Data Violation," preventing the propagation of corrupt data into downstream shunting and arrival reports.
+
+
+## Key Design Patterns
+
+### 1. Atomic Side-Panel Editing
+Instead of navigating away from lists, the platform uses side-panels or in-page forms to preserve context. This pattern is enforced through the `isEditing` state in local page components.
+
+### 2. Composable-Driven State
+Data isn't just "fetched"; it's managed through composables that handle loading states, error boundaries, and optimistic updates across sibling components.
+
+### 3. State-Aware Actions
+The UI dynamically renders action buttons (e.g., "Confirm Load Plan") based on the technical state of the record, preventing invalid operational transitions.

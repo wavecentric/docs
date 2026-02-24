@@ -1,0 +1,57 @@
+---
+title: "Planning & Booking Fulfillment"
+sidebarTitle: "Planning"
+description: "Converting commercial demand into technical loading plans and confirmed bookings."
+---
+
+The **PLANNING** module is where commercial commitments meet operational feasibility. It handles everything from the initial booking request to the technical finalization of a train composition.
+
+## Booking Management
+
+The **Booking** system is the entry point for all customer mandates. It manages the lifecycle of a transport order.
+
+- **Fulfillment States**: Move from "Proposto" (Draft) to "Confermato" (Confirmed).
+- **Multi-Unit Bookings**: A single booking can contain multiple UTIs (Containers, Swap-bodies).
+- **Documentation**: Upload mandatory transport documents (CIM, CMR, BL) directly to the booking.
+
+![Booking Management](/images/magemo/new-booking.png)
+
+### Loading Units (UTI)
+Manage the specific equipment assigned to each booking.
+- **Inventory Check**: Verify if units are currently in stock or expected at the gate.
+- **Technical Specs**: Ensure weight and dimensions comply with the service limits.
+
+## Rail Planning & Composition
+
+For rail operations, the system features a powerful **Train Composition** tool. This is where you assign UTIs to specific Wagons.
+
+### The Compatibility Matrix
+The **Safety Validator** of the system. It dynamically checks if a specific UTI type can be safely placed on a specific Wagon type.
+- **Automatic Blocking**: If the matrix entry for a Wagon-UTI combination is empty or "forbidden", the system physically prevents the assignment.
+- **Geometry Logic**: Checks for overhangs and length constraints.
+
+![Composition Table](/images/relazione_ferroviaria.png)
+
+### Train Dashboard
+A real-time view of departures and arrivals.
+- **Tonnage Aggregation**: Automatically calculates the total weight and length of the train as units are added.
+- **Stability Checks**: Validates that weight distribution is within acceptable rail safety tolerances.
+
+## Workflow: From Booking to Ready
+
+<Steps>
+  <Step title="Create Booking">
+    Input Customer detail, Origin/Destination, and the type of equipment (UTI).
+  </Step>
+  <Step title="Unit Assignment">
+    Assign specific Container IDs to the booking or keep them as "Generic" until terminal gate-in.
+  </Step>
+  <Step title="Wagon Mapping">
+    Using the **Composition Tool**, drag and drop UTIs onto valid Wagons. The Compatibility Matrix ensures safety.
+  </Step>
+  <Step title="Finalization">
+    Mark the trip as "Pronto" (Ready) to hand it over to the **Execution** teams.
+  </Step>
+</Steps>
+
+![Planning Dashboard](/images/dashboard.png)

@@ -1,0 +1,47 @@
+---
+title: "Master Data & Administration"
+sidebarTitle: "Master Data"
+description: "The registry of physical assets, legal entities, and system configurations."
+---
+
+The **GENERALE** module is the "Single Source of Truth" for the entire Magemo ecosystem. No operational movement can occur without validating against the Master Data registry.
+
+## Core Registries
+
+### 1. Subjects (Soggetti) & Contacts
+Management of every legal entity involved in the logistics chain.
+- **Roles**: Categorize subjects as Customers, Carriers, MTOs, or Agents.
+- **Dynamic Mailing**: Link contacts to specific functional roles (e.g., "Operations", "Finance") to automate communication flows.
+
+### 2. Network Nodes (Nodi)
+Physical locations where logistics events occur.
+- **Terminal Capabilities**: Define equipment and storage limits.
+- **Geographic Zones**: Link nodes to logical zones for pricing and routing logic.
+- **Locode Search**: Integrated UN/LOCODE database for standardization.
+
+### 3. Equipment & Fleet
+Detailed technical specifications for physical assets:
+- **UTI (Units)**: Container types, dimensions, and weight thresholds.
+- **Wagons (Carri)**: Rail specifications, length, tara, and maintenance status.
+- **Ships (Navi)**: Vessel registry for maritime legs.
+
+### 4. Fleet Management (Zig-Zag)
+A specialized view for managing wagon availability and technical status in real-time.
+- **Status Monitoring**: Tracks if wagons are in service, under maintenance, or empty.
+- **Condition Grading**: Visualize fleet health using colored indicators (White, Yellow, Green).
+
+## System Administration
+
+### Configuration & Templates
+- **Mail Models**: Design HTML templates for automated operational notifications (e.g., "Booking Confirmed").
+- **Mail Parameters**: Global SMTP settings and dynamic field resolvers.
+- **Commodities**: Registry of goods types and hazardous materials classifications.
+
+## Data Governance
+
+To maintain "Clean Data", the system follows strict governance rules:
+- **No Ad-hoc Entries**: Fields like "Node" or "Wagon" in the Planning module are strictly restricted to search-and-select from the Master Data.
+- **Audit Logs**: Changes to critical technical parameters (like wagon length or UTI capacity) are logged for auditing.
+- **Validation Rules**: Mandatory fields and regex validation ensure data entry consistency across different teams.
+
+![Master Data Subjects](/images/customer-management.png)

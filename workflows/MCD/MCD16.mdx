@@ -1,12 +1,12 @@
 ---
-title: "MCD 16 - Railway Graph Generation"
+title: "MCD 16 - Fleet Management (Graph Generation)"
 sidebarTitle: "MCD 16"
-description: "Generate railway graphs from Zig Zag"
+description: "Generate railway graphs from the Fleet Management suite"
 ---
 
 ## 1. Overview
 
-**Generation of Railway Graphs** empowers users to dynamically model logistics networks. It fulfills the requirement that "the Multimodal Chain Design module will have to offer the possibility of being able to generate railway graphs starting from Zig Zag that will allow users to run simulations and evaluate different 'what-if' scenarios, based on different logistics options."
+**Fleet Management (Graph Generation)** empowers users to dynamically model logistics networks. It fulfills the requirement that "the Multimodal Chain Design module will have to offer the possibility of being able to generate railway graphs starting from Fleet Management that will allow users to run simulations and evaluate different 'what-if' scenarios, based on different logistics options."
 
 This capability is essential for testing hypothetical network configurations before implementation.
 
@@ -19,27 +19,27 @@ Functionally, this deliverable covers the **Network Modeling & Simulation** laye
 
 ## 3. Implemented Functionalities
 
-The platform implements "Railway Graph Generation" through **Zig Zag** within the **Orchestrator** module.
+The platform implements "Railway Graph Generation" through **Fleet Management** within the **Orchestrator module**.
 
-### Zig Zag
-**Requirement Addressed**: *"Generate railway graphs starting from Zig Zag"*
+### Fleet Management Graph Construction
+**Requirement Addressed**: *"Generate railway graphs starting from Fleet Management"*
 
-The **Zig Zag** tool allows users to visually construct complex railway paths:
+The **Fleet Management** tool allows users to visually construct complex railway paths:
 *   **Graph Construction**: Users can link distinct network nodes (terminals, hubs) to create a custom "train graph."
 *   **Visual Validation**: The interface provides immediate visual feedback on the connectivity and validity of the proposed rail segments.
 
-<Frame caption="The Zig Zag interface allowing for the step-by-step construction of a railway graph.">
-  <img src="/images/zigzag1.png" alt="Zig Zag Graph Construction" />
+<Frame caption="The Fleet Management interface allowing for the step-by-step construction of a railway graph.">
+  <img src="/images/zigzag1.png" alt="Fleet Management Graph Construction" />
 </Frame>
 
 ### Simulation & Analysis
 **Requirement Addressed**: *"Run simulations and evaluate different 'what-if' scenarios"*
 
-Once a graph is generated via Zig Zag, it becomes an input for the simulation engine:
+Once a graph is generated via Fleet Management, it becomes an input for the simulation engine:
 *   **Logistics Options**: The system evaluates distinct logistics variables (different providers, timetables) on this newly generated topology.
 
 <Frame caption="Evaluating logistics options on the generated graph within the Orchestrator.">
-  <img src="/images/zigzag2.png" alt="Zig Zag Simulation Analysis" />
+  <img src="/images/zigzag2.png" alt="Fleet Management Simulation Analysis" />
 </Frame>
 
 ## 4. Technical Enablement
@@ -56,5 +56,5 @@ The following evidence demonstrates strict compliance with the MCD 16 requiremen
 
 | Capability | Verification Evidence |
 | :--- | :--- |
-| **Graph Generation** | **Evidenced by [Zig Zag Tool]**: The interface (shown in *zigzag1.png*) explicitly provides the tooling to configure and generate new railway graph segments from Zig Zag. |
+| **Graph Generation** | **Evidenced by [Fleet Management Tool]**: The interface (shown in *zigzag1.png*) explicitly provides the tooling to configure and generate new railway graph segments. |
 | **What-if Scenarios** | **Evidenced by [Simulation Output]**: The ability to view and analyze these paths (shown in *zigzag2.png*) proves the system supports the evaluation of different logistics options on the generated graph. |

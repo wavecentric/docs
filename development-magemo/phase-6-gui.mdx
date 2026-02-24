@@ -1,0 +1,46 @@
+---
+title: "Phase 6 - Experience Layer: GUI & Dashboarding"
+sidebarTitle: "Phase 6 - GUI"
+description: "Iterating on user experience to build a high-density operational command center."
+---
+
+## Redesigning for Operational Density
+In Phase 6, we focused on the **Experience Layer**. We didn't just copy Sinfomodal's layout; we built a completely new **Technical Aesthetic** designed for 24/7 mission-critical environments.
+
+## Cool Features: Magemo vs. Sinfomodal
+We identified several "Legacy Friction" points in Sinfomodal and solved them with the Magemo GUI:
+
+### 1. The "Technical HUD" (Monochrome Palette)
+Sinfomodal used a variety of flashy colors that caused visual fatigue over long shifts.
+-   **Magemo Improvement**: We implemented a slate/gray palette with high-contrast data values. This "HUD" feel allows operators to focus on the numbers rather than the interface.
+
+### 2. Side-Panel/In-Page Workflows
+The biggest drawback of Sinfomodal was its reliance on page navigation and disruptive modals.
+-   **Magemo Improvement**: We developed **Side-Panel Editing**. You can edit a Wagon's technical specs or update a Booking's weight while keeping the entire Train Trip list or Planning Grid visible. No context is ever lost.
+
+### 3. State-Aware Contextual Actions
+In Sinfomodal, all buttons (Edit, Delete, CIM, EDI) were often visible regardless of the shipment status.
+-   **Magemo Improvement**: Actions are now "State-Aware". The "Generate Manifest" button *only* appears when the data validation passes and the trip is in the correct state. This eliminates operator error.
+
+### 4. Modular Dashboarding
+We introduced a widget-based personalization system that allows users to build their own command center.
+
+```vue
+<!-- Example of the high-density widget logic we developed -->
+<template>
+  <div class="magemo-widget-container">
+    <div class="header">
+      <h3>Active Rail Missions</h3>
+      <span class="pulse-indicator" v-if="hasAlerts" />
+    </div>
+    <CompactDataTable :rows="activeMissions" />
+  </div>
+</template>
+```
+
+## The Overload: Actionable Intelligence
+While Sinfomodal was a data registry, Magemo is a **Decision Engine**. Every screen is designed to surface "Deltas"—identifying where reality deviates from the plan—allowing operators to act faster and with more accuracy.
+
+<Frame caption="The Magemo Experience Layer: High-density widgets and technical HUD.">
+  <img src="/images/dashboard-widgets.png" alt="Experience Layer" />
+</Frame>

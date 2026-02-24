@@ -1,0 +1,55 @@
+---
+title: "Network & Service Design"
+sidebarTitle: "Design"
+description: "Engineering the physical and commercial building blocks of the logistics network."
+---
+
+The **DESIGN** module is the engineering core of Magemo. It allows you to define the "possible" routes and services that your commercial teams can sell and your operational teams can execute.
+
+## Core Entities
+
+### 1. Transport Services
+A **Service** is a commercial product offering. It defines *what* you are selling (e.g., "North-South Terminal Express").
+- **Commercial Validity**: Services have start and end dates.
+- **Categorization**: Group services by type (Intermodal, Conventional, Door-to-Door).
+- **Billing Logic**: Set flags for automated invoicing integration.
+
+### 2. Physical Traces
+A **Trace** (Traccia) is the technical blueprint of a rail or road movement. It defines the "slot" in time and space.
+- **Node-to-Node**: Every trace links an Origin Node to a Destination Node.
+- **Schedule Templates**: Define standard departure/arrival times and days of the week.
+- **Agency Links**: Associate traces with specific Infrastructure Managers (IMs) or Carriers.
+
+![Service Trace Selection](/images/nuova_traccia.png)
+
+### 3. Service Connections
+**Connections** are the bridges between commercial demand (Services) and technical supply (Traces). They represent specific "Generators" for daily trips.
+- **Trip Generation**: Automatically generate daily instances of a trip based on connection templates.
+- **Transhipment Windows**: Define allowed time windows for connecting one leg of a journey to another.
+
+## Operational Logic: The Design Chain
+
+The design phase follows a strict hierarchy to ensure data integrity:
+
+<Steps>
+  <Step title="Define Nodes">
+    Ensure all Terminals, Ports, and Depots are defined in the **Generale** module with correct geographic coordinates.
+  </Step>
+  <Step title="Engineer Traces">
+    Create the technical paths between nodes. A trace defines the travel time and the physical capacity.
+  </Step>
+  <Step title="Define Services">
+    Create the commercial product that will be offered to clients, linking it to the required nodes.
+  </Step>
+  <Step title="Establish Connections">
+    Link the Commercial Service to the Technical Trace to enable the **Planning** module to start accepting bookings.
+  </Step>
+</Steps>
+
+## Visualizing the Network
+
+Service design is not just a table of data; it's a visual network. By linking nodes through traces, the system builds an interactive map of your operational reach, shared with the **Orchestrator** module in Centrico for commercial planning.
+
+![Service Configuration](/images/magemo/new-srvice.png)
+
+![Network Design Graph](/images/logistics-network.png)

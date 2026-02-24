@@ -1,0 +1,82 @@
+---
+title: "Phase 2 – Connectivity & Data Foundation"
+sidebarTitle: "Phase 2"
+---
+
+## 1. The Inter-Module Connectivity Chain
+If Phase 1 was the "Map", Phase 2 is the "Roads". We architected and implemented the **Propagation Logic** that allows data to flow seamlessly between the six functional modules. This ensures that every operation is driven by a chain of verified events.
+
+### The Connectivity Orchestration Diagram
+This diagram illustrates the technical "Handshakes" and recursive data loops that occur as a transport mandate matures.
+
+```mermaid
+sequenceDiagram
+    participant GEN as 1. GENERALE (Registry)
+    participant DSG as 2. DESIGN (Engineering)
+    participant PLN as 3. PLANNING (Fulfillment)
+    participant EXE as 4. EXECUTION (Operational)
+    participant MON as 5. MONITORING (Visibility)
+    participant ADM as 6. ADMIN (Audit)
+
+    GEN->>DSG: Propagates Validated Subjects/Nodes
+    DSG->>PLN: Provides Service & Trace Templates
+    Note over PLN: Handshake: Booking meets Tech Slots
+    PLN->>EXE: Transfers "Frozen" Loading Lists
+    EXE->>MON: Triggers Event Hub (GPS/Geofencing)
+    MON-->>EXE: Real-time Milestone Feedback
+    Note over EXE, ADM: Verification: ATD/ATA Reconciliation
+    EXE->>ADM: Pushes Audited Tonnage for Billing/Statistiche
+```
+
+## 2. Technical Connectivity Deep-Dive
+Phase 2 implemented the mandatory links that eliminate the manual data entry hurdles found in legacy systems.
+
+### I. The Commercial-to-Technical Handshake (DESIGN ↔ PLANNING)
+- **Blueprints**: The system now automatically generates daily voyages from the **Services** templates defined in the Design module.
+- **Reference Integrity**: A booking cannot exist without a link to a **Service**, which in turn must link to a physical **Connection**.
+
+### II. The Structural Validity Engine (GENERALE ↔ PLANNING)
+- **Automatic Polling**: When a planner adds a wagon to a train, the system polls the **Equipment Registry** for its `Tara` and `Lunghezza`.
+- **The Matrix Check**: Instant validation of the loading combination against the **Compatibility Matrix** (Wagon Type vs. UTI Type).
+
+### III. The Physical-to-Digital Loop (EXECUTION ↔ MONITORING)
+- **Standardized Event Hub**: Movement triggers in **Rail Ops** (Execution) are broadcast to the **Track & Trace** board (Monitoring).
+- **Geofence Handshake**: Direct integration with **Nexxiot** sensors to automatically confirm ETA/ATA against the planned schedule.
+
+### IV. The Operational-to-Analytical Audit (EXECUTION ↔ ADMIN)
+- **Batch Processing**: Designing the **Sinfostats** data ingestion utility (Aggiornamento Statistiche) that moves data from the live operational DB to the analytical pivot hub.
+
+## 3. Data Integrity & Life Cycle
+The architecture ensures that data "Ripens" as it travels through the connectivity chain, gaining fidelity with every module.
+
+```mermaid
+graph LR
+    subgraph "Registry Phase (Static)"
+        A["GENERALE"] -->|Master Specs| B["DESIGN"]
+    end
+    subgraph "Dynamic Phase (Actionable)"
+        B -->|Service Blueprints| C["PLANNING"]
+        C -->|Frozen Consist| D["EXECUTION"]
+    end
+    subgraph "Verified Phase (Audit)"
+        D -->|Confirmed ATA/ATD| E["MONITORING"]
+        E -->|Verified KPI Data| F["ADMIN"]
+    end
+    
+    style A fill:#0f172a,stroke:#38bdf8,color:#fff
+    style B fill:#0f172a,stroke:#38bdf8,color:#fff
+    style C fill:#0f172a,stroke:#38bdf8,color:#fff
+    style D fill:#0f172a,stroke:#38bdf8,color:#fff
+    style E fill:#0f172a,stroke:#38bdf8,color:#fff
+    style F fill:#0f172a,stroke:#38bdf8,color:#fff
+```
+
+## 4. Architectural Enhancements: The "Integrated Logic"
+- **Cascade Updates**: Updating a Terminal Node in **GENERALE** correctly propagates to every active **Trace** and **Booking**.
+- **Self-Healing State Machine**: If a movement is canceled in **Execution**, the **Monitoring** module automatically resets the milestones to "Planned".
+- **Unified Logic Hub**: One single source of code for weight and length calculations used by Planning, Execution, and Stats.
+
+## Key Deliverables
+- **The Global Handshake Engine**: Automated data transfer logic between modules.
+- **State Transition Orchestrator**: Logic governing the lifecycle of a transport mandate.
+- **Real-Time Consistency Gate**: 100% prevention of orphaned or invalid technical records.

@@ -143,12 +143,26 @@
             ]
           },
           {
-            "group": "Fleet Management Suite",
+            "group": "Fleet Management",
             "pages": [
               "magemo/fleet/configurator",
               "magemo/fleet/registry",
               "magemo/fleet/status",
               "magemo/fleet/search"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Magemo - Deliverables",
+        "groups": [
+          {
+            "group": "Magemo Project Phases",
+            "pages": [
+              "magemo/deliverables/phase-1",
+              "magemo/deliverables/phase-2",
+              "magemo/deliverables/phase-5",
+              "magemo/deliverables/phase-6"
             ]
           }
         ]
@@ -278,6 +292,105 @@
               "workflows/LPM/LPM11",
               "workflows/LPM/LPM12",
               "workflows/LPM/LPM13"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Orchestration Management",
+        "groups": [
+          {
+            "group": "Commercial Orchestration",
+            "pages": [
+              "orchestration/commercial-orchestration",
+              "orchestration/customer-management-logic",
+              "orchestration/sales-pipeline",
+              "orchestration/quotation-logic",
+              "orchestration/interactive-collaboration",
+              "orchestration/commercial-intelligence",
+              "orchestration/procurement-management"
+            ]
+          },
+          {
+            "group": "Operational Design",
+            "pages": [
+              "orchestration/module-interconnection",
+              "orchestration/service-management",
+              "orchestration/trace-design-logic",
+              "orchestration/connection-orchestration",
+              "orchestration/multimodal-chain",
+              "magemo/modules/design/services",
+              "magemo/modules/design/traces",
+              "magemo/modules/design/connections"
+            ]
+          },
+          {
+            "group": "Operational Planning",
+            "pages": [
+              "orchestration/planning-control-tower",
+              "orchestration/booking-logic",
+              "orchestration/fleet-safety",
+              "orchestration/rail-orchestration",
+              "magemo/modules/planning/dashboard",
+              "magemo/modules/planning/booking",
+              "magemo/modules/planning/rail"
+            ]
+          },
+          {
+            "group": "Operational Execution",
+            "pages": [
+              "orchestration/tactical-execution",
+              "orchestration/rail-orchestration",
+              "orchestration/trucking-orchestration",
+              "orchestration/maritime-orchestration",
+              "magemo/modules/execution/rail",
+              "magemo/modules/execution/pcs",
+              "magemo/modules/execution/trucking",
+              "magemo/modules/execution/maritime"
+            ]
+          },
+          {
+            "group": "Operational Monitoring",
+            "pages": [
+              "orchestration/network-visibility",
+              "orchestration/iot-telemetry-logic",
+              "orchestration/inventory-capacity-logic",
+              "magemo/modules/monitoring/track-trace",
+              "magemo/modules/monitoring/inventory"
+            ]
+          },
+          {
+            "group": "Operational Intelligence",
+            "pages": [
+              "orchestration/strategic-analytics",
+              "magemo/modules/admin/statistics",
+              "magemo/modules/admin/reports"
+            ]
+          },
+          {
+            "group": "Master Data Governance",
+            "pages": [
+              "orchestration/data-governance",
+              "magemo/modules/general/subjects",
+              "magemo/modules/general/contacts",
+              "magemo/modules/general/nodes",
+              "magemo/modules/general/zones",
+              "magemo/modules/general/locodes",
+              "magemo/modules/general/commodities",
+              "magemo/modules/general/documents",
+              "magemo/modules/general/ships",
+              "magemo/modules/general/uti",
+              "magemo/modules/general/wagons",
+              "magemo/modules/general/wagon-compatibility",
+              "magemo/modules/general/mute",
+              "magemo/modules/general/configuration"
+            ]
+          },
+          {
+            "group": "Fleet Orchestration",
+            "pages": [
+              "magemo/fleet/v1",
+              "magemo/fleet/v2"
             ]
           }
         ]

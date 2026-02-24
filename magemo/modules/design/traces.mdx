@@ -16,7 +16,8 @@ The list view identifies available paths and their primary technical stakeholder
 | :--- | :--- | :--- |
 | **Numero** | `numero` | The official train number (Path ID). |
 | **Origine / Dest.** | `luogo_partenza` / `_arrivo` | Node identifiers for the train endpoints. |
-| **Vettore Ferr.** | `id_vettore_ferroviario`| The traction provider (RU). |
+| **Vettore Ferr.** | `id_vettore_ferroviario`| The traction provider (Railway Coach). |
+| **Gestore Inf.** | `id_gestore_infrastruttura`| The railway network owner. |
 | **Attivo** | `attivo` | Status flag for planning availability. |
 
 ### Technical Configuration (Form)
@@ -26,12 +27,36 @@ The configuration defines the physical feasibility of the movement.
 | :--- | :--- | :--- | :--- |
 | **Generali** | **Stazione Partenza** | `luogo_partenza` | Autocomplete from Nodes (Rail type). |
 | **Generali** | **Vettore Ferr.** | `id_vettore_ferroviario`| Selection from Subjects (Carrier). |
+| **Generali** | **Gestore Inf.** | `id_gestore_infrastruttura`| Selection from Subjects (Infrastructure Manager). |
 | **Generali** | **Validità Inizio/Fine**| `validita_inizio/fine` | Calendar window for the slot. |
 | **Frequenza** | **LUN...DOM** | `lunedi...domenica` | Weekly frequency checkboxes. |
 | **Massimali** | **Peso Max.** | `peso_max` | Maximum gross tonnage allowed. |
 | **Massimali** | **Lunghezza Max.** | `lunghezza_max` | Maximum train length (meters). |
 
-### Form Interface
+## 3. Key Stakeholders & Roles
+To understand how a Trace works, distinguish between the two primary entities responsible for the journey:
+
+#### I. Vettore Ferroviario (Railway Carrier)
+*   **Role**: The "Traction Provider". They own the locomotives and employ the drivers.
+*   **Analogy**: Think of them as the **Trucking Company**. They are the ones actually dragging the cargo.
+*   **Examples**: Mercitalia, Rail Cargo Austria, Captrain.
+
+#### II. Gestore Infrastruttura (Infrastructure Manager)
+*   **Role**: The "Network Owner". They own the physical tracks, the signaling systems, and the electric lines. They grant the "Permission to pass" (the Trace).
+*   **Analogy**: Think of them as the **Highway Department**. They provide the road upon which the carrier drives.
+*   **Examples**: RFI (Italy), ÖBB-Infrastruktur (Austria), DB Netz (Germany).
+
+## 4. Data Lineage & Persistence
+To ensure system-wide integrity, these fields are not free-text; they are linked to verified master data.
+
+| Field | Fetched From (Collection) | Persisted To (Collection) |
+| :--- | :--- | :--- |
+| **Vettore Ferroviario** | `MAGEMO_CARRIERS_LIST` | `MAGEMO_TRACES_LIST` |
+| **Gestore Infrastruttura**| `MAGEMO_MANAGERS_LIST` | `MAGEMO_TRACES_LIST` |
+
+> **Technical Note**: These collections are hosted on the **AI Loop Database**. When a user selects a value in the form, the system stores the unique ID of the record from the source collection into the destination `MAGEMO_TRACES_LIST` collection.
+
+## 5. Form Interface
 The following interface is used for the creation and maintenance of railway traces, capturing technical constraints and circulation frequency.
 
 <Frame caption="Interface for creating a new railway trace (Nuova Traccia).">

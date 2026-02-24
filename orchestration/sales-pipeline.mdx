@@ -1,0 +1,27 @@
+---
+title: "Sales Pipeline & AI Automation"
+sidebarTitle: "Sales Pipeline"
+description: "AI-driven inquiry processing and commercial funnel orchestration."
+---
+
+## 1. Inquiry Lifecycle & AI Extraction
+The **Inquiry Module** is the gateway to the Magemo ecosystem. To accelerate the "Sales-to-Ops" transition, we implemented the **AI Inquiry Assistant**.
+
+### NL-to-Structure Mapping
+Using specialized Natural Language Processing (NLP) models, the assistant analyzes unstructured inputs (emails, chat logs, notes) to automatically extract:
+*   **Logistics Nodes**: Recognizing origins and destinations.
+*   **Commodity Data**: Identifying types of goods and dangerous goods (ADR/RID).
+*   **Temporal Constraints**: Extracting requested delivery windows.
+
+## 2. Commercial Funnel Orchestration
+The system tracks the transition of inquiries through an immutable state machine:
+`DRAFT -> REVIEW -> QUOTED -> CLOSED`
+
+Every state transition is recorded as a standard operation in the **Data Lake**, providing management with high-fidelity "Sales Velocity" analytics through the standard Funnel View.
+
+```mermaid
+graph LR
+    EMAIL[Incoming Email] -->|AI Extraction| INQ[Structured Inquiry]
+    INQ -->|Validation| QUO[Generated Quote]
+    QUO -->|Acceptance| BKG[Magemo Booking]
+```

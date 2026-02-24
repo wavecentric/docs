@@ -1,53 +1,26 @@
 ---
 title: "Operational Reports"
-sidebarTitle: "Reports"
-description: "Tabular analysis of network performance and throughput"
+sidebarTitle: "Report operativi"
+description: "Detailed operational reports for trains, customers, and fleet performance."
 ---
 
-## 1. Overview
-The reporting engine provides deep insights into the database using predefined templates for common logistics KPIs. It transforms raw operational events into structured data for client billing, carrier auditing, and management oversight.
+The **Report operativi** section provides detailed exports and analysis for specific logistics domains.
 
-## 2. Technical Field Mapping (Intelligence & Sources)
-The reporting engine is a cross-modular aggregator. Every field is a dynamic pointer to the master or operational databases.
+## 1. Train Volumetric Reports
+This report visualizes the volumes transported per train over a specific period. It is essential for analyzing load factors and service utilization.
 
-| Field Label | Technical ID | Primary Source | Flow Logic |
-| :--- | :--- | :--- | :--- |
-| **Cliente** | `id_cliente` | **GENERALE > Soggetti** | Filtered by Role: *Cliente*. |
-| **Connessione** | `id_connessione` | **DESIGN > Connessioni**| Links report to a specific route. |
-| **Tipo UTI** | `id_tipo_uti` | **GENERALE > UTI** | Aggregates volume by equipment class. |
-| **Tonnellaggio** | `peso_netto` | **BOOKING** | Sum of net weights of loaded units. |
-| **Status** | `stato_inv` | **System State** | Current commercial state (Planned, Invoiced). |
+<Frame caption="Report Treni: Volumi Treno per periodo dashboard.">
+  <img src="/images/magemo/magemo_report_treni.png" alt="Magemo Train Report" />
+</Frame>
 
-## 3. Core Report Catalog
+## 2. Customer Performance Reports
+Aggregate data based on specific client mandates:
+- **Tonnage by Client**: Total volume transported within a date range.
+- **Service Frequency**: How often a client utilizes specific nodes or traces.
 
-### Report Tonnage & Volumes
-Aggregates the physical throughput of the network.
-*   **KPIs**: Total TEU, Net Tonnes vs Gross Tonnes.
-*   **Source**: Pulled from the `bookings` table, filtered by confirmed `id_viaggio`.
+## 3. Asset & Stoppage Reports
+- **Report Soste**: Analyzing idle time for wagons and units at various terminals.
+- **Report Autotrasportatori**: Evaluating the performance and mandate fulfillment of road partners.
 
-### Report Autotrasportatori (Trucking)
-Performance auditing of external trucking partners.
-*   **Fields**: Hauler Name (`id_vettore`), Mission Status, ATD/ATA variance.
-*   **Purpose**: Tracking first/last mile efficiency.
-
-### Report Soste (Storage & Demurrage)
-Calculates terminal occupancy for billing accessory services.
-*   **Logic**: `Gate-In Time` - `Gate-Out Time`.
-*   **Critical Node**: Must be linked to a **Node** in the registry marked with `is_terminal=1`.
-
-## 4. Reporting Architecture & Propagation
-
-```mermaid
-graph LR
-    PLAN[Planning Config] --> R[Reporting Engine]
-    EXE[Execution Events] --> R
-    BKG[Booking Demand] --> R
-    R --> XLS[Excel Export]
-    R --> PDF[Invoicing Annex]
-    R --> DASH[Management Dashboard]
-```
-
-### Advanced Functionalities
-*   **Batch Integrity**: Operators use the **Salva dati report** function to "freeze" a report for a specific period, preventing future operational changes from altering historical financial figures.
-*   **Dynamic Recalculation**: If a terminal mistake is corrected in the **Execution** module (e.g., wrong Gate-In date), the **Ricalcola** button in Admin re-runs the storage cost engine instantly.
-*   **Role-Based Visibility**: Visibility into "Fatturazione" (Billing) fields is restricted to users with administrative privileges defined in the global configuration.
+## 4. Statistics Panel
+A consolidated view of system-wide performance metrics, allowing for dynamic filtering and data extraction to CSV/Excel.

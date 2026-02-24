@@ -1,0 +1,66 @@
+---
+title: "Execution & Real-Time Monitoring"
+sidebarTitle: "Execution"
+description: "Managing live operations, dispatching mandates, and asset tracking."
+---
+
+Once the planning phase is complete, the **EXECUTION** and **MONITORING** modules take over to manage the physical movement of goods and provide 24/7 visibility.
+
+## Operational Execution
+
+Execution is divided by transport mode, each with specialized toolsets:
+
+### Rail Operations
+- **Train Dispatch**: Manage departure and arrival events with real-time timestamps.
+- **Manifest Generation**: Generate technical train documents for Infrastructure Managers.
+- **PCS Integration**: Automated electronic handshakes with Port Community Systems for maritime-rail combined flows.
+
+### Trucking Operations
+- **Mission Mandates**: Generate and send transport orders to haulers.
+- **Last-Mile Tracking**: Monitor road legs of intermodal journeys.
+
+### Maritime Operations
+- **Vessel Tracking**: Manage calls at port and vessel schedules.
+- **EDI Exchange**: Automated COPARN/COARRI messaging for loading/unloading operations.
+
+## Monitoring & Visibility
+
+The **Monitoring** module provides a "Control Tower" view of all active assets.
+
+### Track & Trace (IoT)
+Magemo integrates directly with IoT providers (like Nexxiot and Savvy) to pull live GPS and shock data.
+- **Geofencing**: Automated status updates when a wagon or container enters/leaves a defined node.
+- **Estimated Time of Arrival (ETA)**: Dynamic calculation based on real-time speed and position.
+
+### UTI Inventory
+Management of equipment status at various terminals.
+- **Gate-In / Gate-Out**: Log physical movements of units entering or leaving the system.
+- **Empty vs Full**: Real-time balance of available equipment for future bookings.
+- **Transits**: Track units moving through hub nodes without long-term storage.
+
+## Integration Layer
+
+Execution and Monitoring work in tandem with external technical systems:
+
+| System Type | Function |
+| :--- | :--- |
+| **PCS** | Electronic pre-billing and gate-authorizations at ports. |
+| **IM (Infrastructure)** | Technical path booking and rail capacity management. |
+| **GPS Hub** | Aggregated data from multiple fleet tracking providers. |
+
+## The "Pronto" to "Chiuso" Lifecycle
+
+<Steps>
+  <Step title="Operational Start">
+    The trip moves from "Planning" to "Execution" when the assets are physically verified.
+  </Step>
+  <Step title="Live Tracking">
+    The Monitoring module updates the trip status automatically based on GPS geofencing or terminal gate events.
+  </Step>
+  <Step title="Event Management">
+    Operations teams manage delays, transhipment exceptions, and documentation updates.
+  </Step>
+  <Step title="Closure">
+    Once the final node is reached, the trip is marked as "Chiuso" (Closed), triggering the billing process in the Admin module.
+  </Step>
+</Steps>
